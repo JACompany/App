@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -39,7 +38,7 @@ class _RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: Text(
           "Name Generator",
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Colors.blue), //this changes text color
         ),
         actions: [
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
