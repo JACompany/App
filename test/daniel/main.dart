@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
         fontFamily: "Arial",
-        brightness: Brightness.light,
       ),
       home: RandomWords(),
     );
