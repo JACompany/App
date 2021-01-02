@@ -13,6 +13,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    values.storage.read().then((value) {
+      if (value.isNotEmpty) values.tasks.add(value);
+    });
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {});
     });

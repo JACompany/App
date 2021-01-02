@@ -14,7 +14,7 @@ class _Task extends State<Task> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test"),
+        title: Text("Add task"),
         leading:
             IconButton(icon: Icon(Icons.arrow_back), onPressed: _backPressed),
       ),
@@ -40,7 +40,7 @@ class _Task extends State<Task> {
               }
               setState(() {
                 values.tasks.add(value);
-                // values.storage.write("$value\n");
+                values.storage.write("$value\n");
               });
 
               return null;
