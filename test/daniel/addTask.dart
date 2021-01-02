@@ -38,6 +38,9 @@ class _Task extends State<Task> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
+              if (value.contains(";")) {
+                return "Please remove ';' character";
+              }
               setState(() {
                 values.tasks.add(value);
                 values.storage.write(values.tasks);
