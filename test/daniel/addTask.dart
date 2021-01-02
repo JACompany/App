@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'test_homepage.dart';
-import 'test_globalValues.dart' as values;
+import 'homepage.dart';
+import 'globalValues.dart' as values;
 
 class Task extends StatefulWidget {
   @override

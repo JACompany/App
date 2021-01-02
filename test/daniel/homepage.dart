@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'test_addTask.dart';
-import 'test_globalValues.dart' as values;
+import 'addTask.dart';
+import 'globalValues.dart' as values;
 
 class Home extends StatefulWidget {
   @override
