@@ -13,8 +13,12 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    values.storage.read().then((value) {
-      if (value.isNotEmpty) values.tasks.add(value);
+    values.storage.read().then((readValues) {
+      for (int i = 0; i < readValues.length; i++) {
+        if (readValues.elementAt(i).length > 0) {
+          values.tasks.add(readValues.elementAt(i));
+        }
+      }
     });
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {});
@@ -61,6 +65,7 @@ class _HomeState extends State<Home> {
         onPressed: () {
           setState(() {
             values.tasks.removeAt(index);
+            values.storage.write(values.tasks);
           });
         },
       ),

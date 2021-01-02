@@ -14,18 +14,22 @@ class Storage {
     return File('$path/data.txt');
   }
 
-  Future<String> read() async {
+  Future<List<String>> read() async {
     try {
       final file = await localFile;
       String contents = await file.readAsString();
-      return contents;
+      return contents.split(";");
     } catch (exception) {
       return null;
     }
   }
 
-  Future<File> write(String data) async {
+  void write(List data) async {
     final file = await localFile;
-    return file.writeAsString(data);
+    String toWrite = "";
+    for (int i = 0; i < data.length; i++) {
+      toWrite += data.elementAt(i) + ";";
+    }
+    file.writeAsString(toWrite);
   }
 }
