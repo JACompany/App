@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'test_addTask.dart';
+import 'test_globalValues.dart' as values;
 
 class Home extends StatefulWidget {
   @override
@@ -8,7 +10,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var _tasks = <String>[];
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +40,9 @@ class _HomeState extends State<Home> {
   Widget tasks() {
     return ListView.builder(
       padding: EdgeInsets.all(16),
-      itemCount: _tasks.length,
+      itemCount: values.tasks.length,
       itemBuilder: (context, index) {
-        return buildTile(_tasks[index], index);
+        return buildTile(values.tasks[index], index);
       },
     );
   }
@@ -48,7 +57,7 @@ class _HomeState extends State<Home> {
         icon: Icon(Icons.delete),
         onPressed: () {
           setState(() {
-            _tasks.removeAt(index);
+            values.tasks.removeAt(index);
           });
         },
       ),
