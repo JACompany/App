@@ -40,6 +40,7 @@ class _Task extends State<Task> {
               }
               setState(() {
                 values.tasks.add(value);
+                values.storage.write("$value\n");
               });
 
               return null;
