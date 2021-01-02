@@ -53,8 +53,8 @@ class _Task extends State<Task> {
                 if (_formKey.currentState.validate()) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("Adding task..."),
-                      duration: Duration(seconds: 1),
+                      content: Text("Task added!"),
+                      duration: Duration(milliseconds: 500),
                     ),
                   );
                 }

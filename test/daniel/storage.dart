@@ -17,7 +17,7 @@ class Storage {
   Future<List<String>> read() async {
     try {
       final file = await localFile;
-      String contents = await file.readAsString();
+      String contents = await file.readAsString(); //the important part
       return contents.split(";");
     } catch (exception) {
       return null;
