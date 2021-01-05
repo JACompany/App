@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'globalValues.dart' as values;
+import 'splash_screen.dart';
 
 void main() => runApp(App());
 
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: Home(),
+      home: LoadingScreen(),
     );
   }
 }
