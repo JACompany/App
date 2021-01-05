@@ -9,7 +9,6 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // values.tasks.add(values.storage.read());
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
