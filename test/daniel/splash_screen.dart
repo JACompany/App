@@ -20,7 +20,7 @@ class _LoadingScreen extends State<LoadingScreen> {
       backgroundColor: Colors.white,
       useLoader: true,
       loaderColor: Colors.black,
-      photoSize: MediaQuery.of(context).size.width / 2,
+      photoSize: MediaQuery.of(context).size.width / 2 - 50,
     );
   }
 }
