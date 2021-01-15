@@ -1,11 +1,6 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'globalValues.dart' as values;
 
 void main() => runApp(MyApp());
@@ -32,9 +27,6 @@ class ProgressGraph extends StatefulWidget {
 }
 
 class _ProgressGraph extends State<ProgressGraph> {
-  var _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
-  final _saved = Set<WordPair>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
