@@ -32,7 +32,7 @@ class _ProgressGraph extends State<ProgressGraph> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Jimmy Test",
+          "Chandresh Test",
           style: TextStyle(color: Colors.blue),
         ),
         iconTheme: IconThemeData(color: Colors.blue),
