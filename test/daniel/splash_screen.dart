@@ -17,7 +17,7 @@ class _LoadingScreen extends State<LoadingScreen> {
       image: Image(
         image: AssetImage("lib/assets/logo.gif"),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue,
       useLoader: true,
       loaderColor: Colors.black,
       photoSize: MediaQuery.of(context).size.width / 2 - 50,
