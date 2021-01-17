@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    values.storage.read().then((readValues) {
+    values.tasks_storage.read().then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {
           values.tasks.add(readValues.elementAt(i));
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
         onPressed: () {
           setState(() {
             values.tasks.removeAt(index);
-            values.storage.write(values.tasks);
+            values.tasks_storage.write(values.tasks);
           });
         },
       ),

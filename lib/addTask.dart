@@ -43,7 +43,7 @@ class _Task extends State<Task> {
               }
               setState(() {
                 values.tasks.add(value);
-                values.storage.write(values.tasks);
+                values.tasks_storage.write(values.tasks);
               });
 
               return null;
