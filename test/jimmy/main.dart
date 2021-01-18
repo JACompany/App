@@ -6,7 +6,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'globalValues.dart' as values;
 
 void main() => runApp(MyApp());
 
