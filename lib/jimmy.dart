@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'globalValues.dart' as values;
 
 void main() => runApp(MyApp());
@@ -12,37 +13,14 @@ class MyApp extends StatelessWidget {
       title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.blue,
         fontFamily: "Arial",
         brightness: Brightness.light,
       ),
-      home: ProgressGraph(),
+      home: SimpleLineChart(),
     );
   }
 }
-
-class ProgressGraph extends StatefulWidget {
-  @override
-  _ProgressGraph createState() => _ProgressGraph();
-}
-
-class _ProgressGraph extends State<ProgressGraph> {
-  get import => null;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Jimmy Test",
-          style: TextStyle(color: Colors.blue),
-        ),
-        iconTheme: IconThemeData(color: Colors.blue),
-      ),
-      body: Text("Test"),
-      /// Example of a simple line chart.
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter/material.dart';
 
 class SimpleLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -59,10 +37,9 @@ class SimpleLineChart extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList, animate: animate);
+    return charts.LineChart(seriesList, animate: animate);
   }
 
   /// Create one series with sample hard coded data.
@@ -92,10 +69,4 @@ class LinearSales {
   final int sales;
 
   LinearSales(this.year, this.sales);
-}
-    );
-  }
-}
-
-class charts {
 }
