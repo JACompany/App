@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,8 @@ class ProgressGraph extends StatefulWidget {
 }
 
 class _ProgressGraph extends State<ProgressGraph> {
+  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,11 @@ class _ProgressGraph extends State<ProgressGraph> {
         ),
         iconTheme: IconThemeData(color: Colors.blue),
       ),
-      body: Text("Test"),
+      body: Sparkline(
+        data: data,
+        lineWidth: 5.0,
+        lineColor: Colors.purple,
+      ),
     );
   }
 }
