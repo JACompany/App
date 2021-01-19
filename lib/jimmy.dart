@@ -32,13 +32,15 @@ class _ProgressGraph extends State<ProgressGraph> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2 - 50,
-      height: MediaQuery.of(context).size.height / 2 - 50,
-      child: Sparkline(
-        data: data,
-        lineWidth: 5.0,
-        lineColor: Colors.purple,
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2 - 50,
+        height: MediaQuery.of(context).size.height / 2 - 50,
+        child: Sparkline(
+          data: data,
+          lineWidth: 5.0,
+          lineColor: Colors.purple,
+        ),
       ),
     );
   }
