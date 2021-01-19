@@ -1,98 +1,51 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Reading and Writing Files',
-      home: FlutterDemo(storage: CounterStorage()),
-    ),
-  );
-}
+class SimpleLineChart extends StatelessWidget {
+  final List<charts.Series> seriesList;
+  final bool animate;
 
-class CounterStorage {
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+  SimpleLineChart(this.seriesList, {this.animate});
 
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/counter.txt');
-  }
-
-  Future<int> readCounter() async {
-    try {
-      final file = await _localFile;
-
-      // Read the file
-      String contents = await file.readAsString();
-
-      return int.parse(contents);
-    } catch (e) {
-      // If encountering an error, return 0
-      return 0;
-    }
-  }
-
-  Future<File> writeCounter(int counter) async {
-    final file = await _localFile;
-
-    // Write the file
-    return file.writeAsString('$counter');
-  }
-}
-
-class FlutterDemo extends StatefulWidget {
-  final CounterStorage storage;
-
-  FlutterDemo({Key key, @required this.storage}) : super(key: key);
-
-  @override
-  _FlutterDemoState createState() => _FlutterDemoState();
-}
-
-class _FlutterDemoState extends State<FlutterDemo> {
-  int _counter;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.storage.readCounter().then((int value) {
-      setState(() {
-        _counter = value;
-      });
-    });
-  }
-
-  Future<File> _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-
-    // Write the variable as a string to the file.
-    return widget.storage.writeCounter(_counter);
+  /// Creates a [LineChart] with sample data and no transition.
+  factory SimpleLineChart.withSampleData() {
+    return new SimpleLineChart(
+      _createSampleData(),
+      // Disable animations for image tests.
+      animate: false,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Reading and Writing Files')),
-      body: Center(
-        child: Text(
-          'Button tapped $_counter time${_counter == 1 ? '' : 's'}.',
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
+    return new charts.LineChart(seriesList, animate: animate);
   }
+
+  /// Create one series with sample hard coded data.
+  static List<charts.Series<LinearSales, int>> _createSampleData() {
+    final data = [
+      new LinearSales(0, 5),
+      new LinearSales(1, 25),
+      new LinearSales(2, 100),
+      new LinearSales(3, 75),
+    ];
+
+    return [
+      new charts.Series<LinearSales, int>(
+        id: 'Sales',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (LinearSales sales, _) => sales.year,
+        measureFn: (LinearSales sales, _) => sales.sales,
+        data: data,
+      )
+    ];
+  }
+}
+
+/// Sample linear data type.
+class LinearSales {
+  final int year;
+  final int sales;
+
+  LinearSales(this.year, this.sales);
 }

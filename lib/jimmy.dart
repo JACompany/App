@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'globalValues.dart' as values;
 
 void main() => runApp(MyApp());
@@ -13,60 +12,32 @@ class MyApp extends StatelessWidget {
       title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.blue,
+        primaryColor: Colors.white,
         fontFamily: "Arial",
         brightness: Brightness.light,
       ),
-      home: SimpleLineChart(),
+      home: ProgressGraph(),
     );
   }
 }
 
-class SimpleLineChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
-  final bool animate;
+class ProgressGraph extends StatefulWidget {
+  @override
+  _ProgressGraph createState() => _ProgressGraph();
+}
 
-  SimpleLineChart(this.seriesList, {this.animate});
-
-  /// Creates a [LineChart] with sample data and no transition.
-  factory SimpleLineChart.withSampleData() {
-    return new SimpleLineChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
-    );
-  }
-
+class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
-    return charts.LineChart(seriesList, animate: animate);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Jimmy Test",
+          style: TextStyle(color: Colors.blue),
+        ),
+        iconTheme: IconThemeData(color: Colors.blue),
+      ),
+      body: Text("Test"),
+    );
   }
-
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 5),
-      new LinearSales(1, 25),
-      new LinearSales(2, 100),
-      new LinearSales(3, 75),
-    ];
-
-    return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
-}
-
-/// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }
