@@ -28,16 +28,14 @@ class ProgressGraph extends StatefulWidget {
 }
 
 class _ProgressGraph extends State<ProgressGraph> {
-  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: MediaQuery.of(context).size.width / 2 - 50,
-        height: MediaQuery.of(context).size.height / 2 - 50,
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
         child: Sparkline(
-          data: data,
+          data: values.past_hours,
           lineWidth: 5.0,
           lineColor: Colors.purple,
         ),
