@@ -27,6 +27,7 @@ class ProgressGraph extends StatefulWidget {
   @override
   _ProgressGraph createState() => _ProgressGraph();
 }
+
 class LineTitles {
   static getTitleData() => FlTitlesData(
         show: true,
@@ -90,7 +91,7 @@ class _ProgressGraph extends State<ProgressGraph> {
           pointSize: 12.0,
           pointColor: Colors.amber,
           fillMode: FillMode.below,
-          fillGradient: new LinearGradient(
+          fillGradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [Colors.grey[300], Colors.grey],
@@ -98,4 +99,5 @@ class _ProgressGraph extends State<ProgressGraph> {
         ),
       ),
     );
+  }
 }
