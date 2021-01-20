@@ -28,6 +28,32 @@ class ProgressGraph extends StatefulWidget {
   _ProgressGraph createState() => _ProgressGraph();
 }
 
+class _ProgressGraph extends State<ProgressGraph> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
+        child: Sparkline(
+          data: values.past_hours,
+          lineWidth: 5.0,
+          lineColor: Colors.blue,
+          pointsMode: PointsMode.all,
+          pointSize: 12.0,
+          pointColor: Colors.amber,
+          fillMode: FillMode.below,
+          fillGradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.grey[300], Colors.grey],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class LineTitles {
   static getTitleData() => FlTitlesData(
         show: true,
@@ -42,11 +68,11 @@ class LineTitles {
           getTitles: (value) {
             switch (value.toInt()) {
               case 2:
-                return 'MAR';
+                return 'WEEK 1';
               case 5:
-                return 'JUN';
+                return 'WEEK 2';
               case 8:
-                return 'SEP';
+                return 'WEEK 3';
             }
             return '';
           },
@@ -74,30 +100,4 @@ class LineTitles {
           margin: 12,
         ),
       );
-}
-
-class _ProgressGraph extends State<ProgressGraph> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width / 2,
-        height: MediaQuery.of(context).size.height / 2,
-        child: Sparkline(
-          data: values.past_hours,
-          lineWidth: 5.0,
-          lineColor: Colors.blue,
-          pointsMode: PointsMode.all,
-          pointSize: 12.0,
-          pointColor: Colors.amber,
-          fillMode: FillMode.below,
-          fillGradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.grey[300], Colors.grey],
-          ),
-        ),
-      ),
-    );
-  }
 }
