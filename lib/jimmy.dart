@@ -37,7 +37,7 @@ class _ProgressGraph extends State<ProgressGraph> {
         child: Sparkline(
           data: values.past_hours,
           lineWidth: 5.0,
-          lineColor: Colors.purple,
+          lineColor: Colors.blue,
         ),
       ),
     );
