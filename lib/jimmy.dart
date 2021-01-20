@@ -38,6 +38,15 @@ class _ProgressGraph extends State<ProgressGraph> {
           data: values.past_hours,
           lineWidth: 5.0,
           lineColor: Colors.blue,
+          pointsMode: PointsMode.all,
+          pointSize: 12.0,
+          pointColor: Colors.amber,
+          fillMode: FillMode.below,
+          fillGradient: new LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.grey[300], Colors.grey],
+          ),
         ),
       ),
     );
