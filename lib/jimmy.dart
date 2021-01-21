@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.blue,
         fontFamily: "Arial",
         brightness: Brightness.light,
       ),
@@ -28,54 +28,6 @@ class ProgressGraph extends StatefulWidget {
   _ProgressGraph createState() => _ProgressGraph();
 }
 
-class LineTitles {
-  static getTitleData() => FlTitlesData(
-        show: true,
-        bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 35,
-          getTextStyles: (value) => const TextStyle(
-            color: Color(0xff68737d),
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
-          },
-          margin: 8,
-        ),
-        leftTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (value) => const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '10k';
-              case 3:
-                return '30k';
-              case 5:
-                return '50k';
-            }
-            return '';
-          },
-          reservedSize: 35,
-          margin: 12,
-        ),
-      );
-}
-
 class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
@@ -83,21 +35,40 @@ class _ProgressGraph extends State<ProgressGraph> {
       child: Container(
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.height / 2,
-        child: Sparkline(
-          data: values.past_hours,
-          lineWidth: 5.0,
-          lineColor: Colors.blue,
-          pointsMode: PointsMode.all,
-          pointSize: 12.0,
-          pointColor: Colors.amber,
-          fillMode: FillMode.below,
-          fillGradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.grey[300], Colors.grey],
+        child: LineChart(LineChartData(lineBarsData: [
+          LineChartBarData(
+            spots: [
+              FlSpot(0, 3),
+              FlSpot(2, 2),
+              FlSpot(3, 5),
+              FlSpot(4, 3.1),
+              FlSpot(5, 4),
+              FlSpot(6, 3),
+              FlSpot(7, 4),
+            ],
           ),
-        ),
+        ])),
+        // child: Sparkline(
+        //   data: values.past_hours,
+        //   lineWidth: 8.0,
+        //   lineColor: Colors.blue,
+        //   pointsMode: PointsMode.all,
+        //   pointSize: 16.0,
+        //   pointColor: Colors.grey,
+        // ),
       ),
     );
+  }
+
+  LineChartBarData linesBarData1() {
+    return LineChartBarData(spots: [
+      FlSpot(1, 1),
+      FlSpot(3, 1.5),
+      FlSpot(5, 1.4),
+      FlSpot(7, 3.4),
+      FlSpot(10, 2),
+      FlSpot(12, 2.2),
+      FlSpot(13, 1.8),
+    ]);
   }
 }
