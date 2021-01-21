@@ -29,15 +29,8 @@ class ProgressGraph extends StatefulWidget {
 class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Jimmy Test",
-          style: TextStyle(color: Colors.blue),
-        ),
-        iconTheme: IconThemeData(color: Colors.blue),
-      ),
-      body: Text("Test"),
-    );
+    return Center(
+        //add everything in here
+        );
   }
 }
