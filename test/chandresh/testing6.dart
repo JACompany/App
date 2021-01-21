@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,12 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shared preferences demo',
+      title: 'Progress',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Progress'),
+      home: MyHomePage(title: 'Shared preferences demo'),
     );
   }
 }
@@ -30,8 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _displayMinutes;
-  String _displayhour;
+  int _counter2;
+  String _now;
   Timer _everySecond;
   intl.DateFormat dateFormat = new intl.DateFormat.Hms();
 
@@ -44,16 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
   _loadCounter() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    setState(() {
-      if (prefs.getInt('storeMinutes') == null) {
-        _displayMinutes = 0;
-      } else if (prefs.getInt('storeMinutes') == 0) {
-        _displayMinutes = 0;
-      } else {
-        _displayMinutes = prefs.getInt('storeMinutes');
-      }
+    print(prefs.getInt('counter3'));
+    print(' counter value : ' + prefs.getInt('counter3').toString());
 
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
+    setState(() {
+      if (prefs.getInt('counter3') == 0) {
+        _counter2 = 0;
+      } else {
+        _counter2 = prefs.getInt('counter3');
+      }
     });
 
     _everySecond = Timer.periodic(Duration(seconds: 60), (Timer t) {
@@ -66,9 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (!mounted) return;
     setState(() {
-      _displayMinutes = _displayMinutes + 1;
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
-      prefs.setInt('storeMinutes', _displayMinutes);
+      _counter2 = _counter2 + 1;
+      prefs.setInt('counter3', _counter2);
+      print('print counter2  : ' + _counter2.toString());
     });
   }
 
@@ -82,22 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-                child: Text(
-                    'Productive Time  ' + '$_displayhour' + '   Hours   ',
-                    style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 20,
-                        color: Colors.green)),
-                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(40.0),
-                        topRight: const Radius.circular(40.0),
-                        bottomLeft: const Radius.circular(40.0),
-                        bottomRight: const Radius.circular(40.0)))),
+            Text(
+              'Total Productive Hours',
+            ),
+            Text(
+              '$_counter2' + ' mins',
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ],
         ),
       ),
