@@ -34,6 +34,10 @@ class ProgressGraph extends StatefulWidget {
 }
 
 class _ProgressGraph extends State<ProgressGraph> {
+  List<charts.Series> get seriesList => null;
+
+  get animate => null;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -41,7 +45,48 @@ class _ProgressGraph extends State<ProgressGraph> {
         color: Colors.white,
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.height / 2,
-        child: LineChart(LineChartData(lineBarsData: [
+        child: 
+        
+        
+
+            charts.LineChart(
+      seriesList,
+      animate: animate,
+      // Configures four [ChartTitle] behaviors to render titles in each chart
+      // margin. The top title has a sub-title, and is aligned to the left edge
+      // of the chart. The other titles are aligned with the middle of the draw
+      // area.
+      behaviors: [
+        new charts.ChartTitle('hry',
+            subTitle: 'Top sub-title text',
+            behaviorPosition: charts.BehaviorPosition.top,
+            titleOutsideJustification: charts.OutsideJustification.start,
+            // Set a larger inner padding than the default (10) to avoid
+            // rendering the text too close to the top measure axis tick label.
+            // The top tick label may extend upwards into the top margin region
+            // if it is located at the top of the draw area.
+            innerPadding: 18),
+        new charts.ChartTitle('Bottom title text',
+            behaviorPosition: charts.BehaviorPosition.bottom,
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('Start title',
+            behaviorPosition: charts.BehaviorPosition.start,
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('End title',
+            behaviorPosition: charts.BehaviorPosition.end,
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+      ],
+       )
+      
+  }
+
+ 
+  
+
+        LineChart(LineChartData(lineBarsData: [
           LineChartBarData(
             colors: [Colors.blue],
             spots: [
@@ -54,6 +99,10 @@ class _ProgressGraph extends State<ProgressGraph> {
               FlSpot(7, 4),
             ],
           ),
+          
+
+
+
         ])),
         // child: Sparkline(
         //   data: values.past_hours,
