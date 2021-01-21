@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
+      color: Colors.white,
       theme: ThemeData(
         primaryColor: Colors.blue,
         fontFamily: "Arial",
@@ -33,6 +34,7 @@ class _ProgressGraph extends State<ProgressGraph> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        color: Colors.white,
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.height / 2,
         child: LineChart(
