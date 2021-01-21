@@ -39,7 +39,6 @@ class _ProgressGraph extends State<ProgressGraph> {
       child: Container(
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.height / 2,
-<<<<<<< HEAD
         child: Sparkline(
           data: values.past_hours,
           lineWidth: 5.0,
@@ -105,43 +104,4 @@ class LineTitles {
           margin: 12,
         ),
       );
-=======
-        child: LineChart(LineChartData(lineBarsData: [
-          LineChartBarData(
-            colors: [Colors.blue],
-            spots: [
-              FlSpot(0, 3),
-              FlSpot(2, 2),
-              FlSpot(3, 5),
-              FlSpot(4, 3.1),
-              FlSpot(5, 4),
-              FlSpot(6, 3),
-              FlSpot(7, 4),
-            ],
-          ),
-        ])),
-        // child: Sparkline(
-        //   data: values.past_hours,
-        //   lineWidth: 8.0,
-        //   lineColor: Colors.blue,
-        //   pointsMode: PointsMode.all,
-        //   pointSize: 16.0,
-        //   pointColor: Colors.grey,
-        // ),
-      ),
-    );
-  }
-
-  LineChartBarData linesBarData1() {
-    return LineChartBarData(spots: [
-      FlSpot(1, 1),
-      FlSpot(3, 1.5),
-      FlSpot(5, 1.4),
-      FlSpot(7, 3.4),
-      FlSpot(10, 2),
-      FlSpot(12, 2.2),
-      FlSpot(13, 1.8),
-    ]);
-  }
->>>>>>> 8df3b4576f3c650703ed1074930eb615c6d24c9e
 }
