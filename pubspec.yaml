@@ -29,6 +29,8 @@ dependencies:
   rxdart: ^0.23.1 #notifications
   http: ^0.12.1 #notifications
   splashscreen: #splashscreen/loading screen 
+  intl: ^0.15.7
+  shared_preferences: ^0.5.12
 
 
   # The following adds the Cupertino Icons font to your application.

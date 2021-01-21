@@ -1,43 +1,103 @@
-import 'dart:ui';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'globalValues.dart' as values;
+import 'package:intl/intl.dart' as intl;
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jimmy Test File',
-      debugShowCheckedModeBanner: false,
+      title: 'Shared preferences demo',
       theme: ThemeData(
-        primaryColor: Colors.white,
-        fontFamily: "Arial",
-        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
       ),
-      home: ProgressGraph(),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(title: 'Progress'),
     );
   }
 }
 
-class ProgressGraph extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
   @override
-  _ProgressGraph createState() => _ProgressGraph();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _ProgressGraph extends State<ProgressGraph> {
+class _MyHomePageState extends State<MyHomePage> {
+  int _displayMinutes;
+  String _displayhour;
+  Timer _everySecond;
+  intl.DateFormat dateFormat = new intl.DateFormat.Hms();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
+
+  _loadCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      if (prefs.getInt('storeMinutes') == null) {
+        _displayMinutes = 0;
+      } else if (prefs.getInt('storeMinutes') == 0) {
+        _displayMinutes = 0;
+      } else {
+        _displayMinutes = prefs.getInt('storeMinutes');
+      }
+
+      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
+    });
+
+    _everySecond = Timer.periodic(Duration(seconds: 60), (Timer t) {
+      _incrementCounter();
+    });
+  }
+
+  _incrementCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (!mounted) return;
+    setState(() {
+      _displayMinutes = _displayMinutes + 1;
+      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
+      prefs.setInt('storeMinutes', _displayMinutes);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Chandresh Test",
-          style: TextStyle(color: Colors.blue),
-        ),
-        iconTheme: IconThemeData(color: Colors.blue),
+        title: Text(widget.title),
       ),
-      body: Text("Test"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                child: Text(
+                    'Productive Time  ' + '$_displayhour' + '   Hours   ',
+                    style: TextStyle(fontFamily: 'Comic Sans MS')),
+                padding: EdgeInsets.fromLTRB(110.0, 90.0, 90.0, 90.0),
+                margin: EdgeInsets.all(200.0),
+                decoration: BoxDecoration(
+                    color: Colors.orange[100],
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(40.0),
+                        topRight: const Radius.circular(40.0),
+                        bottomLeft: const Radius.circular(40.0),
+                        bottomRight: const Radius.circular(40.0)))),
+          ],
+        ),
+      ),
     );
   }
 }
