@@ -37,6 +37,7 @@ class _ProgressGraph extends State<ProgressGraph> {
         height: MediaQuery.of(context).size.height / 2,
         child: LineChart(LineChartData(lineBarsData: [
           LineChartBarData(
+            colors: [Colors.blue],
             spots: [
               FlSpot(0, 3),
               FlSpot(2, 2),
