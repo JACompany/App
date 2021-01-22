@@ -5,6 +5,9 @@ import 'globalValues.dart' as values;
 import 'dart:async';
 import 'package:flutter/rendering.dart';
 
+//given the total number of hours the user has been productive today (user_hours_day)
+//given the goal of the user per day (user_goal)
+//show a progress graph
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -26,13 +29,12 @@ class LinearProgressIndicatorApp extends StatefulWidget {
 class LinearProgressIndicatorAppState
     extends State<LinearProgressIndicatorApp> {
   bool _loading;
-  double _progressValue;
-
+  double _progressValue = values.user_hours_day;
+  double goal = values.user_goal;
   @override
   void initState() {
     super.initState();
     _loading = false;
-    _progressValue = 0.0;
   }
 
   @override
