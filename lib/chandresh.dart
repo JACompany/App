@@ -83,8 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: Text(
-                    'Total Productive Hours  ' + '$_displayhour' + 'Hours',
+                child: Text('Total Productive Hours:  ' + '15 Hours',
                     style: TextStyle(
                         fontFamily: 'Comic Sans MS',
                         fontSize: 19,
