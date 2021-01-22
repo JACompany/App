@@ -45,7 +45,7 @@ class _ProgressPageState extends State<ProgressPage> {
         child: Column(
           children: [
             Text(
-              "Progress Bar",
+              "Progress Chart",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 50, color: Colors.blue),
             ),
