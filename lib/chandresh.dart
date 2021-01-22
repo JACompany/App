@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     'Total Productive Hours  ' + '$_displayhour' + 'Hours',
                     style: TextStyle(
                         fontFamily: 'Comic Sans MS',
-                        fontSize: 20,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink[300])),
                 padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
