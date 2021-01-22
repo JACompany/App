@@ -27,6 +27,7 @@ class ProgressGraph extends StatefulWidget {
 }
 
 class _ProgressGraph extends State<ProgressGraph> {
+  var hours = 6;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _ProgressGraph extends State<ProgressGraph> {
         ),
         iconTheme: IconThemeData(color: Colors.blue),
       ),
-      body: Text("Test"),
+      body: Text("Total productive hours: " + hours.toString()),
     );
   }
 }
