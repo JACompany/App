@@ -80,40 +80,74 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                child: LineChart(
-                  LineChartData(lineBarsData: [
-                    LineChartBarData(
-                      colors: [Colors.blue],
-                      spots: [
-                        FlSpot(0, 3),
-                        FlSpot(2, 2),
-                        FlSpot(3, 5),
-                        FlSpot(4, 3.1),
-                        FlSpot(5, 4),
-                        FlSpot(6, 3),
-                        FlSpot(7, 4),
-                      ],
-                      barWidth: 5,
-                    ),
-                  ]),
-                ),
-                padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.orange[100],
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
-                      bottomLeft: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0)),
-                )),
-          ],
+        child: ListView(
+          children: <Widget>[ProgressChart()],
         ),
       ),
     );
+  }
+
+  Widget ProgressChart() {
+    return Container(
+        child: LineChart(
+          LineChartData(lineBarsData: [
+            LineChartBarData(
+              colors: [Colors.blue],
+              spots: [
+                FlSpot(0, 3),
+                FlSpot(2, 2),
+                FlSpot(3, 5),
+                FlSpot(4, 3.1),
+                FlSpot(5, 4),
+                FlSpot(6, 3),
+                FlSpot(7, 4),
+              ],
+              barWidth: 5,
+            ),
+          ]),
+        ),
+        height: MediaQuery.of(context).size.height / 3,
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.orange[100],
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+              bottomLeft: Radius.circular(40.0),
+              bottomRight: Radius.circular(40.0)),
+        ));
+  }
+
+  Widget ProgressBar() {
+    return Container(
+        child: LineChart(
+          LineChartData(lineBarsData: [
+            LineChartBarData(
+              colors: [Colors.blue],
+              spots: [
+                FlSpot(0, 3),
+                FlSpot(2, 2),
+                FlSpot(3, 5),
+                FlSpot(4, 3.1),
+                FlSpot(5, 4),
+                FlSpot(6, 3),
+                FlSpot(7, 4),
+              ],
+              barWidth: 5,
+            ),
+          ]),
+        ),
+        height: MediaQuery.of(context).size.height / 3,
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.orange[100],
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+              bottomLeft: Radius.circular(40.0),
+              bottomRight: Radius.circular(40.0)),
+        ));
   }
 }
