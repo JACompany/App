@@ -8,7 +8,6 @@ import 'package:fl_chart/fl_chart.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,48 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _displayMinutes;
-  String _displayhour;
-  Timer _everySecond;
-  intl.DateFormat dateFormat = new intl.DateFormat.Hms();
-
-  @override
-  void initState() {
-    super.initState();
-    _loadCounter();
-  }
-
-  _loadCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      if (prefs.getInt('storeMinutes') == null) {
-        _displayMinutes = 0;
-      } else if (prefs.getInt('storeMinutes') == 0) {
-        _displayMinutes = 0;
-      } else {
-        _displayMinutes = prefs.getInt('storeMinutes');
-      }
-
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
-    });
-
-    _everySecond = Timer.periodic(Duration(seconds: 60), (Timer t) {
-      _incrementCounter();
-    });
-  }
-
-  _incrementCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    if (!mounted) return;
-    setState(() {
-      _displayMinutes = _displayMinutes + 100;
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
-      prefs.setInt('storeMinutes', _displayMinutes);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ListView(
-          children: <Widget>[ProgressChart()],
+          children: <Widget>[ProgressBar(), TotalHours(), ProgressChart()],
         ),
       ),
     );
@@ -89,24 +46,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget ProgressChart() {
     return Container(
-        child: LineChart(
-          LineChartData(lineBarsData: [
-            LineChartBarData(
-              colors: [Colors.blue],
-              spots: [
-                FlSpot(0, 3),
-                FlSpot(2, 2),
-                FlSpot(3, 5),
-                FlSpot(4, 3.1),
-                FlSpot(5, 4),
-                FlSpot(6, 3),
-                FlSpot(7, 4),
-              ],
-              barWidth: 5,
+        child: Column(
+          children: [
+            Text(
+              "Progress Bar",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 50, color: Colors.blue),
             ),
-          ]),
+            SizedBox(height: 10),
+            Expanded(
+              child: LineChart(
+                LineChartData(lineBarsData: [
+                  LineChartBarData(
+                    colors: [Colors.blue],
+                    spots: [
+                      FlSpot(0, 3),
+                      FlSpot(2, 2),
+                      FlSpot(3, 5),
+                      FlSpot(4, 3.1),
+                      FlSpot(5, 4),
+                      FlSpot(6, 3),
+                      FlSpot(7, 4),
+                    ],
+                    barWidth: 5,
+                  ),
+                ]),
+              ),
+            )
+          ],
         ),
-        height: MediaQuery.of(context).size.height / 3,
+        height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -121,24 +90,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget ProgressBar() {
     return Container(
-        child: LineChart(
-          LineChartData(lineBarsData: [
-            LineChartBarData(
-              colors: [Colors.blue],
-              spots: [
-                FlSpot(0, 3),
-                FlSpot(2, 2),
-                FlSpot(3, 5),
-                FlSpot(4, 3.1),
-                FlSpot(5, 4),
-                FlSpot(6, 3),
-                FlSpot(7, 4),
-              ],
-              barWidth: 5,
-            ),
-          ]),
+        child: Text(
+          "Progress Bar",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 50, color: Colors.blue),
         ),
-        height: MediaQuery.of(context).size.height / 3,
+        height: MediaQuery.of(context).size.height / 5,
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.orange[100],
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+              bottomLeft: Radius.circular(40.0),
+              bottomRight: Radius.circular(40.0)),
+        ));
+  }
+
+  Widget TotalHours() {
+    return Container(
+        child: Text(
+          "Total Hours",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 50, color: Colors.blue),
+        ),
+        height: MediaQuery.of(context).size.height / 5,
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
