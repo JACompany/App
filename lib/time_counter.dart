@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (!mounted) return;
     setState(() {
-      _displayMinutes = _displayMinutes + 1;
+      _displayMinutes = _displayMinutes + 100;
       _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
       prefs.setInt('storeMinutes', _displayMinutes);
     });
@@ -83,22 +84,33 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: Text(
-                    'Total Productive Hours  ' + '$_displayhour' + 'Hours',
-                    style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.pink[300])),
-                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
+                child: LineChart(
+                  LineChartData(lineBarsData: [
+                    LineChartBarData(
+                      colors: [Colors.blue],
+                      spots: [
+                        FlSpot(0, 3),
+                        FlSpot(2, 2),
+                        FlSpot(3, 5),
+                        FlSpot(4, 3.1),
+                        FlSpot(5, 4),
+                        FlSpot(6, 3),
+                        FlSpot(7, 4),
+                      ],
+                      barWidth: 5,
+                    ),
+                  ]),
+                ),
+                padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(40.0),
-                        topRight: const Radius.circular(40.0),
-                        bottomLeft: const Radius.circular(40.0),
-                        bottomRight: const Radius.circular(40.0)))),
+                  color: Colors.orange[100],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
+                      bottomLeft: Radius.circular(40.0),
+                      bottomRight: Radius.circular(40.0)),
+                )),
           ],
         ),
       ),
