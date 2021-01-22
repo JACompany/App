@@ -84,11 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
                 child: Text(
-                    'Productive Time  ' + '$_displayhour' + '   Hours   ',
+                    'Total Productive Hours  ' + '$_displayhour' + 'Hours',
                     style: TextStyle(
                         fontFamily: 'Comic Sans MS',
                         fontSize: 20,
-                        color: Colors.green)),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink[300])),
                 padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(

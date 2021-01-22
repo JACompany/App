@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,8 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
+      color: Colors.white,
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.blue,
         fontFamily: "Arial",
         brightness: Brightness.light,
       ),
@@ -29,15 +32,28 @@ class ProgressGraph extends StatefulWidget {
 class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Jimmy Test",
-          style: TextStyle(color: Colors.blue),
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
+        child: LineChart(
+          LineChartData(lineBarsData: [
+            LineChartBarData(
+              colors: [Colors.blue],
+              spots: [
+                FlSpot(0, 3),
+                FlSpot(2, 2),
+                FlSpot(3, 5),
+                FlSpot(4, 3.1),
+                FlSpot(5, 4),
+                FlSpot(6, 3),
+                FlSpot(7, 4),
+              ],
+            ),
+          ]),
         ),
-        iconTheme: IconThemeData(color: Colors.blue),
       ),
-      body: Text("Test"),
     );
   }
 }
