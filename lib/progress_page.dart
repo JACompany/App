@@ -1,5 +1,8 @@
+import 'package:app/backup/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'globalValues.dart' as values;
+import 'addTask.dart';
 
 class ProgressPage extends StatefulWidget {
   @override
@@ -34,7 +37,12 @@ class _ProgressPageState extends State<ProgressPage> {
             )),
             Expanded(
                 child: IconButton(
-              icon: Icon(Icons.insights),
+              icon: Icon(
+                Icons.insights,
+                color: values.current_page == "progress"
+                    ? Colors.white
+                    : Colors.black,
+              ),
               onPressed: onPressed2,
               iconSize: 50,
             )),
@@ -56,7 +64,11 @@ class _ProgressPageState extends State<ProgressPage> {
     );
   }
 
-  void onPressed1() {}
+  void onPressed1() {
+    values.current_page = "home";
+    Navigator.of(context).pop();
+  }
+
   void onPressed2() {}
   void onPressed3() {}
   void onPressed4() {}

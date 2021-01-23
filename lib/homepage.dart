@@ -43,7 +43,11 @@ class _HomeState extends State<Home> {
           children: [
             Expanded(
                 child: IconButton(
-              icon: Icon(Icons.timer),
+              icon: Icon(
+                Icons.timer,
+                color:
+                    values.current_page == "home" ? Colors.white : Colors.black,
+              ),
               onPressed: onPressed1,
               iconSize: 50,
             )),
@@ -71,20 +75,23 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void onPressed1() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-        return Task();
-      }),
-    );
+  void onPressed() {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Task(),
+            transitionDuration: Duration(seconds: 0)));
   }
 
+  void onPressed1() {}
+
   void onPressed2() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-        return ProgressPage();
-      }),
-    );
+    values.current_page = "progress";
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => ProgressPage(),
+            transitionDuration: Duration(seconds: 0)));
   }
 
   void onPressed3() {}
