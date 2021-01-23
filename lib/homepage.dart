@@ -44,25 +44,25 @@ class _HomeState extends State<Home> {
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.timer),
-              onPressed: onPressed,
+              onPressed: onPressed1,
               iconSize: 50,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.insights),
-              onPressed: progressPage,
+              onPressed: onPressed2,
               iconSize: 50,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.leaderboard),
-              onPressed: onPressed,
+              onPressed: onPressed3,
               iconSize: 50,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.account_circle),
-              onPressed: onPressed,
+              onPressed: onPressed4,
               iconSize: 50,
             ))
           ],
@@ -71,7 +71,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void progressPage() {
+  void onPressed1() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (BuildContext context) {
+        return Task();
+      }),
+    );
+  }
+
+  void onPressed2() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (BuildContext context) {
         return ProgressPage();
@@ -79,13 +87,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void onPressed() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-        return Task();
-      }),
-    );
-  }
+  void onPressed3() {}
+  void onPressed4() {}
 
   Widget tasks() {
     return ListView.builder(
