@@ -5,7 +5,6 @@ import 'globalValues.dart' as values;
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-//https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#sample-2-source-code
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
