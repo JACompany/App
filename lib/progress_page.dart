@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shared preferences demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: ProgressPage(),
-    );
-  }
-}
-
 class ProgressPage extends StatefulWidget {
   @override
   _ProgressPageState createState() => _ProgressPageState();
@@ -27,15 +11,55 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Progress"),
+          title: Text("Progress"),
+          leading: IconButton(
+            icon: Icon(Icons.insights),
+            onPressed: null,
+            disabledColor: Colors.black,
+          )),
+      body: ListView(
+        children: [ProgressBar(), TotalHours(), ProgressChart()],
       ),
-      body: Center(
-        child: ListView(
-          children: <Widget>[ProgressBar(), TotalHours(), ProgressChart()],
+      bottomNavigationBar: Container(
+        height: 70,
+        alignment: Alignment.bottomCenter,
+        color: Colors.blue,
+        child: Row(
+          children: [
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.timer),
+              onPressed: onPressed1,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.insights),
+              onPressed: onPressed2,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.leaderboard),
+              onPressed: onPressed3,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: onPressed4,
+              iconSize: 50,
+            ))
+          ],
         ),
       ),
     );
   }
+
+  void onPressed1() {}
+  void onPressed2() {}
+  void onPressed3() {}
+  void onPressed4() {}
 
   Widget ProgressChart() {
     return Container(

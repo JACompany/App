@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:app/backup/template.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
+import 'progress_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
         actions: [IconButton(icon: Icon(Icons.add), onPressed: onPressed)],
       ),
       body: tasks(),
-      bottomSheet: Container(
+      bottomNavigationBar: Container(
         height: 70,
         alignment: Alignment.bottomCenter,
         color: Colors.blue,
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> {
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.insights),
-              onPressed: onPressed,
+              onPressed: progressPage,
               iconSize: 50,
             )),
             Expanded(
@@ -66,6 +68,14 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  void progressPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (BuildContext context) {
+        return ProgressPage();
+      }),
     );
   }
 
