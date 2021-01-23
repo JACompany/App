@@ -29,15 +29,6 @@ class LockScreen extends StatefulWidget {
 class _LockScreenState extends State<LockScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Jimmy Test",
-          style: TextStyle(color: Colors.blue),
-        ),
-        iconTheme: IconThemeData(color: Colors.blue),
-      ),
-      body: Text("Total productive hours: "),
-    );
+    return ListView();
   }
 }

@@ -12,15 +12,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: ProgressPage(title: 'Progress'),
+      home: ProgressPage(),
     );
   }
 }
 
 class ProgressPage extends StatefulWidget {
-  ProgressPage({Key key, this.title}) : super(key: key);
-  final String title;
-
   @override
   _ProgressPageState createState() => _ProgressPageState();
 }
@@ -30,7 +27,7 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Progress"),
       ),
       body: Center(
         child: ListView(

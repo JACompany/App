@@ -33,6 +33,39 @@ class _HomeState extends State<Home> {
         actions: [IconButton(icon: Icon(Icons.add), onPressed: onPressed)],
       ),
       body: tasks(),
+      bottomSheet: Container(
+        height: 70,
+        alignment: Alignment.bottomCenter,
+        color: Colors.blue,
+        child: Row(
+          children: [
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.timer),
+              onPressed: onPressed,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.insights),
+              onPressed: onPressed,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.leaderboard),
+              onPressed: onPressed,
+              iconSize: 50,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: onPressed,
+              iconSize: 50,
+            ))
+          ],
+        ),
+      ),
     );
   }
 
