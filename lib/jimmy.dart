@@ -33,31 +33,25 @@ class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 2,
-          child:  List<LineChartBarData> linesBarData2() {
-    return [
-      LineChartBarData(
-        spots: [
-          FlSpot(1, 1),
-          FlSpot(3, 4),
-          FlSpot(5, 1.8),
-          FlSpot(7, 5),
-          FlSpot(10, 2),
-          FlSpot(12, 2.2),
-          FlSpot(13, 1.8),
-        ],
-        isCurved: true,
-        curveSmoothness: 0,
-        colors: const [
-          Color(0x444af699),
-        ],
-                ],
-              ),
-            ]),
-          )),
-    );
+        child: Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.height / 2,
+            child: LineChart(
+              LineChartData(lineBarsData: [
+                LineChartBarData(
+                  colors: [Colors.blue],
+                  spots: [
+                    FlSpot(0, 3),
+                    FlSpot(2, 2),
+                    FlSpot(3, 5),
+                    FlSpot(4, 3.1),
+                    FlSpot(5, 4),
+                    FlSpot(6, 3),
+                    FlSpot(7, 4),
+                  ],
+                ),
+              ]),
+            )));
   }
 }
