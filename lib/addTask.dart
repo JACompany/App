@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'homepage.dart';
 import 'globalValues.dart' as values;
 
+//https://pub.dev/packages/flutter_time_picker_spinner
 class Task extends StatefulWidget {
   @override
   _Task createState() => _Task();
@@ -28,12 +30,13 @@ class _Task extends State<Task> {
 
   Widget addTask() {
     final _formKey = GlobalKey<FormState>();
+    var _dateTime = null;
     return Form(
       key: _formKey,
-      child: ColoredBox(
+      child: Container(
+        margin: EdgeInsets.all(15),
         color: values.color_peach,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: <Widget>[
             Text(
               "Description",
@@ -56,21 +59,18 @@ class _Task extends State<Task> {
                 return null;
               },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Task added!"),
-                        duration: Duration(milliseconds: 500),
-                      ),
-                    );
-                  }
-                },
-                child: Text('Add task'),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Task added!"),
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+                }
+              },
+              child: Text('Add task'),
             ),
           ],
         ),

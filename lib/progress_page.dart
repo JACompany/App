@@ -108,7 +108,7 @@ class _ProgressPageState extends State<ProgressPage> {
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: values.color_peach,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               topRight: Radius.circular(40.0),
@@ -128,7 +128,7 @@ class _ProgressPageState extends State<ProgressPage> {
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.orange[100],
+          color: values.color_peach,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               topRight: Radius.circular(40.0),
@@ -148,7 +148,7 @@ class _ProgressPageState extends State<ProgressPage> {
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.orange[100],
+          color: values.color_peach,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               topRight: Radius.circular(40.0),
