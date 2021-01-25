@@ -108,19 +108,23 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildTile(String text, index) {
-    return ListTile(
-      title: Text(
-        text,
-        style: TextStyle(fontSize: 18),
-      ),
-      trailing: IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {
-          setState(() {
-            values.tasks.removeAt(index);
-            values.tasks_storage.write(values.tasks);
-          });
-        },
+    return Container(
+      color: values.color_red,
+      child: ListTile(
+        tileColor: values.color_red,
+        title: Text(
+          text,
+          style: TextStyle(fontSize: 18),
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            setState(() {
+              values.tasks.removeAt(index);
+              values.tasks_storage.write(values.tasks);
+            });
+          },
+        ),
       ),
     );
   }

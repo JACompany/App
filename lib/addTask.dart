@@ -30,42 +30,50 @@ class _Task extends State<Task> {
     final _formKey = GlobalKey<FormState>();
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              if (value.contains(";")) {
-                return "Please remove ';' character";
-              }
-              setState(() {
-                values.tasks.add(value);
-                values.tasks_storage.write(values.tasks);
-              });
-
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Task added!"),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                }
-              },
-              child: Text('Add task'),
+      child: ColoredBox(
+        color: values.color_peach,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Description",
+              style: TextStyle(fontSize: 18),
             ),
-          ),
-        ],
+            TextFormField(
+              maxLines: null,
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                if (value.contains(";")) {
+                  return "Please remove ';' character";
+                }
+                setState(() {
+                  values.tasks.add(value);
+                  values.tasks_storage.write(values.tasks);
+                });
+
+                return null;
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Task added!"),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  }
+                },
+                child: Text('Add task'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

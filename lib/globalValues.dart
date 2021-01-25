@@ -19,3 +19,4 @@ String current_page = "home";
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);
 final color_red = Color.fromARGB(255, 247, 86, 124);
+final color_peach = Color.fromARGB(255, 254, 239, 221);
