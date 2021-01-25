@@ -20,7 +20,13 @@ class _Task extends State<Task> {
         leading:
             IconButton(icon: Icon(Icons.arrow_back), onPressed: _backPressed),
       ),
-      body: addTask(),
+      body: Container(
+        color: values.color_peach,
+        margin: EdgeInsets.all(15),
+        child: ListView(
+          children: [addTask(), setTime()],
+        ),
+      ),
     );
   }
 
@@ -30,14 +36,14 @@ class _Task extends State<Task> {
 
   Widget addTask() {
     final _formKey = GlobalKey<FormState>();
-    var _dateTime = null;
     return Form(
       key: _formKey,
       child: Container(
         margin: EdgeInsets.all(15),
         color: values.color_peach,
-        child: ListView(
-          children: <Widget>[
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
               "Description",
               style: TextStyle(fontSize: 18),
@@ -75,6 +81,20 @@ class _Task extends State<Task> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget setTime() {
+    return TimePickerSpinner(
+      is24HourMode: false,
+      normalTextStyle: TextStyle(fontSize: 24, color: Colors.black),
+      highlightedTextStyle: TextStyle(fontSize: 24, color: values.color_red),
+      spacing: 50,
+      itemHeight: 80,
+      isForce2Digits: true,
+      onTimeChange: (time) {
+        setState(() {});
+      },
     );
   }
 }
