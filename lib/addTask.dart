@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'homepage.dart';
+import 'package:sizer/sizer.dart';
 import 'globalValues.dart' as values;
 
 //https://pub.dev/packages/flutter_time_picker_spinner
@@ -17,8 +18,11 @@ class _Task extends State<Task> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add task"),
-        leading:
-            IconButton(icon: Icon(Icons.arrow_back), onPressed: _backPressed),
+        leading: IconButton(
+          icon: Icon(Icons.add),
+          onPressed: null,
+          disabledColor: Colors.black,
+        ),
       ),
       body: Container(
         color: values.color_peach,
@@ -27,12 +31,51 @@ class _Task extends State<Task> {
           children: [addTask(), setTime()],
         ),
       ),
+      bottomNavigationBar: Container(
+        height: 8.0.h,
+        alignment: Alignment.bottomCenter,
+        color: values.color_green,
+        child: Row(
+          children: [
+            Expanded(
+                child: IconButton(
+              icon: Icon(
+                Icons.timer,
+              ),
+              onPressed: onPressed1,
+              iconSize: 6.0.h,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.insights),
+              onPressed: onPressed2,
+              iconSize: 6.0.h,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.leaderboard),
+              onPressed: onPressed3,
+              iconSize: 6.0.h,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: onPressed4,
+              iconSize: 6.0.h,
+            ))
+          ],
+        ),
+      ),
     );
   }
 
-  void _backPressed() {
+  void onPressed1() {
     Navigator.of(context).pop();
   }
+
+  void onPressed2() {}
+  void onPressed3() {}
+  void onPressed4() {}
 
   Widget addTask() {
     final _formKey = GlobalKey<FormState>();

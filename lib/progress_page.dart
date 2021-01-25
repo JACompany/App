@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;
 import 'addTask.dart';
+import 'package:sizer/sizer.dart';
 
 class ProgressPage extends StatefulWidget {
   @override
@@ -16,24 +17,24 @@ class _ProgressPageState extends State<ProgressPage> {
       appBar: AppBar(
           title: Text("Progress"),
           leading: IconButton(
-            icon: Icon(Icons.insights),
             onPressed: null,
+            icon: Icon(Icons.insights),
             disabledColor: Colors.black,
           )),
       body: ListView(
         children: [ProgressBar(), TotalHours(), ProgressChart()],
       ),
       bottomNavigationBar: Container(
-        height: 70,
+        height: 8.0.h,
         alignment: Alignment.bottomCenter,
-        color: Colors.blue,
+        color: values.color_green,
         child: Row(
           children: [
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.timer),
               onPressed: onPressed1,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
@@ -44,19 +45,19 @@ class _ProgressPageState extends State<ProgressPage> {
                     : Colors.black,
               ),
               onPressed: onPressed2,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.leaderboard),
               onPressed: onPressed3,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.account_circle),
               onPressed: onPressed4,
-              iconSize: 50,
+              iconSize: 6.0.h,
             ))
           ],
         ),
