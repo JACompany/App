@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:app/calendar.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
 import 'progress_page.dart';
 import 'package:sizer/sizer.dart';
+import 'calendar.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -37,7 +39,7 @@ class _HomeState extends State<Home> {
             children: [
               IconButton(
                 icon: Icon(Icons.calendar_today),
-                onPressed: onPressed,
+                onPressed: onPressed5,
                 iconSize: 6.0.h,
               ),
               Text(
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> {
               ),
               IconButton(
                 icon: Icon(Icons.add),
-                onPressed: onPressed,
+                onPressed: onPressed6,
                 iconSize: 6.0.h,
               )
             ],
@@ -94,9 +96,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void onPressed5() {}
-  void onPressed6() {}
-  void onPressed() {
+  void onPressed5() {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Calendar(),
+            transitionDuration: Duration(seconds: 0)));
+  }
+
+  void onPressed6() {
     Navigator.push(
         context,
         PageRouteBuilder(

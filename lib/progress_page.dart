@@ -17,8 +17,8 @@ class _ProgressPageState extends State<ProgressPage> {
       appBar: AppBar(
           title: Text("Progress"),
           leading: IconButton(
-            icon: Icon(Icons.insights),
             onPressed: null,
+            icon: Icon(Icons.insights),
             disabledColor: Colors.black,
           )),
       body: ListView(
