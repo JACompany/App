@@ -35,6 +35,8 @@ dependencies:
   flutter_sparkline: ^0.1.0 #progress chart
   fl_chart: ^0.12.2 #progress chart 
   flutter_time_picker_spinner: ^1.0.6+1 #time picker using a scroll
+  sizer: ^1.1.8 #screen sizing
+  table_calendar: ^2.3.3 #calendar
 
 
   # The following adds the Cupertino Icons font to your application.

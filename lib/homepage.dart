@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
 import 'progress_page.dart';
+import 'package:sizer/sizer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -30,14 +31,33 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calendar"),
-        actions: [IconButton(icon: Icon(Icons.add), onPressed: onPressed)],
-      ),
+          backgroundColor: values.color_green,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: Icon(Icons.calendar_today),
+                onPressed: onPressed,
+                iconSize: 6.0.h,
+              ),
+              Text(
+                "THU DEC 10",
+                style: TextStyle(
+                  fontSize: 4.0.h,
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: onPressed,
+                iconSize: 6.0.h,
+              )
+            ],
+          )),
       body: tasks(),
       bottomNavigationBar: Container(
-        height: 70,
+        height: 8.0.h,
         alignment: Alignment.bottomCenter,
-        color: Colors.blue,
+        color: values.color_green,
         child: Row(
           children: [
             Expanded(
@@ -48,25 +68,25 @@ class _HomeState extends State<Home> {
                     values.current_page == "home" ? Colors.white : Colors.black,
               ),
               onPressed: onPressed1,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.insights),
               onPressed: onPressed2,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.leaderboard),
               onPressed: onPressed3,
-              iconSize: 50,
+              iconSize: 6.0.h,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.account_circle),
               onPressed: onPressed4,
-              iconSize: 50,
+              iconSize: 6.0.h,
             ))
           ],
         ),
@@ -74,6 +94,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void onPressed5() {}
+  void onPressed6() {}
   void onPressed() {
     Navigator.push(
         context,
