@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:app/leaderboard.dart';
+import 'package:app/profile.dart';
+import 'package:app/progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
@@ -18,11 +21,11 @@ class _Task extends State<Task> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add task"),
+        title: Text("Add Task"),
         leading: IconButton(
-          icon: Icon(Icons.add),
-          onPressed: null,
-          disabledColor: Colors.black,
+          icon: Icon(Icons.close),
+          onPressed: onPressed1,
+          iconSize: 3.0.h,
         ),
       ),
       body: Container(
@@ -42,6 +45,8 @@ class _Task extends State<Task> {
                 child: IconButton(
               icon: Icon(
                 Icons.timer,
+                color:
+                    values.current_page == "home" ? Colors.white : Colors.black,
               ),
               onPressed: onPressed1,
               iconSize: 6.0.h,
@@ -71,7 +76,7 @@ class _Task extends State<Task> {
   }
 
   void onPressed1() {
-    // Navigator.of(context).pop();
+    values.current_page = "home";
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Home(),
@@ -79,9 +84,32 @@ class _Task extends State<Task> {
         (route) => false);
   }
 
-  void onPressed2() {}
-  void onPressed3() {}
-  void onPressed4() {}
+  void onPressed2() {
+    values.current_page = "progress";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => ProgressPage(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed3() {
+    values.current_page = "leaderboard";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Leaderboard(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed4() {
+    values.current_page = "profile";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Profile(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
 
   Widget addTask() {
     final _formKey = GlobalKey<FormState>();

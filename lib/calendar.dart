@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:sizer/sizer.dart';
 import 'globalValues.dart' as values;
+import 'homepage.dart';
 
 class Calendar extends StatefulWidget {
   Calendar({Key key}) : super(key: key);
@@ -13,25 +14,13 @@ class Calendar extends StatefulWidget {
 }
 
 class _Calendar extends State<Calendar> with TickerProviderStateMixin {
-  Map<DateTime, List> _events;
-  List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
 
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
-
-    _events = {
-      _selectedDay.subtract(Duration(days: 30)): [
-        'Event A0',
-      ],
-    };
-
-    _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -48,22 +37,20 @@ class _Calendar extends State<Calendar> with TickerProviderStateMixin {
   }
 
   void _onDaySelected(DateTime day, List events, List holidays) {
-    setState(() {
-      _selectedEvents = events;
-    });
+    setState(() {});
   }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {}
-
-  void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: values.color_green,
         title: Text("Calendar"),
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: onPressed1,
+          iconSize: 3.0.h,
+        ),
       ),
       body: _buildTableCalendar(),
       bottomNavigationBar: Container(
@@ -74,9 +61,10 @@ class _Calendar extends State<Calendar> with TickerProviderStateMixin {
           children: [
             Expanded(
                 child: IconButton(
-              icon: Icon(
-                Icons.timer,
-              ),
+              icon: Icon(Icons.timer,
+                  color: values.current_page == "home"
+                      ? Colors.white
+                      : Colors.black),
               onPressed: onPressed1,
               iconSize: 6.0.h,
             )),
@@ -107,28 +95,28 @@ class _Calendar extends State<Calendar> with TickerProviderStateMixin {
   Widget _buildTableCalendar() {
     return TableCalendar(
       calendarController: _calendarController,
+      availableCalendarFormats: {CalendarFormat.month: 'Month'},
       startingDayOfWeek: StartingDayOfWeek.sunday,
       calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.brown[700],
+        selectedColor: values.color_red,
+        todayColor: values.color_green,
         outsideDaysVisible: true,
       ),
       headerStyle: HeaderStyle(
-        formatButtonTextStyle:
-            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
+          titleTextStyle: TextStyle(
+        fontSize: 3.0.h,
+      )),
       onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
     );
   }
 
-  void onPressed1() {}
+  void onPressed1() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Home(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
 
   void onPressed2() {}
 

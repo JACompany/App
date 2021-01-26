@@ -10,13 +10,7 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    values.tasks_storage.read().then((readValues) {
-      for (int i = 0; i < readValues.length; i++) {
-        if (readValues.elementAt(i).length > 0) {
-          values.tasks.add(readValues.elementAt(i));
-        }
-      }
-    });
+    if (values.is_setup == false) setup();
     return LayoutBuilder(
       builder: (context, constraints) {
         return OrientationBuilder(builder: (context, orientation) {
@@ -31,5 +25,16 @@ class App extends StatelessWidget {
         });
       },
     );
+  }
+
+  void setup() {
+    values.is_setup = true;
+    values.tasks_storage.read().then((readValues) {
+      for (int i = 0; i < readValues.length; i++) {
+        if (readValues.elementAt(i).length > 0) {
+          values.tasks.add(readValues.elementAt(i));
+        }
+      }
+    });
   }
 }

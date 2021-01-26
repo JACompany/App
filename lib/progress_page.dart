@@ -1,9 +1,12 @@
-import 'package:app/backup/homepage.dart';
+import 'package:app/leaderboard.dart';
+import 'package:app/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;
 import 'addTask.dart';
 import 'package:sizer/sizer.dart';
+
+import 'homepage.dart';
 
 class ProgressPage extends StatefulWidget {
   @override
@@ -35,6 +38,8 @@ class _ProgressPageState extends State<ProgressPage> {
               icon: Icon(Icons.timer),
               onPressed: onPressed1,
               iconSize: 6.0.h,
+              color:
+                  values.current_page == "home" ? Colors.white : Colors.black,
             )),
             Expanded(
                 child: IconButton(
@@ -52,12 +57,18 @@ class _ProgressPageState extends State<ProgressPage> {
               icon: Icon(Icons.leaderboard),
               onPressed: onPressed3,
               iconSize: 6.0.h,
+              color: values.current_page == "leaderboard"
+                  ? Colors.white
+                  : Colors.black,
             )),
             Expanded(
                 child: IconButton(
               icon: Icon(Icons.account_circle),
               onPressed: onPressed4,
               iconSize: 6.0.h,
+              color: values.current_page == "profile"
+                  ? Colors.white
+                  : Colors.black,
             ))
           ],
         ),
@@ -67,12 +78,39 @@ class _ProgressPageState extends State<ProgressPage> {
 
   void onPressed1() {
     values.current_page = "home";
-    Navigator.of(context).pop();
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Home(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
   }
 
-  void onPressed2() {}
-  void onPressed3() {}
-  void onPressed4() {}
+  void onPressed2() {
+    values.current_page = "progress";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => ProgressPage(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed3() {
+    values.current_page = "leaderboard";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Leaderboard(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed4() {
+    values.current_page = "profile";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Profile(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
 
   Widget ProgressChart() {
     return Container(

@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:app/calendar.dart';
-import 'package:app/leaderboard.dart';
 import 'package:app/profile.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
+import 'homepage.dart';
 import 'progress_page.dart';
 import 'package:sizer/sizer.dart';
 import 'calendar.dart';
 
-class Home extends StatefulWidget {
+class Leaderboard extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _Leaderboard createState() => _Leaderboard();
 }
 
-class _HomeState extends State<Home> {
+class _Leaderboard extends State<Leaderboard> {
   bool get maintainState {
     return false;
   }
@@ -25,28 +25,19 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: values.color_green,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.calendar_today),
-                onPressed: onPressed5,
-                iconSize: 6.0.h,
-              ),
-              Text(
-                "THU DEC 10",
-                style: TextStyle(
-                  fontSize: 4.0.h,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: onPressed6,
-                iconSize: 6.0.h,
-              )
-            ],
+          title: Text(
+            "Leaderboard",
+            style: TextStyle(
+              fontSize: 4.0.h,
+            ),
+          ),
+          leading: IconButton(
+            onPressed: null,
+            icon: Icon(Icons.leaderboard),
+            disabledColor: Colors.black,
+            iconSize: 3.0.h,
           )),
-      body: tasks(),
+      body: Text("Leaderboard"),
       bottomNavigationBar: Container(
         height: 8.0.h,
         alignment: Alignment.bottomCenter,
@@ -87,23 +78,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void onPressed5() {
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Calendar(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
-
-  void onPressed6() {
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Task(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
-
   void onPressed1() {
+    values.current_page = "home";
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Home(),
@@ -136,37 +112,5 @@ class _HomeState extends State<Home> {
             pageBuilder: (context, animation, animation2) => Profile(),
             transitionDuration: Duration(seconds: 0)),
         (route) => false);
-  }
-
-  Widget tasks() {
-    return ListView.builder(
-      padding: EdgeInsets.all(16),
-      itemCount: values.tasks.length,
-      itemBuilder: (context, index) {
-        return buildTile(values.tasks[index], index);
-      },
-    );
-  }
-
-  Widget buildTile(String text, index) {
-    return Container(
-      color: values.color_red,
-      child: ListTile(
-        tileColor: values.color_red,
-        title: Text(
-          text,
-          style: TextStyle(fontSize: 18),
-        ),
-        trailing: IconButton(
-          icon: Icon(Icons.delete),
-          onPressed: () {
-            setState(() {
-              values.tasks.removeAt(index);
-              values.tasks_storage.write(values.tasks);
-            });
-          },
-        ),
-      ),
-    );
   }
 }

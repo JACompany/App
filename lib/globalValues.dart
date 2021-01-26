@@ -16,6 +16,9 @@ final List<String> tasks = <String>[];
 //route settings
 String current_page = "home";
 
+//initial setup
+bool is_setup = false;
+
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);
 final color_red = Color.fromARGB(255, 241, 169, 186);
