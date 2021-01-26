@@ -139,8 +139,12 @@ class _HomeState extends State<Home> {
   }
 
   Widget tasks() {
-    return ListView.builder(
-      padding: EdgeInsets.all(16),
+    return ListView.separated(
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.transparent,
+        height: 1.0.h,
+      ),
+      padding: EdgeInsets.all(2.0.w),
       itemCount: values.tasks.length,
       itemBuilder: (context, index) {
         return buildTile(values.tasks[index], index);
@@ -150,14 +154,25 @@ class _HomeState extends State<Home> {
 
   Widget buildTile(String text, index) {
     return Container(
-      color: values.color_red,
+      decoration: BoxDecoration(
+          color: values.color_red,
+          borderRadius: BorderRadius.all(Radius.circular(2.0.w))),
       child: ListTile(
-        tileColor: values.color_red,
-        title: Text(
-          text,
-          style: TextStyle(fontSize: 18),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "3:00 pm - 3:55 pm",
+              style: TextStyle(fontSize: 4.0.h, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              text,
+              style: TextStyle(fontSize: 4.0.h),
+            )
+          ],
         ),
         trailing: IconButton(
+          //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
           icon: Icon(Icons.delete),
           onPressed: () {
             setState(() {
