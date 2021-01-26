@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+import 'calendar.dart';
 import 'homepage.dart';
 import 'package:sizer/sizer.dart';
 import 'globalValues.dart' as values;
@@ -70,7 +71,12 @@ class _Task extends State<Task> {
   }
 
   void onPressed1() {
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Home(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
   }
 
   void onPressed2() {}

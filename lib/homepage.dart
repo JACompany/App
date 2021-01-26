@@ -17,16 +17,13 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    values.tasks_storage.read().then((readValues) {
-      for (int i = 0; i < readValues.length; i++) {
-        if (readValues.elementAt(i).length > 0) {
-          values.tasks.add(readValues.elementAt(i));
-        }
-      }
-    });
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {});
     });
+  }
+
+  bool get maintainState {
+    return false;
   }
 
   @override

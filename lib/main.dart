@@ -10,6 +10,13 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    values.tasks_storage.read().then((readValues) {
+      for (int i = 0; i < readValues.length; i++) {
+        if (readValues.elementAt(i).length > 0) {
+          values.tasks.add(readValues.elementAt(i));
+        }
+      }
+    });
     return LayoutBuilder(
       builder: (context, constraints) {
         return OrientationBuilder(builder: (context, orientation) {
