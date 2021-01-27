@@ -76,19 +76,19 @@ class _ProgressGraph extends State<ProgressGraph> {
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
-                      getTitles: (value) {
-                        switch (value.toInt()) {
-                          case 1:
-                            return '1m';
-                          case 2:
-                            return '2m';
-                          case 3:
-                            return '3m';
-                          case 4:
-                            return '5m';
-                        }
-                        return '';
-                      },
+                      // getTitles: (value) {
+                      //   switch (value.toInt()) {
+                      //     case 1:
+                      //       return '1m';
+                      //     case 2:
+                      //       return '2m';
+                      //     case 3:
+                      //       return '3m';
+                      //     case 4:
+                      //       return '5m';
+                      //   }
+                      //   return '';
+                      // },
                       margin: 8,
                       reservedSize: 30,
                     ),
