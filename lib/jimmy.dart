@@ -35,8 +35,6 @@ class _ProgressGraph extends State<ProgressGraph> {
     return Center(
         child: Container(
             color: Colors.white,
-            width: MediaQuery.of(context).size.width / 2,
-            height: MediaQuery.of(context).size.height / 2,
             child: LineChart(
               LineChartData(
                   lineTouchData: LineTouchData(
@@ -52,7 +50,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                   titlesData: FlTitlesData(
                     bottomTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 22,
+                      reservedSize: 20,
                       getTextStyles: (value) => const TextStyle(
                         color: Color(0xff72719b),
                         fontWeight: FontWeight.bold,
