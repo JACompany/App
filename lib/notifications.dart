@@ -5,7 +5,8 @@ import 'addTask.dart';
 import 'calendar.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
-
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 import 'leaderboard.dart';
 import 'profile.dart';
 import 'progress_page.dart';
@@ -42,18 +43,45 @@ class _Notifications extends State<Notifications> {
   @override
   void initState() {
     super.initState();
+    tz.initializeTimeZones();
     var androidInit = AndroidInitializationSettings("improvall_logo");
     var iosInit = IOSInitializationSettings();
     var initSettings =
         InitializationSettings(android: androidInit, iOS: iosInit);
     notification = FlutterLocalNotificationsPlugin();
     notification.initialize(initSettings, onSelectNotification: onSelect);
+
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {});
     });
   }
 
-  Future onSelect(String payload) async {}
+  Future showNotification() async {
+    var androidDetails = AndroidNotificationDetails(
+        "Chennel ID", "JA", "This is a notification",
+        importance: Importance.max,
+        priority: Priority.high,
+        fullScreenIntent: true);
+    var iosDetails = IOSNotificationDetails();
+    var generalNotificationDetails =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
+    var scheduleTime = tz.TZDateTime.now(tz.local).add(Duration(seconds: 5));
+    await notification.zonedSchedule(0, "Scheduled Task", "Do stuff",
+        scheduleTime, generalNotificationDetails,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true);
+    // notification.schedule(
+    //     0, "Test", "Test body", scheduleTime, generalNotificationDetails);
+  }
+
+  Future onSelect(String payload) async {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("Notification Clicked"),
+            ));
+  }
 
   FlutterLocalNotificationsPlugin notification;
 
@@ -62,7 +90,10 @@ class _Notifications extends State<Notifications> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: values.color_green, title: Text("Notification")),
-      body: Text("Hi"),
+      body: RaisedButton(
+        onPressed: showNotification,
+        child: Text("Notification"),
+      ),
       // bottomNavigationBar: Container(
       //   height: 8.0.h,
       //   alignment: Alignment.bottomCenter,
