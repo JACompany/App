@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   english_words: ^3.1.5  #english words
   path_provider: ^1.6.11 #saving files to disk
-  flutter_local_notifications: ^1.4.2 #notifications
+  flutter_local_notifications: ^3.0.3 #notifications
   rxdart: ^0.23.1 #notifications
   http: ^0.12.1 #notifications
   splashscreen: #splashscreen/loading screen   
@@ -37,6 +37,7 @@ dependencies:
   flutter_time_picker_spinner: ^1.0.6+1 #time picker using a scroll
   sizer: ^1.1.8 #screen sizing
   table_calendar: ^2.3.3 #calendar
+  device_info: #notifications
 
 
   # The following adds the Cupertino Icons font to your application.
