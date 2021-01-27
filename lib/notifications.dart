@@ -1,177 +1,187 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'addTask.dart';
+import 'calendar.dart';
+import 'globalValues.dart' as values;
+import 'package:sizer/sizer.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
+import 'leaderboard.dart';
+import 'profile.dart';
+import 'progress_page.dart';
 
-void main() => runApp(new MaterialApp(
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(
-        color: Colors.red,
-      )),
-      home: new MyApp(),
-    ));
+void main() => runApp(App());
 
-class MyApp extends StatefulWidget {
+class App extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          SizerUtil().init(constraints, orientation);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
+            home: Notifications(),
+          );
+        });
+      },
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+//https://www.youtube.com/watch?v=U38FJ40cEAE&ab_channel=DesiProgrammer
+class Notifications extends StatefulWidget {
+  @override
+  _Notifications createState() => _Notifications();
+}
 
+class _Notifications extends State<Notifications> {
   @override
   void initState() {
     super.initState();
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('flutter_devs');
-    var initializationSettingsIOs = IOSInitializationSettings();
-    var initSetttings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOs);
+    tz.initializeTimeZones();
+    var androidInit = AndroidInitializationSettings("improvall_logo");
+    var iosInit = IOSInitializationSettings();
+    var initSettings =
+        InitializationSettings(android: androidInit, iOS: iosInit);
+    notification = FlutterLocalNotificationsPlugin();
+    notification.initialize(initSettings, onSelectNotification: onSelect);
 
-    flutterLocalNotificationsPlugin.initialize(initSetttings,
-        onSelectNotification: onSelectNotification);
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
   }
 
-  Future onSelectNotification(String payload) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return NewScreen(
-        payload: payload,
-      );
-    }));
+  Future showNotification() async {
+    var androidDetails = AndroidNotificationDetails(
+        "Chennel ID", "JA", "This is a notification",
+        importance: Importance.max,
+        priority: Priority.high,
+        fullScreenIntent: true);
+    var iosDetails = IOSNotificationDetails();
+    var generalNotificationDetails =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
+    var scheduleTime = tz.TZDateTime.now(tz.local).add(Duration(seconds: 5));
+    await notification.zonedSchedule(0, "Scheduled Task", "Do stuff",
+        scheduleTime, generalNotificationDetails,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true);
+    // notification.schedule(
+    //     0, "Test", "Test body", scheduleTime, generalNotificationDetails);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.red,
-        title: new Text('Flutter notification demo'),
-      ),
-      body: new Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: showNotification,
-              child: new Text(
-                'showNotification',
-              ),
-            ),
-            RaisedButton(
-              onPressed: cancelNotification,
-              child: new Text(
-                'cancelNotification',
-              ),
-            ),
-            RaisedButton(
-              onPressed: scheduleNotification,
-              child: new Text(
-                'scheduleNotification',
-              ),
-            ),
-            RaisedButton(
-              onPressed: showBigPictureNotification,
-              child: new Text(
-                'showBigPictureNotification',
-              ),
-            ),
-            RaisedButton(
-              onPressed: showNotificationMediaStyle,
-              child: new Text(
-                'showNotificationMediaStyle',
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  Future onSelect(String payload) async {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("Notification Clicked"),
+            ));
   }
 
-  Future<void> showNotificationMediaStyle() async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'media channel id',
-      'media channel name',
-      'media channel description',
-      color: Colors.red,
-      enableLights: true,
-      largeIcon: DrawableResourceAndroidBitmap("flutter_devs"),
-      styleInformation: MediaStyleInformation(),
-    );
-    var platformChannelSpecifics =
-        NotificationDetails(androidPlatformChannelSpecifics, null);
-    await flutterLocalNotificationsPlugin.show(
-        0, 'notification title', 'notification body', platformChannelSpecifics);
-  }
-
-  Future<void> showBigPictureNotification() async {
-    var bigPictureStyleInformation = BigPictureStyleInformation(
-        DrawableResourceAndroidBitmap("flutter_devs"),
-        largeIcon: DrawableResourceAndroidBitmap("flutter_devs"),
-        contentTitle: 'flutter devs',
-        htmlFormatContentTitle: true,
-        summaryText: 'summaryText',
-        htmlFormatSummaryText: true);
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'big text channel id',
-        'big text channel name',
-        'big text channel description',
-        styleInformation: bigPictureStyleInformation);
-    var platformChannelSpecifics =
-        NotificationDetails(androidPlatformChannelSpecifics, null);
-    await flutterLocalNotificationsPlugin.show(
-        0, 'big text title', 'silent body', platformChannelSpecifics,
-        payload: "big image notifications");
-  }
-
-  Future<void> scheduleNotification() async {
-    var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(seconds: 5));
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'channel id',
-      'channel name',
-      'channel description',
-      icon: 'flutter_devs',
-      largeIcon: DrawableResourceAndroidBitmap('flutter_devs'),
-    );
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.schedule(
-        0,
-        'scheduled title',
-        'scheduled body',
-        scheduledNotificationDateTime,
-        platformChannelSpecifics);
-  }
-
-  Future<void> cancelNotification() async {
-    await flutterLocalNotificationsPlugin.cancel(0);
-  }
-
-  showNotification() async {
-    var android = new AndroidNotificationDetails(
-        'id', 'channel ', 'description',
-        priority: Priority.High, importance: Importance.Max);
-    var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android, iOS);
-    await flutterLocalNotificationsPlugin.show(
-        0, 'Flutter devs', 'Flutter Local Notification Demo', platform,
-        payload: 'Welcome to the Local Notification demo ');
-  }
-}
-
-class NewScreen extends StatelessWidget {
-  String payload;
-
-  NewScreen({
-    @required this.payload,
-  });
+  FlutterLocalNotificationsPlugin notification;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(payload),
+          backgroundColor: values.color_green, title: Text("Notification")),
+      body: RaisedButton(
+        onPressed: showNotification,
+        child: Text("Notification"),
       ),
+      // bottomNavigationBar: Container(
+      //   height: 8.0.h,
+      //   alignment: Alignment.bottomCenter,
+      //   color: values.color_green,
+      //   child: Row(
+      //     children: [
+      //       Expanded(
+      //           child: IconButton(
+      //         icon: Icon(
+      //           Icons.timer,
+      //           color:
+      //               values.current_page == "home" ? Colors.white : Colors.black,
+      //         ),
+      //         onPressed: onPressed1,
+      //         iconSize: 6.0.h,
+      //       )),
+      //       Expanded(
+      //           child: IconButton(
+      //         icon: Icon(Icons.insights),
+      //         onPressed: onPressed2,
+      //         iconSize: 6.0.h,
+      //       )),
+      //       // Expanded(
+      //       //     child: IconButton(
+      //       //   icon: Icon(Icons.leaderboard),
+      //       //   onPressed: onPressed3,
+      //       //   iconSize: 6.0.h,
+      //       // )),
+      //       // Expanded(
+      //       //     child: IconButton(
+      //       //   icon: Icon(Icons.account_circle),
+      //       //   onPressed: onPressed4,
+      //       //   iconSize: 6.0.h,
+      //       // ))
+      //     ],
+      //   ),
+      // ),
     );
+  }
+
+  void onPressed5() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Calendar(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed6() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Task(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  // void onPressed1() {
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Home(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
+
+  void onPressed2() {
+    values.current_page = "progress";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => ProgressPage(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed3() {
+    values.current_page = "leaderboard";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Leaderboard(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed4() {
+    values.current_page = "profile";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Profile(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
   }
 }
