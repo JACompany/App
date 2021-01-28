@@ -68,7 +68,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                         child: LineChart(
                           LineChartData(lineBarsData: [
                             LineChartBarData(
-                              colors: [Colors.blue],
+                              colors: [Colors.pinkAccent],
                               spots: [
                                 FlSpot(0, 3),
                                 FlSpot(2, 2),
