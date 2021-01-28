@@ -48,7 +48,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                   const Text(
                     'Unfold Shop 2018',
                     style: TextStyle(
-                      color: Color(0xff827daa),
+                      color: Colors.black,
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.center,
@@ -59,7 +59,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                   const Text(
                     'Monthly Sales',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 2),
@@ -96,9 +96,6 @@ class _ProgressGraph extends State<ProgressGraph> {
                         )),
                   ),
                 ]),
-            const SizedBox(
-              height: 10,
-            ),
           ],
         ),
       ),
