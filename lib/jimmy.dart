@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'globalValues.dart' as values;
 
 void main() => runApp(LineChartSample1());
 
@@ -29,7 +30,7 @@ class LineChartSample1State extends State<LineChartSample1> {
                         color: Colors.black,
                       ),
                       Sparkline(
-                        data: [1, 3, 2, 5, 3.5, 4.2, 2, 1, 1, 2, 5, 6],
+                        data: values.past_hours,
                       )
                     ],
                   ),
