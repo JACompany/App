@@ -52,24 +52,24 @@ class _ProgressPageState extends State<ProgressPage> {
               onPressed: onPressed2,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.leaderboard),
-              onPressed: onPressed3,
-              iconSize: 6.0.h,
-              color: values.current_page == "leaderboard"
-                  ? Colors.white
-                  : Colors.black,
-            )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-              color: values.current_page == "profile"
-                  ? Colors.white
-                  : Colors.black,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.leaderboard),
+            //   onPressed: onPressed3,
+            //   iconSize: 6.0.h,
+            //   color: values.current_page == "leaderboard"
+            //       ? Colors.white
+            //       : Colors.black,
+            // )),
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            //   color: values.current_page == "profile"
+            //       ? Colors.white
+            //       : Colors.black,
+            // ))
           ],
         ),
       ),

@@ -57,18 +57,18 @@ class _Task extends State<Task> {
               onPressed: onPressed2,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.leaderboard),
-              onPressed: onPressed3,
-              iconSize: 6.0.h,
-            )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.leaderboard),
+            //   onPressed: onPressed3,
+            //   iconSize: 6.0.h,
+            // )),
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
           ],
         ),
       ),

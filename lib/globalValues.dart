@@ -21,5 +21,5 @@ bool is_setup = false;
 
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);
-final color_red = Color.fromARGB(255, 241, 169, 186);
+final color_red = Color.fromARGB(255, 241, 86, 124);
 final color_peach = Color.fromARGB(255, 254, 239, 221);

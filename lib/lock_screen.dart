@@ -9,14 +9,19 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        fontFamily: "Arial",
-        brightness: Brightness.light,
-      ),
-      home: LockScreen(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          SizerUtil().init(constraints, orientation);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
+            home: LockScreen(),
+          );
+        });
+      },
     );
   }
 }
@@ -31,20 +36,64 @@ class _LockScreenState extends State<LockScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [lock()],
+        children: [
+          timer(),
+          SizedBox(
+            height: 2.0.h,
+          ),
+          icon(),
+          SizedBox(
+            height: 2.0.h,
+          ),
+          title(),
+          SizedBox(
+            height: 2.0.h,
+          ),
+          unlock()
+        ],
       ),
     );
   }
 
-  Widget lock() {
-    return Icon(
-      Icons.lock,
-      size: 10.0.h,
+  Widget title() {
+    return Container(
+      color: values.color_green,
+      padding: EdgeInsets.fromLTRB(0, 2.0.h, 0, 2.0.h),
+      alignment: Alignment.center,
+      child: Text(
+        "do homework ",
+        style: TextStyle(fontSize: 4.0.h),
+      ),
     );
   }
 
-  Widget title() {}
-  Widget timer() {}
-  Widget time_remaining() {}
-  Widget unlock() {}
+  Widget icon() {
+    return Icon(
+      Icons.timer,
+      size: 40.0.h,
+      color: values.color_red,
+    );
+  }
+
+  Widget timer() {
+    return Container(
+      color: values.color_green,
+      padding: EdgeInsets.fromLTRB(0, 2.0.h, 0, 2.0.h),
+      alignment: Alignment.center,
+      child: Text(
+        "TIME REMAINING ",
+        style: TextStyle(fontSize: 4.0.h),
+      ),
+    );
+  }
+
+  Widget unlock() {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        "EMERGENCY UNLOCK ",
+        style: TextStyle(fontSize: 3.0.h, color: values.color_red),
+      ),
+    );
+  }
 }

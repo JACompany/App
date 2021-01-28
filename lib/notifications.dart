@@ -71,8 +71,6 @@ class _Notifications extends State<Notifications> {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: true);
-    // notification.schedule(
-    //     0, "Test", "Test body", scheduleTime, generalNotificationDetails);
   }
 
   Future onSelect(String payload) async {
