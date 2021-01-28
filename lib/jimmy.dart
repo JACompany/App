@@ -1,101 +1,45 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-import 'globalValues.dart' as values;
-import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(LineChartSample1());
 
-class MyApp extends StatelessWidget {
+class LineChartSample1 extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => LineChartSample1State();
+}
+
+class LineChartSample1State extends State<LineChartSample1> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jimmy Test File',
-      debugShowCheckedModeBanner: false,
-      home: ProgressGraph(),
-    );
-  }
-}
-
-class ProgressGraph extends StatefulWidget {
-  @override
-  _ProgressGraph createState() => _ProgressGraph();
-}
-
-class _ProgressGraph extends State<ProgressGraph> {
-  @override
-  Widget build(BuildContext context) {
-    var lineWidth;
-    return Center(
-      child: Container(
-        color: Colors.grey,
-        width: MediaQuery.of(context).size.width / 2,
-        height: MediaQuery.of(context).size.height / 2,
-        child: Stack(
-          children: <Widget>[
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 37,
-                  ),
-                  const Text(
-                    '',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  const Text(
-                    'TRENDS',
-                    style: TextStyle(
+        home: Scaffold(
+            appBar: AppBar(),
+            body: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 10,
+                        height: 100,
                         color: Colors.black,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2), // Arial
-                    textAlign: TextAlign.left,
+                      ),
+                      Sparkline(
+                        data: [1, 3, 2, 5, 3.5, 4.2, 2, 1, 1, 2, 5, 6],
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    height: 37,
-                  ),
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                        child: LineChart(
-                          LineChartData(lineBarsData: [
-                            LineChartBarData(
-                              colors: [Colors.pinkAccent],
-                              spots: [
-                                FlSpot(0, 3),
-                                FlSpot(2, 2),
-                                FlSpot(3, 5),
-                                FlSpot(4, 3.1),
-                                FlSpot(5, 4),
-                                FlSpot(6, 3),
-                              ],
-                              barWidth: 8,
-                              isStrokeCapRound: true,
-                              dotData: FlDotData(
-                                show: false,
-                              ),
-                              belowBarData: BarAreaData(
-                                show: false,
-                              ),
-                            ),
-                          ]),
-                        )),
-                  ),
-                ]),
-          ],
-        ),
-      ),
-    );
+                  Container(
+                    width: 350,
+                    height: 10,
+                    color: Colors.black,
+                  )
+                ],
+              ),
+            )));
   }
-
-  sampleData1() {}
 }
