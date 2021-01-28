@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 import 'homepage.dart';
 import 'globalValues.dart' as values;
 import 'splash_screen.dart';
@@ -30,6 +32,7 @@ class App extends StatelessWidget {
 
   void setup() {
     values.is_setup = true;
+    tz.initializeTimeZones();
     values.tasks_storage.read().then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {

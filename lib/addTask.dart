@@ -5,6 +5,8 @@ import 'package:app/progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 import 'calendar.dart';
 import 'homepage.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +19,8 @@ class Task extends StatefulWidget {
 }
 
 class _Task extends State<Task> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +36,39 @@ class _Task extends State<Task> {
         color: values.color_peach,
         margin: EdgeInsets.all(15),
         child: ListView(
-          children: [addTask(), setTime()],
+          children: [
+            Container(
+                color: values.color_green,
+                alignment: Alignment.center,
+                width: 100.0.w,
+                height: 5.0.h,
+                child: Text(
+                  "Description",
+                  style: TextStyle(fontSize: 3.0.h),
+                )),
+            addTask(),
+            Container(
+                color: values.color_green,
+                alignment: Alignment.center,
+                width: 100.0.w,
+                height: 5.0.h,
+                child: Text(
+                  "Start time:",
+                  style: TextStyle(fontSize: 3.0.h),
+                )),
+            setStartTime(),
+            Container(
+                color: values.color_green,
+                alignment: Alignment.center,
+                width: 100.0.w,
+                height: 5.0.h,
+                child: Text(
+                  "End time:",
+                  style: TextStyle(fontSize: 3.0.h),
+                )),
+            setEndTime(),
+            submit_button(),
+          ],
         ),
       ),
       bottomNavigationBar: Container(
@@ -112,66 +148,104 @@ class _Task extends State<Task> {
   }
 
   Widget addTask() {
-    final _formKey = GlobalKey<FormState>();
     return Form(
       key: _formKey,
       child: Container(
         margin: EdgeInsets.all(15),
         color: values.color_peach,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Description",
-              style: TextStyle(fontSize: 18),
-            ),
-            TextFormField(
-              maxLines: null,
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                if (value.contains(";")) {
-                  return "Please remove ';' character";
-                }
-                setState(() {
-                  values.tasks.add(value);
-                  values.tasks_storage.write(values.tasks);
-                });
+        child: TextFormField(
+          controller: controller,
+          maxLines: null,
+          validator: (value) {
+            if (value.isEmpty) {
+              return 'Please enter some text';
+            }
+            if (value.contains(";")) {
+              return "Please remove ';' character";
+            }
+            setState(() {
+              values.tasks.add(value);
+              values.tasks_storage.write(values.tasks);
+            });
 
-                return null;
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Task added!"),
-                      duration: Duration(milliseconds: 500),
-                    ),
-                  );
-                }
-              },
-              child: Text('Add task'),
-            ),
-          ],
+            return null;
+          },
         ),
       ),
     );
   }
 
-  Widget setTime() {
+  Widget setStartTime() {
     return TimePickerSpinner(
       is24HourMode: false,
-      normalTextStyle: TextStyle(fontSize: 24, color: Colors.black),
-      highlightedTextStyle: TextStyle(fontSize: 24, color: values.color_red),
-      spacing: 50,
-      itemHeight: 80,
+      normalTextStyle: TextStyle(fontSize: 2.0.h, color: Colors.black),
+      highlightedTextStyle: TextStyle(fontSize: 3.0.h, color: values.color_red),
+      spacing: 10.0.w,
+      itemHeight: 7.0.h,
       isForce2Digits: true,
       onTimeChange: (time) {
-        setState(() {});
+        setState(() {
+          print(time);
+        });
       },
     );
+  }
+
+  Widget setEndTime() {
+    return TimePickerSpinner(
+      is24HourMode: false,
+      normalTextStyle: TextStyle(fontSize: 2.0.h, color: Colors.black),
+      highlightedTextStyle: TextStyle(fontSize: 3.0.h, color: values.color_red),
+      spacing: 10.0.w,
+      itemHeight: 7.0.h,
+      isForce2Digits: true,
+      onTimeChange: (time) {
+        setState(() {
+          print(time);
+        });
+      },
+    );
+  }
+
+  Widget submit_button() {
+    return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => values.color_green)),
+      onPressed: () {
+        if (_formKey.currentState.validate()) {
+          controller.clear();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Task added!"),
+              duration: Duration(milliseconds: 500),
+            ),
+          );
+        }
+      },
+      child: Text(
+        'Add task',
+        style: TextStyle(color: Colors.black, fontSize: 3.0.h),
+      ),
+    );
+  }
+}
+
+class Task_Details implements Comparable<Task_Details> {
+  String description;
+  tz.TZDateTime start_time;
+  tz.TZDateTime end_time;
+  int notification_id;
+  Task_Details(String description, DateTime start_time, DateTime end_time,
+      int notification_id) {
+    this.description = description;
+    this.start_time = tz.TZDateTime.from(start_time, tz.local);
+    this.end_time = tz.TZDateTime.from(end_time, tz.local);
+    this.notification_id = notification_id;
+  }
+
+  @override
+  int compareTo(other) {
+    return this.start_time.isBefore(other.start_time) ? 1 : -1;
   }
 }
