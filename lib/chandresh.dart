@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:sizer/sizer.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,43 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
   intl.DateFormat dateFormat = new intl.DateFormat.Hms();
 
   @override
-  void initState() {
-    super.initState();
-    _loadCounter();
-  }
-
-  _loadCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      if (prefs.getInt('storeMinutes') == null) {
-        _displayMinutes = 0;
-      } else if (prefs.getInt('storeMinutes') == 0) {
-        _displayMinutes = 0;
-      } else {
-        _displayMinutes = prefs.getInt('storeMinutes');
-      }
-
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
-    });
-
-    _everySecond = Timer.periodic(Duration(seconds: 60), (Timer t) {
-      _incrementCounter();
-    });
-  }
-
-  _incrementCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    if (!mounted) return;
-    setState(() {
-      _displayMinutes = _displayMinutes + 1;
-      _displayhour = (_displayMinutes ~/ 60).toString().padLeft(2, "0");
-      prefs.setInt('storeMinutes', _displayMinutes);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -86,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('Total Productive Hours:  ' + '15 Hours',
                     style: TextStyle(
                         fontFamily: 'Comic Sans MS',
-                        fontSize: 19,
+                        fontSize: 4.0.h,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink[300])),
                 padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),

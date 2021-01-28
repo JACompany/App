@@ -1,91 +1,90 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' as intl;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Progress',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Shared preferences demo'),
+      home: HomeCalendarPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
+class HomeCalendarPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeCalendarPageState createState() => _HomeCalendarPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter2;
-  String _now;
-  Timer _everySecond;
-  intl.DateFormat dateFormat = new intl.DateFormat.Hms();
+class _HomeCalendarPageState extends State<HomeCalendarPage> {
+  CalendarController _controller;
 
   @override
   void initState() {
     super.initState();
-    _loadCounter();
-  }
-
-  _loadCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    print(prefs.getInt('counter3'));
-    print(' counter value : ' + prefs.getInt('counter3').toString());
-
-    setState(() {
-      if (prefs.getInt('counter3') == 0) {
-        _counter2 = 0;
-      } else {
-        _counter2 = prefs.getInt('counter3');
-      }
-    });
-
-    _everySecond = Timer.periodic(Duration(seconds: 60), (Timer t) {
-      _incrementCounter();
-    });
-  }
-
-  _incrementCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    if (!mounted) return;
-    setState(() {
-      _counter2 = _counter2 + 1;
-      prefs.setInt('counter3', _counter2);
-      print('print counter2  : ' + _counter2.toString());
-    });
+    _controller = CalendarController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Flutter Calendar Example'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Total Productive Hours',
-            ),
-            Text(
-              '$_counter2' + ' mins',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            TableCalendar(
+              initialCalendarFormat: CalendarFormat.month,
+              calendarStyle: CalendarStyle(
+                  todayColor: Colors.blue,
+                  selectedColor: Theme.of(context).primaryColor,
+                  todayStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
+                      color: Colors.white)),
+              headerStyle: HeaderStyle(
+                centerHeaderTitle: true,
+                formatButtonDecoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadius.circular(22.0),
+                ),
+                formatButtonTextStyle: TextStyle(color: Colors.white),
+                formatButtonShowsNext: false,
+              ),
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              onDaySelected: (date, events) {
+                print(date.toUtc());
+              },
+              builders: CalendarBuilders(
+                selectedDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+                todayDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              calendarController: _controller,
+            )
           ],
         ),
       ),
