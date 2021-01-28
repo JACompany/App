@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'globalValues.dart' as values;
+import 'package:sizer/sizer.dart';
 
 void main() => runApp(LineChartSample1());
 
@@ -29,6 +30,7 @@ class LineChartSample1State extends State<LineChartSample1> {
                         height: 100,
                         color: Colors.black,
                       ),
+                      SizedBox(width: 1.0.w),
                       Sparkline(
                         data: values.past_hours,
                       )
