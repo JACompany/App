@@ -26,6 +26,7 @@ class ProgressGraph extends StatefulWidget {
 class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
+    var lineWidth;
     return Center(
       child: Container(
         color: Colors.grey,
@@ -40,7 +41,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                     height: 37,
                   ),
                   const Text(
-                    'Unfold Shop 2018',
+                    '',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -51,13 +52,13 @@ class _ProgressGraph extends State<ProgressGraph> {
                     height: 4,
                   ),
                   const Text(
-                    'Monthly Sales',
+                    'TRENDS',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 2),
-                    textAlign: TextAlign.center,
+                        letterSpacing: 2), // Arial
+                    textAlign: TextAlign.left,
                   ),
                   const SizedBox(
                     height: 37,
@@ -68,7 +69,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                         child: LineChart(
                           LineChartData(lineBarsData: [
                             LineChartBarData(
-                              colors: [Colors.blue],
+                              colors: [Colors.pinkAccent],
                               spots: [
                                 FlSpot(0, 3),
                                 FlSpot(2, 2),
