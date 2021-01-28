@@ -14,35 +14,42 @@ class LineChartSample1 extends StatefulWidget {
 class LineChartSample1State extends State<LineChartSample1> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(),
-            body: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 100,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 1.0.w),
-                      Sparkline(
-                        data: values.past_hours,
-                      )
-                    ],
-                  ),
-                  Container(
-                    width: 350,
-                    height: 10,
-                    color: Colors.black,
-                  )
-                ],
-              ),
-            )));
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          SizerUtil().init(constraints, orientation);
+          return MaterialApp(
+              home: Scaffold(
+                  appBar: AppBar(),
+                  body: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 10,
+                              height: 100,
+                              color: Colors.black,
+                            ),
+                            SizedBox(width: 1.0.w),
+                            Sparkline(
+                              data: values.past_hours,
+                            )
+                          ],
+                        ),
+                        Container(
+                          width: 350,
+                          height: 10,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  )));
+        });
+      },
+    );
   }
 }
