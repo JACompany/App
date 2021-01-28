@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
-
-import 'package:sizer/sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('Total Productive Hours:  ' + '15 Hours',
                     style: TextStyle(
                         fontFamily: 'Comic Sans MS',
-                        fontSize: 4.0.h,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink[300])),
                 padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
