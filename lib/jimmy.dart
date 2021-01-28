@@ -40,7 +40,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                     height: 37,
                   ),
                   const Text(
-                    'Unfold Shop 2018',
+                    '',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -51,13 +51,13 @@ class _ProgressGraph extends State<ProgressGraph> {
                     height: 4,
                   ),
                   const Text(
-                    'Monthly Sales',
+                    'Trends',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 2),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                   ),
                   const SizedBox(
                     height: 37,
