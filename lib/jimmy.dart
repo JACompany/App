@@ -48,7 +48,6 @@ class _ProgressGraph extends State<ProgressGraph> {
                   FlSpot(4, 3.1),
                   FlSpot(5, 4),
                   FlSpot(6, 3),
-                  FlSpot(7, 4),
                 ],
                 barWidth: 8,
                 isStrokeCapRound: true,
