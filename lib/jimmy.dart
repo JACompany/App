@@ -34,32 +34,76 @@ class _ProgressGraph extends State<ProgressGraph> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 2,
-          child: LineChart(
-            LineChartData(lineBarsData: [
-              LineChartBarData(
-                colors: [Colors.blue],
-                spots: [
-                  FlSpot(0, 3),
-                  FlSpot(2, 2),
-                  FlSpot(3, 5),
-                  FlSpot(4, 3.1),
-                  FlSpot(5, 4),
-                  FlSpot(6, 3),
-                ],
-                barWidth: 8,
-                isStrokeCapRound: true,
-                dotData: FlDotData(
-                  show: false,
-                ),
-                belowBarData: BarAreaData(
-                  show: false,
-                ),
-              ),
-            ]),
-          )),
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
+        child: Stack(
+          children: <Widget>[
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 37,
+                  ),
+                  const Text(
+                    'Unfold Shop 2018',
+                    style: TextStyle(
+                      color: Color(0xff827daa),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  const Text(
+                    'Monthly Sales',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 37,
+                  ),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.only(right: 16.0, left: 6.0),
+                        child: LineChart(
+                          LineChartData(lineBarsData: [
+                            LineChartBarData(
+                              colors: [Colors.blue],
+                              spots: [
+                                FlSpot(0, 3),
+                                FlSpot(2, 2),
+                                FlSpot(3, 5),
+                                FlSpot(4, 3.1),
+                                FlSpot(5, 4),
+                                FlSpot(6, 3),
+                              ],
+                              barWidth: 8,
+                              isStrokeCapRound: true,
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                              belowBarData: BarAreaData(
+                                show: false,
+                              ),
+                            ),
+                          ]),
+                        )),
+                  ),
+                ]),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ),
     );
   }
+
+  sampleData1() {}
 }
