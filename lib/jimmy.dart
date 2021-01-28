@@ -52,7 +52,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                     height: 4,
                   ),
                   const Text(
-                    'Trends',
+                    'TRENDS',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 32,
