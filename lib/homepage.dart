@@ -1,8 +1,14 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:app/calendar.dart';
+import 'package:app/leaderboard.dart';
+import 'package:app/profile.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
+import 'progress_page.dart';
+import 'package:sizer/sizer.dart';
+import 'calendar.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,17 +16,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool get maintainState {
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
-    values.tasks_storage.read().then((readValues) {
-      for (int i = 0; i < readValues.length; i++) {
-        if (readValues.elementAt(i).length > 0) {
-          values.tasks.add(readValues.elementAt(i));
-        }
-      }
-    });
-    Timer.periodic(Duration(seconds: 1), (Timer t) {
+    Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {});
     });
   }
@@ -29,24 +32,127 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calendar"),
-        actions: [IconButton(icon: Icon(Icons.add), onPressed: onPressed)],
-      ),
+          backgroundColor: values.color_green,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: Icon(Icons.calendar_today),
+                onPressed: onPressed5,
+                iconSize: 6.0.h,
+              ),
+              Text(
+                "THU DEC 10",
+                style: TextStyle(
+                  fontSize: 4.0.h,
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: onPressed6,
+                iconSize: 6.0.h,
+              )
+            ],
+          )),
       body: tasks(),
+      bottomNavigationBar: Container(
+        height: 8.0.h,
+        alignment: Alignment.bottomCenter,
+        color: values.color_green,
+        child: Row(
+          children: [
+            Expanded(
+                child: IconButton(
+              icon: Icon(
+                Icons.timer,
+                color:
+                    values.current_page == "home" ? Colors.white : Colors.black,
+              ),
+              onPressed: onPressed1,
+              iconSize: 6.0.h,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.insights),
+              onPressed: onPressed2,
+              iconSize: 6.0.h,
+            )),
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.leaderboard),
+            //   onPressed: onPressed3,
+            //   iconSize: 6.0.h,
+            // )),
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
+          ],
+        ),
+      ),
     );
   }
 
-  void onPressed() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (BuildContext context) {
-        return Task();
-      }),
-    );
+  void onPressed5() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Calendar(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed6() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Task(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed1() {
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Home(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed2() {
+    values.current_page = "progress";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => ProgressPage(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed3() {
+    values.current_page = "leaderboard";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Leaderboard(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
+  }
+
+  void onPressed4() {
+    values.current_page = "profile";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Profile(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
   }
 
   Widget tasks() {
-    return ListView.builder(
-      padding: EdgeInsets.all(16),
+    return ListView.separated(
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.transparent,
+        height: 1.0.h,
+      ),
+      padding: EdgeInsets.all(2.0.w),
       itemCount: values.tasks.length,
       itemBuilder: (context, index) {
         return buildTile(values.tasks[index], index);
@@ -55,19 +161,34 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildTile(String text, index) {
-    return ListTile(
-      title: Text(
-        text,
-        style: TextStyle(fontSize: 18),
-      ),
-      trailing: IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {
-          setState(() {
-            values.tasks.removeAt(index);
-            values.tasks_storage.write(values.tasks);
-          });
-        },
+    return Container(
+      decoration: BoxDecoration(
+          color: values.color_red,
+          borderRadius: BorderRadius.all(Radius.circular(2.0.w))),
+      child: ListTile(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "3:00 pm - 3:55 pm",
+              style: TextStyle(fontSize: 4.0.h, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              text,
+              style: TextStyle(fontSize: 4.0.h),
+            )
+          ],
+        ),
+        trailing: IconButton(
+          //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            setState(() {
+              values.tasks.removeAt(index);
+              values.tasks_storage.write(values.tasks);
+            });
+          },
+        ),
       ),
     );
   }
