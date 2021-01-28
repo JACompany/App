@@ -26,6 +26,7 @@ class ProgressGraph extends StatefulWidget {
 class _ProgressGraph extends State<ProgressGraph> {
   @override
   Widget build(BuildContext context) {
+    var lineWidth;
     return Center(
       child: Container(
         color: Colors.grey,
@@ -56,7 +57,7 @@ class _ProgressGraph extends State<ProgressGraph> {
                         color: Colors.black,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 2),
+                        letterSpacing: 2), // Arial
                     textAlign: TextAlign.left,
                   ),
                   const SizedBox(
