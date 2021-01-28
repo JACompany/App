@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
+import 'package:sizer/sizer.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +10,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jimmy Test File',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -29,6 +29,22 @@ class LockScreen extends StatefulWidget {
 class _LockScreenState extends State<LockScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return Scaffold(
+      body: ListView(
+        children: [lock()],
+      ),
+    );
   }
+
+  Widget lock() {
+    return Icon(
+      Icons.lock,
+      size: 10.0.h,
+    );
+  }
+
+  Widget title() {}
+  Widget timer() {}
+  Widget time_remaining() {}
+  Widget unlock() {}
 }
