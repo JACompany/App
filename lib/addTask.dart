@@ -20,7 +20,7 @@ class Task extends StatefulWidget {
 
 class _Task extends State<Task> {
   final _formKey = GlobalKey<FormState>();
-  tz.TZDateTime start, end;
+  DateTime start, end;
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -164,16 +164,27 @@ class _Task extends State<Task> {
             if (value.contains(";")) {
               return "Please remove ';' character";
             }
-            setState(() {
-              values.tasks.add(Task_Details(value, this.start, this.end, 0));
-              values.tasks_storage.write(values.tasks);
-            });
+            values.tasks.add(Task_Details(value, this.start, this.end, 0));
+            sortList();
+            values.tasks_storage.write(values.tasks);
 
             return null;
           },
         ),
       ),
     );
+  }
+
+  void sortList() {
+    for (int i = 0; i < values.tasks.length - 1; i++) {
+      for (int j = 0; j < values.tasks.length - i - 1; j++) {
+        if (values.tasks[j].start.isAfter(values.tasks[j + 1].start)) {
+          Task_Details temp = values.tasks[j];
+          values.tasks[j] = values.tasks[j + 1];
+          values.tasks[j + 1] = temp;
+        }
+      }
+    }
   }
 
   Widget setStartTime() {
@@ -186,7 +197,7 @@ class _Task extends State<Task> {
       isForce2Digits: true,
       onTimeChange: (time) {
         setState(() {
-          this.start = time;
+          this.start = DateTime.parse(time.toString().substring(0, 16));
         });
       },
     );
@@ -230,33 +241,44 @@ class _Task extends State<Task> {
       ),
     );
   }
+
+  List<Task_Details> sort(List<Task_Details> data) {}
 }
 
-class Task_Details implements Comparable<Task_Details> {
+class Task_Details {
   String description; //task description
-  tz.TZDateTime start_time; //start time of task
-  tz.TZDateTime end_time; //end time of tast
+  DateTime start, end; //start and end time in normal format
+  tz.TZDateTime start_time,
+      end_time; //start and end time of tast in time zone format
   int notification_id; //notification id for cancelling in the future
+  List<int> duration;
+  bool completed = false;
+
   Task_Details(String description, DateTime start_time, DateTime end_time,
       int notification_id) {
     this.description = description;
+    this.start = start_time;
+    this.end = end_time;
     this.start_time = tz.TZDateTime.from(start_time, tz.local);
     this.end_time = tz.TZDateTime.from(end_time, tz.local);
     this.notification_id = notification_id;
+    this.duration = findDuration();
   }
-
-  @override
-  int compareTo(other) {
-    return this.start_time.isBefore(other.start_time) ? 1 : -1;
+  List<int> findDuration() {
+    int seconds = end_time.difference(start_time).inSeconds.abs();
+    int minutes = seconds ~/ 60;
+    int hours = minutes ~/ 60;
+    minutes = minutes - (hours * 60);
+    return [hours, minutes];
   }
 
   @override
   String toString() {
     return description +
         ";" +
-        start_time.toString() +
+        start.toString() +
         ";" +
-        end_time.toString() +
+        end.toString() +
         ";" +
         notification_id.toString() +
         ";;;";

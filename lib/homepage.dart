@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:app/calendar.dart';
 import 'package:app/leaderboard.dart';
+import 'package:app/lock_screen.dart';
 import 'package:app/profile.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
@@ -18,14 +19,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool get maintainState {
-    return false;
-  }
-
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {});
     });
   }
@@ -53,7 +50,7 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.add),
                 onPressed: onPressed6,
                 iconSize: 6.0.h,
-              )
+              ),
             ],
           )),
       body: tasks(),
@@ -106,6 +103,7 @@ class _HomeState extends State<Home> {
   }
 
   void onPressed6() {
+    values.timer.cancel();
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Task(),
@@ -158,23 +156,46 @@ class _HomeState extends State<Home> {
       itemCount: values.tasks.length,
       itemBuilder: (context, index) {
         return buildTile(values.tasks[index].description,
-            values.tasks[index].start_time, index);
+            values.tasks[index].start, values.tasks[index].end, index);
       },
     );
   }
 
-  Widget buildTile(String text, tz.TZDateTime time, index) {
+  String formatTime(DateTime time) {
+    String str;
+    if (time.toString().substring(11, 13) == "00") {
+      str = "12" + time.toString().substring(13, 16) + "am";
+    } else if (time
+        .isBefore(DateTime(time.year, time.month, time.day, 12, 0))) {
+      str = time.toString().substring(11, 16) + "am";
+    } else if (time
+        .isAfter(DateTime(time.year, time.month, time.day, 12, 59))) {
+      int hours = int.parse(time.toString().substring(11, 13)) - 12;
+      str = hours.toString() + time.toString().substring(13, 16) + "pm";
+    } else {
+      str = time.toString().substring(11, 16) + "pm";
+    }
+    if (int.parse(str[0]) == 0) str = str.substring(1);
+    return str;
+  }
+
+  Widget buildTile(String text, DateTime start, DateTime end, index) {
     return Container(
       decoration: BoxDecoration(
-          color: values.color_red,
+          color: values.color_peach,
           borderRadius: BorderRadius.all(Radius.circular(2.0.w))),
       child: ListTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              time.toString(),
+              formatTime(start) + '-' + formatTime(end),
               style: TextStyle(fontSize: 4.0.h, fontWeight: FontWeight.bold),
+            ),
+            Container(
+              width: 100.0.w,
+              height: 0.25.h,
+              color: values.color_peach,
             ),
             Text(
               text,

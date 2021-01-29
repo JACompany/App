@@ -41,7 +41,7 @@ class App extends StatelessWidget {
         if (readValues.elementAt(i).length > 0) {
           List<String> object = readValues.elementAt(i).split(";");
           values.tasks.add(Task_Details(object[0], DateTime.parse(object[1]),
-              DateTime.parse(object[2]), int.tryParse(object[3])));
+              DateTime.parse(object[2]), int.parse(object[3])));
         }
       }
     });
