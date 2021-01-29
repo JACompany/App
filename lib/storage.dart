@@ -17,11 +17,11 @@ class Storage {
     return File('$path/' + location + '.txt');
   }
 
-  Future<List<String>> read() async {
+  Future<List<String>> read(String splitter) async {
     try {
       final file = await localFile;
       String contents = await file.readAsString();
-      return contents.split(";");
+      return contents.split(splitter);
     } catch (exception) {
       return null;
     }
@@ -31,7 +31,7 @@ class Storage {
     final file = await localFile;
     String toWrite = "";
     for (int i = 0; i < data.length; i++) {
-      toWrite += data.elementAt(i) + ";";
+      toWrite += data.elementAt(i).toString();
     }
     file.writeAsString(toWrite);
   }

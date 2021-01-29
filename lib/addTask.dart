@@ -20,6 +20,7 @@ class Task extends StatefulWidget {
 
 class _Task extends State<Task> {
   final _formKey = GlobalKey<FormState>();
+  tz.TZDateTime start, end;
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -164,7 +165,7 @@ class _Task extends State<Task> {
               return "Please remove ';' character";
             }
             setState(() {
-              values.tasks.add(value);
+              values.tasks.add(Task_Details(value, this.start, this.end, 0));
               values.tasks_storage.write(values.tasks);
             });
 
@@ -185,7 +186,7 @@ class _Task extends State<Task> {
       isForce2Digits: true,
       onTimeChange: (time) {
         setState(() {
-          print(time);
+          this.start = time;
         });
       },
     );
@@ -201,7 +202,7 @@ class _Task extends State<Task> {
       isForce2Digits: true,
       onTimeChange: (time) {
         setState(() {
-          print(time);
+          this.end = time;
         });
       },
     );
@@ -232,10 +233,10 @@ class _Task extends State<Task> {
 }
 
 class Task_Details implements Comparable<Task_Details> {
-  String description;
-  tz.TZDateTime start_time;
-  tz.TZDateTime end_time;
-  int notification_id;
+  String description; //task description
+  tz.TZDateTime start_time; //start time of task
+  tz.TZDateTime end_time; //end time of tast
+  int notification_id; //notification id for cancelling in the future
   Task_Details(String description, DateTime start_time, DateTime end_time,
       int notification_id) {
     this.description = description;
@@ -247,5 +248,17 @@ class Task_Details implements Comparable<Task_Details> {
   @override
   int compareTo(other) {
     return this.start_time.isBefore(other.start_time) ? 1 : -1;
+  }
+
+  @override
+  String toString() {
+    return description +
+        ";" +
+        start_time.toString() +
+        ";" +
+        end_time.toString() +
+        ";" +
+        notification_id.toString() +
+        ";;;";
   }
 }

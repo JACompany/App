@@ -9,6 +9,8 @@ import 'globalValues.dart' as values;
 import 'progress_page.dart';
 import 'package:sizer/sizer.dart';
 import 'calendar.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class Home extends StatefulWidget {
   @override
@@ -155,12 +157,13 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.all(2.0.w),
       itemCount: values.tasks.length,
       itemBuilder: (context, index) {
-        return buildTile(values.tasks[index], index);
+        return buildTile(values.tasks[index].description,
+            values.tasks[index].start_time, index);
       },
     );
   }
 
-  Widget buildTile(String text, index) {
+  Widget buildTile(String text, tz.TZDateTime time, index) {
     return Container(
       decoration: BoxDecoration(
           color: values.color_red,
@@ -170,7 +173,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "3:00 pm - 3:55 pm",
+              time.toString(),
               style: TextStyle(fontSize: 4.0.h, fontWeight: FontWeight.bold),
             ),
             Text(
