@@ -203,17 +203,72 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        trailing: IconButton(
-          //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
-          icon: Icon(Icons.delete),
-          onPressed: () {
-            setState(() {
-              values.tasks.removeAt(index);
-              values.tasks_storage.write(values.tasks);
-            });
-          },
-        ),
+        // trailing: IconButton(
+        //   //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
+        //   icon: Icon(Icons.delete),
+        //   onPressed: () {
+        //     setState(() {
+        //       values.tasks.removeAt(index);
+        //       values.tasks_storage.write(values.tasks);
+        //     });
+        //   },
+        // ),
+        trailing: options(index),
       ),
     );
+  }
+
+  Widget options(int index) {
+    return PopupMenuButton(
+        color: values.color_green,
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              break;
+            case 2:
+              break;
+            case 3:
+              values.tasks.removeAt(index);
+              values.tasks_storage.write(values.tasks);
+              break;
+          }
+        },
+        itemBuilder: (context) => [
+              PopupMenuItem(
+                  value: 1,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.fromLTRB(0.5.w, 0.5.w, 2.0.w, 0.5.w),
+                        child: Icon(Icons.play_arrow),
+                      ),
+                      Text('Start')
+                    ],
+                  )),
+              PopupMenuItem(
+                  value: 2,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.fromLTRB(0.5.w, 0.5.w, 2.0.w, 0.5.w),
+                        child: Icon(Icons.edit),
+                      ),
+                      Text('Edit')
+                    ],
+                  )),
+              PopupMenuItem(
+                  value: 3,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                        child: Icon(Icons.delete),
+                      ),
+                      Text('Delete')
+                    ],
+                  )),
+            ]);
   }
 }
