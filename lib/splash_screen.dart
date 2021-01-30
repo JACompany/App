@@ -12,7 +12,7 @@ class _LoadingScreen extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 3,
+      seconds: 1,
       navigateAfterSeconds: Home(),
       image: Image(
         image: AssetImage("lib/assets/logo.gif"),

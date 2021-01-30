@@ -20,14 +20,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {
-    super.initState();
-    values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
