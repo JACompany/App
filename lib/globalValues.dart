@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:app/addTask.dart';
 import 'package:app/storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:timezone/browser.dart';
 
 //productive hours
 const double total_hours = 15.2487;
@@ -16,9 +17,10 @@ const List<double> past_hours = [2.0, 3.0, 5.4, 1.1, 7.4, 4.5, 2.2];
 final Storage tasks_storage = Storage("tasks");
 final List<Task_Details> tasks = [];
 Task_Details current_task = null;
+TZDateTime task_start_time;
 
 //route settings
-String current_page = "home";
+String current_page = "home"; //current page
 Timer timer; //used keep pages updated
 
 //initial setup

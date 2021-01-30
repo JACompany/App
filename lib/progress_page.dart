@@ -19,6 +19,7 @@ class _ProgressPageState extends State<ProgressPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text("Progress"),
+          backgroundColor: values.color_green,
           leading: IconButton(
             onPressed: null,
             icon: Icon(Icons.insights),

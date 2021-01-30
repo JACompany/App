@@ -89,4 +89,16 @@ class _LockScreenState extends State<LockScreen> {
       ),
     );
   }
+
+  List<int> findDuration() {
+    int seconds = values.current_task.end_time
+        .difference(values.current_task.start_time)
+        .inSeconds
+        .abs();
+    int minutes = seconds ~/ 60;
+    int hours = minutes ~/ 60;
+    minutes = minutes - (hours * 60);
+    seconds = seconds - (hours * 60 * 60) - (minutes * 60);
+    return [hours, minutes, seconds];
+  }
 }

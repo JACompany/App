@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:app/calendar.dart';
+import 'package:app/editTask.dart';
 import 'package:app/leaderboard.dart';
 import 'package:app/lock_screen.dart';
 import 'package:app/profile.dart';
@@ -95,7 +96,6 @@ class _HomeState extends State<Home> {
   }
 
   void onPressed6() {
-    values.timer.cancel();
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Task(),
@@ -216,12 +216,27 @@ class _HomeState extends State<Home> {
         onSelected: (value) {
           switch (value) {
             case 1:
+              values.current_task = values.tasks[index];
+              Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, animation2) =>
+                          LockScreen(),
+                      transitionDuration: Duration(seconds: 0)),
+                  (route) => false);
               break;
             case 2:
+              Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, animation2) =>
+                          EditTask(index),
+                      transitionDuration: Duration(seconds: 0)),
+                  (route) => false);
               break;
             case 3:
-              values.tasks.removeAt(index);
-              values.tasks_storage.write(values.tasks);
+              setState(() {
+                values.tasks.removeAt(index);
+                values.tasks_storage.write(values.tasks);
+              });
               break;
           }
         },
