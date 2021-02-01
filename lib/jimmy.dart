@@ -22,32 +22,42 @@ class LineChartSample1State extends State<LineChartSample1> {
               home: Scaffold(
                   appBar: AppBar(),
                   body: Container(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 10,
-                              height: 100,
-                              color: Colors.black,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 10,
+                                  height: 100,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(width: 1.0.w),
+                                Sparkline(
+                                  data: values.past_hours,
+                                )
+                              ],
                             ),
-                            SizedBox(width: 1.0.w),
-                            Sparkline(
-                              data: values.past_hours,
-                            )
-                          ],
-                        ),
-                        Container(
-                          width: 350,
-                          height: 10,
-                          color: Colors.black,
-                        )
-                      ],
-                    ),
-                  )));
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "testing",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                Container(
+                                  width: 350,
+                                  height: 10,
+                                  color: Colors.black,
+                                )
+                              ],
+                            ),
+                          ]))));
         });
       },
     );
