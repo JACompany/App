@@ -5,7 +5,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;
 import 'addTask.dart';
 import 'package:sizer/sizer.dart';
-
 import 'homepage.dart';
 
 class ProgressPage extends StatefulWidget {
