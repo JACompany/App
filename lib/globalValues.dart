@@ -2,8 +2,8 @@ library values.globals;
 
 import 'dart:async';
 
-import 'package:app/addTask.dart';
-import 'package:app/storage.dart';
+import 'addTask.dart';
+import 'storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:timezone/browser.dart';
 

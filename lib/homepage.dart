@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:app/calendar.dart';
-import 'package:app/editTask.dart';
-import 'package:app/leaderboard.dart';
-import 'package:app/lock_screen.dart';
-import 'package:app/profile.dart';
+import 'calendar.dart';
+import 'editTask.dart';
+import 'leaderboard.dart';
+import 'lock_screen.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;

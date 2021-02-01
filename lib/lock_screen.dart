@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:app/addTask.dart';
+import 'addTask.dart';
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';

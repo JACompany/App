@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:app/calendar.dart';
-import 'package:app/leaderboard.dart';
+import 'calendar.dart';
+import 'leaderboard.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;

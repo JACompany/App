@@ -1,5 +1,5 @@
-import 'package:app/leaderboard.dart';
-import 'package:app/profile.dart';
+import 'leaderboard.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;

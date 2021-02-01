@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:app/leaderboard.dart';
-import 'package:app/profile.dart';
-import 'package:app/progress_page.dart';
+import 'leaderboard.dart';
+import 'profile.dart';
+import 'progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
@@ -242,8 +242,6 @@ class _Task extends State<Task> {
       ),
     );
   }
-
-  List<Task_Details> sort(List<Task_Details> data) {}
 }
 
 class Task_Details {

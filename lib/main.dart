@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:app/addTask.dart';
+import 'addTask.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'homepage.dart';
 import 'globalValues.dart' as values;
