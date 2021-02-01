@@ -5,7 +5,7 @@ import 'dart:async';
 import 'addTask.dart';
 import 'storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:timezone/browser.dart';
+import 'package:timezone/timezone.dart';
 
 //productive hours
 const double total_hours = 15.2487;
