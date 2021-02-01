@@ -11,6 +11,7 @@ class LockScreen extends StatefulWidget {
 }
 
 class _LockScreenState extends State<LockScreen> {
+  List<int> duration = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +41,11 @@ class _LockScreenState extends State<LockScreen> {
       color: values.color_green,
       alignment: Alignment.center,
       child: Text(
-        values.current_task.duration[0].toString() +
+        duration[0].toString() +
             ":" +
-            values.current_task.duration[1].toString(),
+            duration[1].toString() +
+            ":" +
+            duration[2].toString(),
         style: TextStyle(fontSize: 4.0.h),
       ),
     );

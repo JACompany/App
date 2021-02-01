@@ -272,7 +272,7 @@ class Task_Details {
     this.end = end;
     this.start_time = tz.TZDateTime.from(start, tz.local);
     this.end_time = tz.TZDateTime.from(end, tz.local);
-    this.duration = findDuration();
+    this.duration = end_time.difference(start_time).inSeconds.abs();
   }
 
   @override
