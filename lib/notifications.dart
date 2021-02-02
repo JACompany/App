@@ -66,7 +66,7 @@ class _Notifications extends State<Notifications> {
     var generalNotificationDetails =
         NotificationDetails(android: androidDetails, iOS: iosDetails);
     var scheduleTime = tz.TZDateTime.now(tz.local).add(Duration(seconds: 5));
-    await notification.zonedSchedule(0, "Scheduled Task", "Do stuff",
+    await notification.zonedSchedule(1, "Scheduled Task", "Do stuff",
         scheduleTime, generalNotificationDetails,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
@@ -88,9 +88,17 @@ class _Notifications extends State<Notifications> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: values.color_green, title: Text("Notification")),
-      body: RaisedButton(
-        onPressed: showNotification,
-        child: Text("Notification"),
+      body: Column(
+        children: [
+          RaisedButton(
+            onPressed: showNotification,
+            child: Text("Start Notification"),
+          ),
+          RaisedButton(
+            onPressed: cancelNotification,
+            child: Text("Cancel Notification"),
+          ),
+        ],
       ),
       // bottomNavigationBar: Container(
       //   height: 8.0.h,
@@ -130,6 +138,10 @@ class _Notifications extends State<Notifications> {
       //   ),
       // ),
     );
+  }
+
+  void cancelNotification() {
+    notification.cancel(1);
   }
 
   void onPressed5() {

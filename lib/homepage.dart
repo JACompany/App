@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:app/calendar.dart';
-import 'package:app/leaderboard.dart';
-import 'package:app/profile.dart';
+import 'calendar.dart';
+import 'editTask.dart';
+import 'leaderboard.dart';
+import 'lock_screen.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
 import 'addTask.dart';
 import 'globalValues.dart' as values;
 import 'progress_page.dart';
 import 'package:sizer/sizer.dart';
 import 'calendar.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class Home extends StatefulWidget {
   @override
@@ -16,18 +20,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool get maintainState {
-    return false;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +43,7 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.add),
                 onPressed: onPressed6,
                 iconSize: 6.0.h,
-              )
+              ),
             ],
           )),
       body: tasks(),
@@ -155,23 +147,47 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.all(2.0.w),
       itemCount: values.tasks.length,
       itemBuilder: (context, index) {
-        return buildTile(values.tasks[index], index);
+        return buildTile(values.tasks[index].description,
+            values.tasks[index].start, values.tasks[index].end, index);
       },
     );
   }
 
-  Widget buildTile(String text, index) {
+  String formatTime(DateTime time) {
+    String str;
+    if (time.toString().substring(11, 13) == "00") {
+      str = "12" + time.toString().substring(13, 16) + "am";
+    } else if (time
+        .isBefore(DateTime(time.year, time.month, time.day, 12, 0))) {
+      str = time.toString().substring(11, 16) + "am";
+    } else if (time
+        .isAfter(DateTime(time.year, time.month, time.day, 12, 59))) {
+      int hours = int.parse(time.toString().substring(11, 13)) - 12;
+      str = hours.toString() + time.toString().substring(13, 16) + "pm";
+    } else {
+      str = time.toString().substring(11, 16) + "pm";
+    }
+    if (int.parse(str[0]) == 0) str = str.substring(1);
+    return str;
+  }
+
+  Widget buildTile(String text, DateTime start, DateTime end, index) {
     return Container(
       decoration: BoxDecoration(
-          color: values.color_red,
+          color: values.color_peach,
           borderRadius: BorderRadius.all(Radius.circular(2.0.w))),
       child: ListTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "3:00 pm - 3:55 pm",
+              formatTime(start) + '-' + formatTime(end),
               style: TextStyle(fontSize: 4.0.h, fontWeight: FontWeight.bold),
+            ),
+            Container(
+              width: 100.0.w,
+              height: 0.25.h,
+              color: values.color_peach,
             ),
             Text(
               text,
@@ -179,17 +195,87 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        trailing: IconButton(
-          //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
-          icon: Icon(Icons.delete),
-          onPressed: () {
-            setState(() {
-              values.tasks.removeAt(index);
-              values.tasks_storage.write(values.tasks);
-            });
-          },
-        ),
+        // trailing: IconButton(
+        //   //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
+        //   icon: Icon(Icons.delete),
+        //   onPressed: () {
+        //     setState(() {
+        //       values.tasks.removeAt(index);
+        //       values.tasks_storage.write(values.tasks);
+        //     });
+        //   },
+        // ),
+        trailing: options(index),
       ),
     );
+  }
+
+  Widget options(int index) {
+    return PopupMenuButton(
+        color: values.color_green,
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              values.current_task = values.tasks[index];
+              Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, animation2) =>
+                          LockScreen(),
+                      transitionDuration: Duration(seconds: 0)),
+                  (route) => false);
+              break;
+            case 2:
+              Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, animation2) =>
+                          EditTask(index),
+                      transitionDuration: Duration(seconds: 0)),
+                  (route) => false);
+              break;
+            case 3:
+              setState(() {
+                values.tasks.removeAt(index);
+                values.tasks_storage.write(values.tasks);
+              });
+              break;
+          }
+        },
+        itemBuilder: (context) => [
+              PopupMenuItem(
+                  value: 1,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.fromLTRB(0.5.w, 0.5.w, 2.0.w, 0.5.w),
+                        child: Icon(Icons.play_arrow),
+                      ),
+                      Text('Start')
+                    ],
+                  )),
+              PopupMenuItem(
+                  value: 2,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            EdgeInsets.fromLTRB(0.5.w, 0.5.w, 2.0.w, 0.5.w),
+                        child: Icon(Icons.edit),
+                      ),
+                      Text('Edit')
+                    ],
+                  )),
+              PopupMenuItem(
+                  value: 3,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                        child: Icon(Icons.delete),
+                      ),
+                      Text('Delete')
+                    ],
+                  )),
+            ]);
   }
 }

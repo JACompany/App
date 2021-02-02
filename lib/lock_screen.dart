@@ -1,30 +1,9 @@
 import 'dart:ui';
 
+import 'addTask.dart';
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return OrientationBuilder(builder: (context, orientation) {
-          SizerUtil().init(constraints, orientation);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primaryColor: Colors.white,
-            ),
-            home: LockScreen(),
-          );
-        });
-      },
-    );
-  }
-}
 
 class LockScreen extends StatefulWidget {
   @override
@@ -32,11 +11,13 @@ class LockScreen extends StatefulWidget {
 }
 
 class _LockScreenState extends State<LockScreen> {
+  List<int> duration = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
+          timerText(),
           timer(),
           SizedBox(
             height: 2.0.h,
@@ -51,6 +32,21 @@ class _LockScreenState extends State<LockScreen> {
           ),
           unlock()
         ],
+      ),
+    );
+  }
+
+  Widget timer() {
+    return Container(
+      color: values.color_green,
+      alignment: Alignment.center,
+      child: Text(
+        duration[0].toString() +
+            ":" +
+            duration[1].toString() +
+            ":" +
+            duration[2].toString(),
+        style: TextStyle(fontSize: 4.0.h),
       ),
     );
   }
@@ -75,13 +71,13 @@ class _LockScreenState extends State<LockScreen> {
     );
   }
 
-  Widget timer() {
+  Widget timerText() {
     return Container(
       color: values.color_green,
-      padding: EdgeInsets.fromLTRB(0, 2.0.h, 0, 2.0.h),
+      padding: EdgeInsets.fromLTRB(0, 1.0.h, 0, 0),
       alignment: Alignment.center,
       child: Text(
-        "TIME REMAINING ",
+        "TIME REMAINING",
         style: TextStyle(fontSize: 4.0.h),
       ),
     );
@@ -95,5 +91,17 @@ class _LockScreenState extends State<LockScreen> {
         style: TextStyle(fontSize: 3.0.h, color: values.color_red),
       ),
     );
+  }
+
+  List<int> findDuration() {
+    int seconds = values.current_task.end_time
+        .difference(values.current_task.start_time)
+        .inSeconds
+        .abs();
+    int minutes = seconds ~/ 60;
+    int hours = minutes ~/ 60;
+    minutes = minutes - (hours * 60);
+    seconds = seconds - (hours * 60 * 60) - (minutes * 60);
+    return [hours, minutes, seconds];
   }
 }

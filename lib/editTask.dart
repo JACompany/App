@@ -11,14 +11,19 @@ import 'calendar.dart';
 import 'homepage.dart';
 import 'package:sizer/sizer.dart';
 import 'globalValues.dart' as values;
+import 'addTask.dart';
 
 //https://pub.dev/packages/flutter_time_picker_spinner
-class Task extends StatefulWidget {
+class EditTask extends StatefulWidget {
+  int index;
+  EditTask(this.index);
   @override
-  _Task createState() => _Task();
+  _EditTask createState() => _EditTask(index);
 }
 
-class _Task extends State<Task> {
+class _EditTask extends State<EditTask> {
+  int index;
+  _EditTask(this.index);
   final _formKey = GlobalKey<FormState>();
   DateTime start, end;
   TextEditingController controller = TextEditingController();
@@ -26,7 +31,7 @@ class _Task extends State<Task> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Task"),
+        title: Text("Edit Task"),
         backgroundColor: values.color_green,
         leading: IconButton(
           icon: Icon(Icons.close),
@@ -36,18 +41,19 @@ class _Task extends State<Task> {
       ),
       body: Container(
         color: values.color_peach,
-        margin: EdgeInsets.all(15),
+        margin: EdgeInsets.all(2.0.w),
         child: ListView(
           children: [
             Container(
-                color: values.color_green,
-                alignment: Alignment.center,
-                width: 100.0.w,
-                height: 5.0.h,
-                child: Text(
-                  "Description",
-                  style: TextStyle(fontSize: 3.0.h),
-                )),
+              color: values.color_green,
+              alignment: Alignment.center,
+              width: 100.0.w,
+              height: 5.0.h,
+              child: Text(
+                "Description",
+                style: TextStyle(fontSize: 3.0.h),
+              ),
+            ),
             addTask(),
             Container(
                 color: values.color_green,
@@ -156,7 +162,7 @@ class _Task extends State<Task> {
         margin: EdgeInsets.all(15),
         color: values.color_peach,
         child: TextFormField(
-          controller: controller,
+          initialValue: values.tasks[index].description,
           maxLines: null,
           validator: (value) {
             if (value.isEmpty) {
@@ -165,7 +171,7 @@ class _Task extends State<Task> {
             if (value.contains(";")) {
               return "Please remove ';' character";
             }
-            values.tasks.add(Task_Details(value, this.start, this.end, 0));
+            values.tasks[index].update(value, start, end);
             sortList();
             values.tasks_storage.write(values.tasks);
 
@@ -190,6 +196,7 @@ class _Task extends State<Task> {
 
   Widget setStartTime() {
     return TimePickerSpinner(
+      time: values.tasks[index].start,
       is24HourMode: false,
       normalTextStyle: TextStyle(fontSize: 2.0.h, color: Colors.black),
       highlightedTextStyle: TextStyle(fontSize: 3.0.h, color: values.color_red),
@@ -206,6 +213,7 @@ class _Task extends State<Task> {
 
   Widget setEndTime() {
     return TimePickerSpinner(
+      time: values.tasks[index].end,
       is24HourMode: false,
       normalTextStyle: TextStyle(fontSize: 2.0.h, color: Colors.black),
       highlightedTextStyle: TextStyle(fontSize: 3.0.h, color: values.color_red),
@@ -230,58 +238,21 @@ class _Task extends State<Task> {
           controller.clear();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("Task added!"),
+              content: Text("Task Saved!"),
               duration: Duration(milliseconds: 500),
             ),
           );
+          Navigator.of(context).pushAndRemoveUntil(
+              PageRouteBuilder(
+                  pageBuilder: (context, animation, animation2) => Home(),
+                  transitionDuration: Duration(seconds: 0)),
+              (route) => false);
         }
       },
       child: Text(
-        'Add task',
+        'Save',
         style: TextStyle(color: Colors.black, fontSize: 3.0.h),
       ),
     );
-  }
-}
-
-class Task_Details {
-  String description; //task description
-  DateTime start, end; //start and end time in normal format
-  tz.TZDateTime start_time,
-      end_time; //start and end time of tast in time zone format
-  int notification_id; //notification id for cancelling in the future
-  int duration;
-  bool completed = false;
-
-  Task_Details(String description, DateTime start_time, DateTime end_time,
-      int notification_id) {
-    this.description = description;
-    this.start = start_time;
-    this.end = end_time;
-    this.start_time = tz.TZDateTime.from(start_time, tz.local);
-    this.end_time = tz.TZDateTime.from(end_time, tz.local);
-    this.notification_id = notification_id;
-    this.duration = end_time.difference(start_time).inSeconds.abs();
-  }
-
-  void update(String description, DateTime start, DateTime end) {
-    this.description = description;
-    this.start = start;
-    this.end = end;
-    this.start_time = tz.TZDateTime.from(start, tz.local);
-    this.end_time = tz.TZDateTime.from(end, tz.local);
-    this.duration = end_time.difference(start_time).inSeconds.abs();
-  }
-
-  @override
-  String toString() {
-    return description +
-        ";" +
-        start.toString() +
-        ";" +
-        end.toString() +
-        ";" +
-        notification_id.toString() +
-        ";;;";
   }
 }

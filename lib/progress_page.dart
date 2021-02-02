@@ -1,11 +1,10 @@
-import 'package:app/leaderboard.dart';
-import 'package:app/profile.dart';
+import 'leaderboard.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;
 import 'addTask.dart';
 import 'package:sizer/sizer.dart';
-
 import 'homepage.dart';
 
 class ProgressPage extends StatefulWidget {
@@ -19,6 +18,7 @@ class _ProgressPageState extends State<ProgressPage> {
     return Scaffold(
       appBar: AppBar(
           title: Text("Progress"),
+          backgroundColor: values.color_green,
           leading: IconButton(
             onPressed: null,
             icon: Icon(Icons.insights),
