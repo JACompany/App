@@ -42,7 +42,7 @@ class LineChartSample1State extends State<LineChartSample1> {
                               ],
                             ),
                             new Sparkline(
-                              data: data,
+                              data: values.past_hours,
                               pointsMode: PointsMode.all,
                               pointSize: 12.0,
                               pointColor: Colors.blue,
