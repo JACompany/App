@@ -45,21 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: Text('Total Productive Hours:  ' + ' 15 Hours',
-                    style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 19,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.pink[300])),
-                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(40.0),
-                        topRight: const Radius.circular(40.0),
-                        bottomLeft: const Radius.circular(40.0),
-                        bottomRight: const Radius.circular(40.0)))),
+                child: ListView(
+              children: [Text("Total Productive Hours"), Text("15 Hours")],
+            )),
           ],
         ),
       ),
