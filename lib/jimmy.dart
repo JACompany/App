@@ -38,21 +38,18 @@ class LineChartSample1State extends State<LineChartSample1> {
                                 SizedBox(width: 1.0.w),
                                 Sparkline(
                                   data: values.past_hours,
-                                )
+                                  pointsMode: PointsMode.all,
+                                  pointSize: 12.0,
+                                  pointColor: Colors.blue,
+                                ),
                               ],
-                            ),
-                            new Sparkline(
-                              data: values.past_hours,
-                              pointsMode: PointsMode.all,
-                              pointSize: 12.0,
-                              pointColor: Colors.blue,
                             ),
                             Column(
                               verticalDirection: VerticalDirection.up,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "testing",
+                                  "Days of the Week",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
