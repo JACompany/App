@@ -11,7 +11,7 @@ import 'package:timezone/timezone.dart';
 const double total_hours = 15.2487;
 const double user_goal = 20;
 const double user_hours_day = 5;
-const List<double> past_hours = [2.0, 3.0, 5.4, 1.1, 7.4, 4.5, 2.2];
+const List<double> past_hours = [2.0, 3.0, 3.4, 1.1, 2.4, 3.5, 2.2];
 
 // storing user tasks
 final Storage tasks_storage = Storage("tasks");
