@@ -12,6 +12,7 @@ class LineChartSample1 extends StatefulWidget {
 }
 
 class LineChartSample1State extends State<LineChartSample1> {
+  get data => values.past_hours;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -40,9 +41,15 @@ class LineChartSample1State extends State<LineChartSample1> {
                                 )
                               ],
                             ),
+                            new Sparkline(
+                              data: data,
+                              pointsMode: PointsMode.all,
+                              pointSize: 12.0,
+                              pointColor: Colors.blue,
+                            ),
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   "testing",
