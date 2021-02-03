@@ -48,7 +48,7 @@ class LineChartSample1State extends State<LineChartSample1> {
                               pointColor: Colors.blue,
                             ),
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              verticalDirection: VerticalDirection.up,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
