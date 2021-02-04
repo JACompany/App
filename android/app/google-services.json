@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "917628286455",
+    "project_id": "improvall-e88e8",
+    "storage_bucket": "improvall-e88e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917628286455:android:958f761330d3434d5feaf2",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917628286455-hrqu4eo1ald81rv462242cm2epid33gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgjjkXmpU5gY_4nvqx7KDVFL26B8cAzR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917628286455-hrqu4eo1ald81rv462242cm2epid33gr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

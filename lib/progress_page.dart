@@ -1,7 +1,6 @@
 import 'leaderboard.dart';
 import 'profile.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'globalValues.dart' as values;
 import 'addTask.dart';
 import 'package:sizer/sizer.dart';
@@ -123,24 +122,8 @@ class _ProgressPageState extends State<ProgressPage> {
             ),
             SizedBox(height: 10),
             Expanded(
-              child: LineChart(
-                LineChartData(lineBarsData: [
-                  LineChartBarData(
-                    colors: [Colors.blue],
-                    spots: [
-                      FlSpot(0, 3),
-                      FlSpot(2, 2),
-                      FlSpot(3, 5),
-                      FlSpot(4, 3.1),
-                      FlSpot(5, 4),
-                      FlSpot(6, 3),
-                      FlSpot(7, 4),
-                    ],
-                    barWidth: 5,
-                  ),
-                ]),
-              ),
-            )
+              child: Text("insert graph"),
+            ),
           ],
         ),
         height: MediaQuery.of(context).size.height / 2,
