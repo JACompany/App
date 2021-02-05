@@ -1,3 +1,5 @@
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+
 import 'leaderboard.dart';
 import 'profile.dart';
 import 'package:flutter/material.dart';
@@ -113,19 +115,40 @@ class _ProgressPageState extends State<ProgressPage> {
 
   Widget ProgressChart() {
     return Container(
-        child: Column(
-          children: [
-            Text(
-              "Progress Chart",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 50, color: Colors.blue),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: Text("insert graph"),
-            ),
-          ],
-        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 10,
+                height: 100,
+                color: Colors.black,
+              ),
+              SizedBox(width: 1.0.w),
+              Sparkline(
+                data: values.past_hours,
+                pointsMode: PointsMode.all,
+                pointSize: 12.0,
+                pointColor: Colors.blue,
+              ),
+            ],
+          ),
+          Column(
+            verticalDirection: VerticalDirection.up,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Days of the Week",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              Container(
+                width: 350,
+                height: 10,
+                color: Colors.black,
+              )
+            ],
+          ),
+        ]),
         height: MediaQuery.of(context).size.height / 2,
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
         margin: EdgeInsets.all(10),

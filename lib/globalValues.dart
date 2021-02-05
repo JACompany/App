@@ -25,6 +25,7 @@ Timer timer; //used keep pages updated
 
 //initial setup
 bool is_setup = false;
+String userID = null;
 
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);

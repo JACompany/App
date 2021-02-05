@@ -1,4 +1,4 @@
-import 'globalValues.dart';
+import 'globalValues.dart' as values;
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -22,7 +22,7 @@ class _LinearProgressIndicatorApp extends StatefulWidget {
 
 class _LinearProgressIndicatorAppState
     extends State<_LinearProgressIndicatorApp> {
-  double _progress = user_hours_day / user_goal;
+  double _progress = values.user_hours_day / values.user_goal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +37,8 @@ class _LinearProgressIndicatorAppState
             children: <Widget>[
               LinearProgressIndicator(
                 minHeight: 20.0,
-                backgroundColor: Colors.cyanAccent,
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                backgroundColor: Colors.grey,
+                valueColor: new AlwaysStoppedAnimation<Color>(values.color_red),
                 value: _progress,
               ),
             ],
