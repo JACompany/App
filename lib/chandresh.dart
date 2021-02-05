@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -33,7 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String _displayhour;
   Timer _everySecond;
   intl.DateFormat dateFormat = new intl.DateFormat.Hms();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: ListView(
-              children: [Text("Total Productive Hours"), Text("15 Hours")],
-            )),
+                child: Text('Total Productive Hours:/n' + '15',
+                    style: TextStyle(
+                        fontFamily: 'Comic Sans MS',
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink[300])),
+                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.orange[100],
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(40.0),
+                        topRight: const Radius.circular(40.0),
+                        bottomLeft: const Radius.circular(40.0),
+                        bottomRight: const Radius.circular(40.0)))),
           ],
         ),
       ),

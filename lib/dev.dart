@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Tutorial by Woolha.com',
+      title: 'Progress Bar',
       home: _LinearProgressIndicatorApp(),
     );
   }
@@ -27,7 +27,7 @@ class _LinearProgressIndicatorAppState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Woolha.com Flutter Tutorial'),
+        title: Text('Progress Bar'),
       ),
       body: Center(
         child: Padding(
@@ -37,10 +37,11 @@ class _LinearProgressIndicatorAppState
             children: <Widget>[
               LinearProgressIndicator(
                 minHeight: 20.0,
-                backgroundColor: Colors.grey,
-                valueColor: new AlwaysStoppedAnimation<Color>(values.color_red),
+                backgroundColor: Colors.cyanAccent,
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
                 value: _progress,
               ),
+              Text('${(_progress * 100).round()}%'),
             ],
           ),
         ),
