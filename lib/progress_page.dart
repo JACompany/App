@@ -163,11 +163,22 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 
   Widget ProgressBar() {
+    double _progress = values.user_hours_day / values.user_goal;
     return Container(
-        child: Text(
-          "Progress Bar",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 50, color: Colors.blue),
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              LinearProgressIndicator(
+                minHeight: 20.0,
+                backgroundColor: Colors.cyanAccent,
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                value: _progress,
+              ),
+              Text('${(_progress * 100).round()}%'),
+            ],
+          ),
         ),
         height: MediaQuery.of(context).size.height / 5,
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
@@ -184,10 +195,26 @@ class _ProgressPageState extends State<ProgressPage> {
 
   Widget TotalHours() {
     return Container(
-        child: Text(
-          "Total Hours",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 50, color: Colors.blue),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                child: Text('Total Productive Hours:/n' + '15',
+                    style: TextStyle(
+                        fontFamily: 'Comic Sans MS',
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink[300])),
+                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.orange[100],
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(40.0),
+                        topRight: const Radius.circular(40.0),
+                        bottomLeft: const Radius.circular(40.0),
+                        bottomRight: const Radius.circular(40.0)))),
+          ],
         ),
         height: MediaQuery.of(context).size.height / 5,
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
