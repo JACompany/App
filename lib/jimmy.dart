@@ -100,7 +100,15 @@ class _Profile extends State<Profile> {
   }
 
   void TextFormField() {
-    TextFormField(
+
+ @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+         TextFormField(
       //The validator receives the text that the user has entered.
       validator: (value) {
         if (value.isEmpty) {
@@ -108,7 +116,7 @@ class _Profile extends State<Profile> {
         }
         return null;
       },
-    );
+    );  
     Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: ElevatedButton(
@@ -122,7 +130,15 @@ class _Profile extends State<Profile> {
               }
             },
             child: Text('Submit')));
+  }   
+        ]
+     )
+    );
   }
+}
+
+   
+    
 
   void onPressed1() {
     values.current_page = "home";
