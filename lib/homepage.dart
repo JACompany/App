@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'calendar.dart';
+import 'completed_tasks.dart';
 import 'editTask.dart';
 import 'leaderboard.dart';
 import 'lock_screen.dart';
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.calendar_today),
+                icon: Icon(Icons.check),
                 onPressed: onPressed5,
                 iconSize: 6.0.h,
               ),
@@ -98,7 +99,7 @@ class _HomeState extends State<Home> {
   void onPressed5() {
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Calendar(),
+            pageBuilder: (context, animation, animation2) => Completed_Task(),
             transitionDuration: Duration(seconds: 0)),
         (route) => false);
   }
@@ -203,16 +204,6 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        // trailing: IconButton(
-        //   //https://www.warmodroid.xyz/tutorial/flutter/popup-menu-in-flutter/ for the run task, edit, and delete buttons
-        //   icon: Icon(Icons.delete),
-        //   onPressed: () {
-        //     setState(() {
-        //       values.tasks.removeAt(index);
-        //       values.tasks_storage.write(values.tasks);
-        //     });
-        //   },
-        // ),
         trailing: options(index),
       ),
     );

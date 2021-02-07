@@ -18,6 +18,7 @@ const List<double> past_hours = [2.0, 3.0, 3.4, 1.1, 2.4, 3.5, 2.2];
 // storing user tasks
 final Storage tasks_storage = Storage("tasks");
 final List<Task_Details> tasks = [];
+final Storage completed_tasks = Storage("completed_tasks");
 Task_Details current_task = null;
 TZDateTime task_start_time;
 

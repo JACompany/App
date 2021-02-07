@@ -165,6 +165,12 @@ class _Task extends State<Task> {
             if (value.contains(";")) {
               return "Please remove ';' character";
             }
+            if (this.start.isAfter(this.end)) {
+              return "Start time must be before end time";
+            }
+            if (this.start.isBefore(DateTime.now())) {
+              return "Start time must be after the current time";
+            }
             values.tasks.add(Task_Details(value, this.start, this.end, 0));
             sortList();
             values.tasks_storage.write(values.tasks);

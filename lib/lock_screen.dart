@@ -1,6 +1,6 @@
+import 'dart:async';
 import 'dart:ui';
 
-import 'addTask.dart';
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
@@ -12,6 +12,15 @@ class LockScreen extends StatefulWidget {
 
 class _LockScreenState extends State<LockScreen> {
   List<int> duration = [];
+  @override
+  void initState() {
+    super.initState();
+    duration = findDuration();
+    values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
