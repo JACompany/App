@@ -39,11 +39,6 @@ class database extends StatelessWidget {
   }
 
   ListView tiles(context) {
-    // firestore.collection("leaderboard").snapshots().listen((result) {
-    //   result.docs.forEach((element) {
-    //     list.add(element.data());
-    //   });
-    // });
     read();
     return ListView(
       children: list,

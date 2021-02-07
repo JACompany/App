@@ -48,8 +48,6 @@ class _Leaderboard extends State<Leaderboard> {
                 child: IconButton(
               icon: Icon(
                 Icons.timer,
-                color:
-                    values.current_page == "home" ? Colors.white : Colors.black,
               ),
               onPressed: onPressed1,
               iconSize: 6.0.h,
@@ -62,7 +60,12 @@ class _Leaderboard extends State<Leaderboard> {
             )),
             Expanded(
                 child: IconButton(
-              icon: Icon(Icons.leaderboard),
+              icon: Icon(
+                Icons.leaderboard,
+                color: values.current_page == "leaderboard"
+                    ? Colors.white
+                    : Colors.black,
+              ),
               onPressed: onPressed3,
               iconSize: 6.0.h,
             )),

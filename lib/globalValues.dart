@@ -2,6 +2,8 @@ library values.globals;
 
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'addTask.dart';
 import 'storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +28,9 @@ Timer timer; //used keep pages updated
 //initial setup
 bool is_setup = false;
 String userID = null;
+
+//firebase (database)
+final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);

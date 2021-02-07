@@ -53,24 +53,24 @@ class _ProgressPageState extends State<ProgressPage> {
               onPressed: onPressed2,
               iconSize: 6.0.h,
             )),
-            // Expanded(
-            //     child: IconButton(
-            //   icon: Icon(Icons.leaderboard),
-            //   onPressed: onPressed3,
-            //   iconSize: 6.0.h,
-            //   color: values.current_page == "leaderboard"
-            //       ? Colors.white
-            //       : Colors.black,
-            // )),
-            // Expanded(
-            //     child: IconButton(
-            //   icon: Icon(Icons.account_circle),
-            //   onPressed: onPressed4,
-            //   iconSize: 6.0.h,
-            //   color: values.current_page == "profile"
-            //       ? Colors.white
-            //       : Colors.black,
-            // ))
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.leaderboard),
+              onPressed: onPressed3,
+              iconSize: 6.0.h,
+              color: values.current_page == "leaderboard"
+                  ? Colors.white
+                  : Colors.black,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: onPressed4,
+              iconSize: 6.0.h,
+              color: values.current_page == "profile"
+                  ? Colors.white
+                  : Colors.black,
+            ))
           ],
         ),
       ),
@@ -115,117 +115,148 @@ class _ProgressPageState extends State<ProgressPage> {
 
   Widget ProgressChart() {
     return Container(
+        alignment: Alignment.centerRight,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            "TRENDS",
+            style: TextStyle(fontSize: 3.0.h),
+          ),
+          SizedBox(
+            height: 1.0.h,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 10,
-                height: 100,
+                width: 5,
+                height: 15.0.h,
                 color: Colors.black,
               ),
-              SizedBox(width: 1.0.w),
+              SizedBox(width: 4.0.w),
               Sparkline(
                 data: values.past_hours,
+                lineColor: values.color_red,
                 pointsMode: PointsMode.all,
-                pointSize: 12.0,
-                pointColor: Colors.blue,
+                pointSize: 2.5.h,
+                pointColor: values.color_red,
               ),
             ],
           ),
-          Column(
-            verticalDirection: VerticalDirection.up,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Days of the Week",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              Container(
-                width: 350,
-                height: 10,
-                color: Colors.black,
-              )
-            ],
+          Container(
+            width: 90.0.w,
+            height: 5,
+            color: Colors.black,
+          ),
+          SizedBox(
+            height: 1.0.h,
+          ),
+          Align(
+            child: Text(
+              "Last 7 days",
+              style: TextStyle(fontSize: 2.0.h),
+              textAlign: TextAlign.center,
+            ),
           ),
         ]),
-        height: MediaQuery.of(context).size.height / 2,
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: values.color_peach,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-              bottomRight: Radius.circular(40.0)),
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0)),
         ));
   }
 
   Widget ProgressBar() {
     double _progress = values.user_hours_day / values.user_goal;
     return Container(
-        child: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LinearProgressIndicator(
-                minHeight: 20.0,
-                backgroundColor: Colors.cyanAccent,
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                value: _progress,
-              ),
-              Text('${(_progress * 100).round()}%'),
-            ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "DAILY PROGRESS",
+              style: TextStyle(fontSize: 3.0.h),
+            ),
           ),
-        ),
-        height: MediaQuery.of(context).size.height / 5,
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: values.color_peach,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-              bottomRight: Radius.circular(40.0)),
-        ));
+          SizedBox(
+            height: 1.0.h,
+          ),
+          LinearProgressIndicator(
+            minHeight: 2.5.h,
+            backgroundColor: Colors.grey[300],
+            valueColor: new AlwaysStoppedAnimation<Color>(values.color_red),
+            value: _progress,
+          ),
+          SizedBox(
+            height: 1.0.h,
+          ),
+          Text(
+            '${(_progress * 100).round()}%',
+            style: TextStyle(
+              fontSize: 2.5.h,
+              color: values.color_red,
+            ),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: values.color_peach,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+            bottomLeft: Radius.circular(20.0),
+            bottomRight: Radius.circular(20.0)),
+      ),
+    );
   }
 
   Widget TotalHours() {
     return Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                child: Text('Total Productive Hours:/n' + '15',
-                    style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.pink[300])),
-                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(40.0),
-                        topRight: const Radius.circular(40.0),
-                        bottomLeft: const Radius.circular(40.0),
-                        bottomRight: const Radius.circular(40.0)))),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "TOTAL PRODUCTIVE HOURS",
+              style: TextStyle(fontSize: 3.0.h),
+            ),
+            SizedBox(
+              height: 1.0.h,
+            ),
+            Text(
+              "Today: " + values.user_hours_day.toStringAsFixed(1),
+              style: TextStyle(
+                color: values.color_red,
+                fontSize: 2.5.h,
+              ),
+            ),
+            SizedBox(
+              height: 1.0.h,
+            ),
+            Text(
+              "All time: " + values.total_hours.toStringAsFixed(1),
+              style: TextStyle(
+                color: values.color_red,
+                fontSize: 2.5.h,
+              ),
+            ),
           ],
         ),
-        height: MediaQuery.of(context).size.height / 5,
-        padding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 10.0),
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: values.color_peach,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
-              bottomLeft: Radius.circular(40.0),
-              bottomRight: Radius.circular(40.0)),
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0)),
         ));
   }
 }

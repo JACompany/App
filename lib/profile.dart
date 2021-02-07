@@ -48,8 +48,6 @@ class _Profile extends State<Profile> {
                 child: IconButton(
               icon: Icon(
                 Icons.timer,
-                color:
-                    values.current_page == "home" ? Colors.white : Colors.black,
               ),
               onPressed: onPressed1,
               iconSize: 6.0.h,
@@ -68,7 +66,12 @@ class _Profile extends State<Profile> {
             )),
             Expanded(
                 child: IconButton(
-              icon: Icon(Icons.account_circle),
+              icon: Icon(
+                Icons.account_circle,
+                color: values.current_page == "profile"
+                    ? Colors.white
+                    : Colors.black,
+              ),
               onPressed: onPressed4,
               iconSize: 6.0.h,
             ))
