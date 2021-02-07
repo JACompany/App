@@ -100,7 +100,6 @@ class _Profile extends State<Profile> {
   }
 
   void TextFormField() {
-
  @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -135,6 +134,7 @@ class _Profile extends State<Profile> {
      )
     );
   }
+
 }
 
    
