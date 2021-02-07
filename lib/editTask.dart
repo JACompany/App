@@ -222,7 +222,7 @@ class _EditTask extends State<EditTask> {
       isForce2Digits: true,
       onTimeChange: (time) {
         setState(() {
-          this.end = time;
+          this.end = DateTime.parse(time.toString().substring(0, 16));
         });
       },
     );

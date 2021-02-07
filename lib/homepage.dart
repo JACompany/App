@@ -216,6 +216,8 @@ class _HomeState extends State<Home> {
           switch (value) {
             case 1:
               values.current_task = values.tasks[index];
+              values.task_start_time = DateTime.now();
+              values.current_page = 'lockscreen';
               Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
                       pageBuilder: (context, animation, animation2) =>
