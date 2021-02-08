@@ -125,7 +125,7 @@ class _Profile extends State<Profile> {
                   );
                 }
               },
-              child: Text('Submit'),
+              child: Text('Update'),
             ),
           ),
           TextFormField(
