@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
 
-import 'leaderboard.dart';
-import 'profile.dart';
-
 class LockScreen extends StatefulWidget {
   @override
   _LockScreenState createState() => _LockScreenState();
@@ -25,6 +22,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
     values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         duration = findDuration();
+        timer.cancel();
         if (values.current_page == "home") {
           Navigator.of(context).pushAndRemoveUntil(
               PageRouteBuilder(
@@ -38,28 +36,33 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          timerText(),
-          timer(),
-          SizedBox(
-            height: 2.0.h,
-          ),
-          icon(),
-          SizedBox(
-            height: 2.0.h,
-          ),
-          unlock(),
-          SizedBox(
-            height: 2.0.h,
-          ),
-          title(),
-          SizedBox(
-            height: 2.0.h,
-          ),
-        ],
+    return WillPopScope(
+      child: Scaffold(
+        body: ListView(
+          children: [
+            timerText(),
+            timer(),
+            SizedBox(
+              height: 2.0.h,
+            ),
+            icon(),
+            SizedBox(
+              height: 2.0.h,
+            ),
+            unlock(),
+            SizedBox(
+              height: 2.0.h,
+            ),
+            title(),
+            SizedBox(
+              height: 2.0.h,
+            ),
+          ],
+        ),
       ),
+      onWillPop: () async {
+        return false;
+      },
     );
   }
 

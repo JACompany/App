@@ -174,7 +174,6 @@ class _Task extends State<Task> {
             values.tasks.add(Task_Details(value, this.start, this.end, 0));
             sortList();
             values.tasks_storage.write(values.tasks);
-
             return null;
           },
         ),
@@ -240,6 +239,11 @@ class _Task extends State<Task> {
               duration: Duration(milliseconds: 500),
             ),
           );
+          Navigator.of(context).pushAndRemoveUntil(
+              PageRouteBuilder(
+                  pageBuilder: (context, animation, animation2) => Home(),
+                  transitionDuration: Duration(seconds: 0)),
+              (route) => false);
         }
       },
       child: Text(
