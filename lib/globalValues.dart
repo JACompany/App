@@ -3,8 +3,10 @@ library values.globals;
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'addTask.dart';
+import 'notifications.dart';
 import 'storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:timezone/timezone.dart';
@@ -18,7 +20,8 @@ const List<double> past_hours = [2.0, 3.0, 3.4, 1.1, 2.4, 3.5, 2.2];
 // storing user tasks
 final Storage tasks_storage = Storage("tasks");
 final List<Task_Details> tasks = [];
-final Storage completed_tasks = Storage("completed_tasks");
+final List<String> completed_tasks = [];
+final Storage completed_tasks_storage = Storage("completed_tasks");
 Task_Details current_task;
 DateTime task_start_time;
 
@@ -32,6 +35,11 @@ String userID = null;
 
 //firebase (database)
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+//notifications
+FlutterLocalNotificationsPlugin notifcation;
+Notifications notification_launcher = Notifications();
+int notificationID = 0;
 
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);

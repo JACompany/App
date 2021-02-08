@@ -29,7 +29,7 @@ class _Completed_Task extends State<Completed_Task> {
         ),
         title: Text("COMPLETED TASKS"),
       ),
-      body: Text("test"),
+      body: buildList(),
       bottomNavigationBar: Container(
         height: 8.0.h,
         alignment: Alignment.bottomCenter,
@@ -112,5 +112,49 @@ class _Completed_Task extends State<Completed_Task> {
             pageBuilder: (context, animation, animation2) => Home(),
             transitionDuration: Duration(seconds: 0)),
         (route) => false);
+  }
+
+  Widget buildList() {
+    return ListView.builder(
+      itemCount: values.completed_tasks.length,
+      itemBuilder: (context, index) => Container(
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+        margin: EdgeInsets.all(0.5.h),
+        decoration: BoxDecoration(
+          color: values.color_peach,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0)),
+        ),
+        child: ListTile(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                values.completed_tasks[index].split(";")[0],
+                style: TextStyle(fontSize: 3.0.h),
+              ),
+              SizedBox(height: 2.0.h),
+              Text(
+                "Date completed: " +
+                    values.completed_tasks[index]
+                        .split(";")[1]
+                        .replaceAll(";", ""),
+                style: TextStyle(fontSize: 2.0.h),
+              ),
+            ],
+          ),
+          trailing: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => setState(() {
+              values.completed_tasks.removeAt(index);
+              values.completed_tasks_storage.write(values.completed_tasks);
+            }),
+          ),
+        ),
+      ),
+    );
   }
 }

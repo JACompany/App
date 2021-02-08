@@ -21,14 +21,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Timer.periodic(Duration(seconds: 1), (timer) {
-  //     setState(() {});
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +35,7 @@ class _HomeState extends State<Home> {
                 iconSize: 6.0.h,
               ),
               Text(
-                "THU DEC 10",
+                date,
                 style: TextStyle(
                   fontSize: 4.0.h,
                 ),
@@ -94,6 +86,93 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+//needs testing https://cs.uwaterloo.ca/~alopez-o/math-faq/node73.html
+  int getMonth(String month) {
+    int m = 0;
+    switch (month) {
+      case "01":
+        m = 11;
+        break;
+      case "02":
+        m = 12;
+        break;
+      case "03":
+        m = 1;
+        break;
+      case "04":
+        m = 2;
+        break;
+      case "05":
+        m = 3;
+        break;
+      case "06":
+        m = 4;
+        break;
+      case "07":
+        m = 5;
+        break;
+      case "08":
+        m = 6;
+        break;
+      case "09":
+        m = 7;
+        break;
+      case "10":
+        m = 8;
+        break;
+      case "11":
+        m = 9;
+        break;
+      case "12":
+        m = 10;
+        break;
+    }
+    return m;
+  }
+
+  String getMonthAsString(int month) {
+    List<String> months = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC"
+    ];
+    return months[month - 1];
+  }
+
+  String getDateAsString(int day) {
+    List<String> dates = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    return dates[day];
+  }
+
+  String get date {
+    String current = DateTime.now().toString().substring(0, 10);
+    String year = current.substring(0, 4);
+    String month = current.substring(5, 7);
+    String day = current.substring(8, 10);
+    int k = int.parse(day);
+    int m = getMonth(month);
+    int c = 20;
+    int y = int.parse(year);
+    int w = (k +
+            (2.6 * m - 0.2).floor() -
+            2 * c +
+            y +
+            (y / 4).floor() +
+            (c / 4).floor())
+        .modInverse(7);
+    m = int.parse(month);
+    return getDateAsString(w) + " " + getMonthAsString(m) + " " + k.toString();
   }
 
   void onPressed5() {

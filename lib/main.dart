@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'addTask.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -44,5 +46,19 @@ class App extends StatelessWidget {
         }
       }
     });
+    values.completed_tasks_storage.read(";;;").then((readValues) {
+      for (int i = 0; i < readValues.length; i++) {
+        if (readValues.elementAt(i).length > 0) {
+          values.completed_tasks
+              .add(readValues[0] + ";" + readValues[1] + ";;;");
+        }
+      }
+    });
+    var androidInit = AndroidInitializationSettings("improvall_logo");
+    var iosInit = IOSInitializationSettings();
+    var initSettings =
+        InitializationSettings(android: androidInit, iOS: iosInit);
+    values.notifcation = FlutterLocalNotificationsPlugin();
+    values.notifcation.initialize(initSettings, onSelectNotification: null);
   }
 }

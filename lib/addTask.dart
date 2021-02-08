@@ -171,7 +171,13 @@ class _Task extends State<Task> {
             if (this.start.isBefore(DateTime.now())) {
               return "Start time must be after the current time";
             }
-            values.tasks.add(Task_Details(value, this.start, this.end, 0));
+            values.tasks.add(Task_Details(
+                value, this.start, this.end, values.notificationID + 1));
+            values.notification_launcher.showNotification(
+                "Improvall Productivity App",
+                value,
+                values.notificationID + 1,
+                this.start);
             sortList();
             values.tasks_storage.write(values.tasks);
             return null;

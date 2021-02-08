@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:timezone/timezone.dart';
+
 import 'homepage.dart';
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
 
+//https://pub.dev/packages/hardware_buttons
 class LockScreen extends StatefulWidget {
   @override
   _LockScreenState createState() => _LockScreenState();
@@ -22,15 +25,15 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
     values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         duration = findDuration();
-        timer.cancel();
-        if (values.current_page == "home") {
-          Navigator.of(context).pushAndRemoveUntil(
-              PageRouteBuilder(
-                  pageBuilder: (context, animation, animation2) => Home(),
-                  transitionDuration: Duration(seconds: 0)),
-              (route) => false);
-        }
       });
+      if (values.current_page == "home") {
+        values.timer.cancel();
+        Navigator.of(context).pushAndRemoveUntil(
+            PageRouteBuilder(
+                pageBuilder: (context, animation, animation2) => Home(),
+                transitionDuration: Duration(seconds: 0)),
+            (route) => false);
+      }
     });
   }
 
@@ -157,6 +160,33 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
         .abs();
     int time_passed =
         DateTime.now().difference(values.task_start_time).inSeconds.abs();
+    if (seconds - time_passed <= 0) {
+      try {
+        values.timer.cancel();
+      } catch (exception) {
+        print("Timer exception when closing");
+      }
+      values.current_page = "home";
+      values.completed_tasks.insert(
+          0,
+          values.current_task.description +
+              ";" +
+              DateTime.now().toString().substring(0, 16) +
+              ";;;");
+      values.completed_tasks_storage.write(values.completed_tasks);
+      values.tasks.remove(values.current_task);
+      values.tasks_storage.write(values.tasks);
+      values.notification_launcher.showNotification(
+          "Improvall Productivity App",
+          "Task Complete! Good work!",
+          values.notificationID,
+          TZDateTime.now(local).add(Duration(seconds: 5)));
+      Navigator.of(context).pushAndRemoveUntil(
+          PageRouteBuilder(
+              pageBuilder: (context, animation, animation2) => Home(),
+              transitionDuration: Duration(seconds: 0)),
+          (route) => false);
+    }
     seconds = seconds - time_passed;
     int minutes = seconds ~/ 60;
     int hours = minutes ~/ 60;
@@ -166,6 +196,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
     if (hours < 10) h = "0" + hours.toString();
     if (minutes < 10) m = "0" + minutes.toString();
     if (seconds < 10) s = "0" + seconds.toString();
+
     return [h, m, s];
   }
 
