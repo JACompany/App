@@ -1,65 +1,53 @@
-import 'dart:async';
+//https://www.youtube.com/watch?v=DqJ_KjFzL9I
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' as intl;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(database());
+}
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of the application.
+class database extends StatelessWidget {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shared preferences demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Progress'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Leaderboard"),
+        ),
+        body: tiles(context),
+      ),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _displayMinutes;
-  String _displayhour;
-  Timer _everySecond;
-  intl.DateFormat dateFormat = new intl.DateFormat.Hms();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                child: Text('Total Productive Hours:/n' + '15',
-                    style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.pink[300])),
-                padding: EdgeInsets.fromLTRB(120.0, 100.0, 120.0, 100.0),
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(40.0),
-                        topRight: const Radius.circular(40.0),
-                        bottomLeft: const Radius.circular(40.0),
-                        bottomRight: const Radius.circular(40.0)))),
-          ],
+  List<Widget> list = [];
+  read() async {
+    await firestore
+        .collection("leaderboard")
+        .get()
+        .then((value) => value.docs.forEach((element) {
+      list.add(ListTile(
+        title: Text(element.get('name')),
+        trailing: Text(element.get('score').toString()
         ),
-      ),
+      ));
+    }));
+  }
+
+  ListView tiles(context) {
+    // firestore.collection("leaderboard").snapshots().listen((result) {
+    //   result.docs.forEach((element) {
+    //     list.add(element.data());
+    //   });
+    // });
+    read();
+    return ListView(
+      children: list,
     );
   }
 }
