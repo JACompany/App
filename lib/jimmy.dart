@@ -112,6 +112,21 @@ class _Profile extends State<Profile> {
               return null;
             },
           ),
+          TextFormField(
+            keyboardType: TextInputType.text,
+            obscureText: false,
+            decoration: InputDecoration(
+                hintText: 'Display Name',
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 32.0),
+                    borderRadius: BorderRadius.circular(5.0)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                    borderRadius: BorderRadius.circular(5.0))),
+            onChanged: (value) {
+              //Do something with this value
+            },
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -127,21 +142,6 @@ class _Profile extends State<Profile> {
               },
               child: Text('Update'),
             ),
-          ),
-          TextFormField(
-            keyboardType: TextInputType.text,
-            obscureText: false,
-            decoration: InputDecoration(
-                hintText: 'Display Name',
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                    borderRadius: BorderRadius.circular(5.0)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                    borderRadius: BorderRadius.circular(5.0))),
-            onChanged: (value) {
-              //Do something with this value
-            },
           ),
         ],
       ),
