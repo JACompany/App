@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
-
 import 'homepage.dart';
 import 'leaderboard.dart';
 import 'progress_page.dart';
