@@ -130,9 +130,9 @@ class _Profile extends State<Profile> {
           ),
           TextFormField(
             keyboardType: TextInputType.text,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
-                hintText: 'write something',
+                hintText: 'Display Name',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
