@@ -101,18 +101,18 @@ class _EditTask extends State<EditTask> {
               onPressed: onPressed2,
               iconSize: 6.0.h,
             )),
-            // Expanded(
-            //     child: IconButton(
-            //   icon: Icon(Icons.leaderboard),
-            //   onPressed: onPressed3,
-            //   iconSize: 6.0.h,
-            // )),
-            // Expanded(
-            //     child: IconButton(
-            //   icon: Icon(Icons.account_circle),
-            //   onPressed: onPressed4,
-            //   iconSize: 6.0.h,
-            // ))
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.leaderboard),
+              onPressed: onPressed3,
+              iconSize: 6.0.h,
+            )),
+            Expanded(
+                child: IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: onPressed4,
+              iconSize: 6.0.h,
+            ))
           ],
         ),
       ),
@@ -178,9 +178,15 @@ class _EditTask extends State<EditTask> {
               return "Start time must be after the current time";
             }
             values.tasks[index].update(value, start, end);
+            values.notification_launcher
+                .cancelNotification(values.tasks[index].notification_id);
+            values.notification_launcher.showNotification(
+                "Improvall Productivity App",
+                value,
+                values.tasks[index].notification_id,
+                this.start);
             sortList();
             values.tasks_storage.write(values.tasks);
-
             return null;
           },
         ),

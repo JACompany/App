@@ -180,6 +180,10 @@ class _Task extends State<Task> {
                 this.start);
             sortList();
             values.tasks_storage.write(values.tasks);
+            values.notificationID++;
+            if (values.notificationID > 100000) {
+              values.notificationID = 0;
+            }
             return null;
           },
         ),
