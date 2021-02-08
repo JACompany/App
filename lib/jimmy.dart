@@ -128,6 +128,21 @@ class _Profile extends State<Profile> {
               child: Text('Submit'),
             ),
           ),
+          TextFormField(
+            keyboardType: TextInputType.text,
+            obscureText: true,
+            decoration: InputDecoration(
+                hintText: 'write something',
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 32.0),
+                    borderRadius: BorderRadius.circular(5.0)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                    borderRadius: BorderRadius.circular(5.0))),
+            onChanged: (value) {
+              //Do something with this value
+            },
+          ),
         ],
       ),
     );
