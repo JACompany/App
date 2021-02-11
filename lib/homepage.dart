@@ -314,6 +314,8 @@ class _HomeState extends State<Home> {
               break;
             case 3:
               setState(() {
+                values.notification_launcher
+                    .cancelNotification(values.tasks[index].notification_id);
                 values.tasks.removeAt(index);
                 values.tasks_storage.write(values.tasks);
               });
