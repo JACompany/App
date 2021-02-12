@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'globalValues.dart' as values;
@@ -39,6 +40,8 @@ class _Profile extends State<Profile> {
   bool get maintainState {
     return false;
   }
+
+  final firestoreInstance = FirebaseFirestore.instance;
 
   final _formKey = GlobalKey<FormState>();
   @override
