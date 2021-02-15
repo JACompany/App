@@ -166,6 +166,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       } catch (exception) {
         print("Timer exception when closing");
       }
+      dispose();
       values.current_page = "home";
       values.completed_tasks.insert(
           0,
@@ -176,6 +177,16 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       values.completed_tasks_storage.write(values.completed_tasks);
       values.tasks.remove(values.current_task);
       values.tasks_storage.write(values.tasks);
+      values.user_hours_day += values.current_task.end_time
+              .difference(values.current_task.start_time)
+              .inMinutes
+              .abs() /
+          60.0;
+      values.values_storage.write_all_values();
+      values.firestore
+          .collection("leaderboard")
+          .doc("sujz10x7cfDIJHxD3gkk")
+          .update({"score": 40}).then((value) => null);
       values.notification_launcher.showNotification(
           "Improvall Productivity App",
           "Task Complete! Good work!",

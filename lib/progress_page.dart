@@ -133,13 +133,7 @@ class _ProgressPageState extends State<ProgressPage> {
                 color: Colors.black,
               ),
               SizedBox(width: 4.0.w),
-              Sparkline(
-                data: values.past_hours,
-                lineColor: values.color_red,
-                pointsMode: PointsMode.all,
-                pointSize: 2.5.h,
-                pointColor: values.color_red,
-              ),
+              showGraph(),
             ],
           ),
           Container(
@@ -171,7 +165,8 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 
   Widget ProgressBar() {
-    double _progress = values.user_hours_day / values.user_goal;
+    double _progress =
+        values.user_goal == 0 ? 0 : values.user_hours_day / values.user_goal;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -258,5 +253,22 @@ class _ProgressPageState extends State<ProgressPage> {
               bottomLeft: Radius.circular(20.0),
               bottomRight: Radius.circular(20.0)),
         ));
+  }
+
+  showGraph() {
+    if (values.past_hours.length > 1)
+      return Sparkline(
+        data: values.past_hours,
+        lineColor: values.color_red,
+        pointsMode: PointsMode.all,
+        pointSize: 2.5.h,
+        pointColor: values.color_red,
+      );
+    else {
+      return Text(
+        "No data",
+        style: TextStyle(fontSize: 4.0.h, color: values.color_red),
+      );
+    }
   }
 }

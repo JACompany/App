@@ -187,6 +187,7 @@ class _EditTask extends State<EditTask> {
                 this.start);
             sortList();
             values.tasks_storage.write(values.tasks);
+            values.values_storage.write_all_values();
             return null;
           },
         ),

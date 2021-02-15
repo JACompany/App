@@ -12,15 +12,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:timezone/timezone.dart';
 
 //productive hours
-const double total_hours = 15.2487;
-const double user_goal = 20;
-const double user_hours_day = 5;
-const List<double> past_hours = [2.0, 3.0, 3.4, 1.1, 2.4, 3.5, 2.2];
+double total_hours;
+double user_goal;
+double user_hours_day;
+List<double> past_hours = [];
 
 // storing user tasks
 final Storage tasks_storage = Storage("tasks");
-final List<Task_Details> tasks = [];
-final List<String> completed_tasks = [];
+List<Task_Details> tasks = [];
+List<String> completed_tasks = [];
 final Storage completed_tasks_storage = Storage("completed_tasks");
 Task_Details current_task;
 DateTime task_start_time;
@@ -31,7 +31,9 @@ Timer timer; //used keep pages updated
 
 //initial setup
 bool is_setup = false;
-String userID = null;
+String userID;
+Storage values_storage = Storage("values_storage");
+bool is_intial_setup;
 
 //firebase (database)
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -39,7 +41,7 @@ final FirebaseFirestore firestore = FirebaseFirestore.instance;
 //notifications
 FlutterLocalNotificationsPlugin notifcation;
 Notifications notification_launcher = Notifications();
-int notificationID = 0;
+int notificationID;
 
 //theme data
 final color_green = Color.fromARGB(255, 153, 225, 217);

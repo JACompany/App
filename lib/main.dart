@@ -12,7 +12,9 @@ import 'splash_screen.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
-void main() => runApp(App());
+void main() {
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
@@ -37,6 +39,7 @@ class App extends StatelessWidget {
   void setup() {
     values.is_setup = true;
     tz.initializeTimeZones();
+    //reading tasks
     values.tasks_storage.read(";;;").then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {
@@ -46,6 +49,7 @@ class App extends StatelessWidget {
         }
       }
     });
+    //reading completed tasks
     values.completed_tasks_storage.read(";;;").then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {
@@ -54,11 +58,42 @@ class App extends StatelessWidget {
         }
       }
     });
+    //starting notifications
     var androidInit = AndroidInitializationSettings("improvall_logo");
     var iosInit = IOSInitializationSettings();
     var initSettings =
         InitializationSettings(android: androidInit, iOS: iosInit);
     values.notifcation = FlutterLocalNotificationsPlugin();
     values.notifcation.initialize(initSettings, onSelectNotification: null);
+    //reading all other values
+    values.values_storage.read(";").then((readValues) {
+      if (readValues == null) {
+        print("---------------it is null -----------");
+        values.total_hours = 0;
+        values.user_goal = 0;
+        values.user_hours_day = 0;
+        values.past_hours = [0];
+        values.userID = "";
+        values.is_intial_setup = false;
+        values.notificationID = 0;
+      } else {
+        print("-------------------it is not null-----------");
+        print(readValues.toString());
+        values.total_hours = double.tryParse(readValues[0]);
+        if (values.total_hours == null) values.total_hours = 0;
+        values.user_goal = double.tryParse(readValues[1]);
+        if (values.user_goal == null) values.user_goal = 0;
+        values.user_hours_day = double.tryParse(readValues[2]);
+        if (values.user_hours_day == null) values.user_hours_day = 0;
+        List val = readValues[3].split(",");
+        for (String a in val) {
+          values.past_hours.add(double.tryParse(a));
+        }
+        values.userID = readValues[4];
+        values.notificationID = int.tryParse(readValues[5]);
+        if (values.notificationID == null) values.notificationID = 0;
+        values.is_intial_setup = readValues[6] == 'true';
+      }
+    });
   }
 }

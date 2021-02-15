@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'globalValues.dart' as values;
 
 class Storage {
   String location;
@@ -25,6 +26,26 @@ class Storage {
     } catch (exception) {
       return null;
     }
+  }
+
+  void write_all_values() async {
+    final file = await localFile;
+    String str = "";
+    str += values.total_hours.toString() + ";";
+    str += values.user_goal.toString() + ";";
+    str += values.user_hours_day.toString() + ";";
+    for (int i = 0; i < values.past_hours.length; i++) {
+      if (i != values.past_hours.length - 1)
+        str += values.past_hours[i].toString() + ",";
+      else
+        str += values.past_hours[i].toString();
+    }
+    str += ";";
+    str += values.userID + ";";
+    str += values.notificationID.toString() + ";";
+    str += values.is_intial_setup.toString();
+    print(str);
+    file.writeAsString(str);
   }
 
   void write(List data) async {
