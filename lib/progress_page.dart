@@ -144,13 +144,6 @@ class _ProgressPageState extends State<ProgressPage> {
           SizedBox(
             height: 1.0.h,
           ),
-          Align(
-            child: Text(
-              "Last 7 days",
-              style: TextStyle(fontSize: 2.0.h),
-              textAlign: TextAlign.center,
-            ),
-          ),
         ]),
         padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         margin: EdgeInsets.all(10),
@@ -164,9 +157,10 @@ class _ProgressPageState extends State<ProgressPage> {
         ));
   }
 
+  double _progress =
+      values.user_goal == 0 ? 0 : values.user_hours_day / values.user_goal;
+
   Widget ProgressBar() {
-    double _progress =
-        values.user_goal == 0 ? 0 : values.user_hours_day / values.user_goal;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -174,29 +168,18 @@ class _ProgressPageState extends State<ProgressPage> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "DAILY PROGRESS",
+              "PROGRESS",
               style: TextStyle(fontSize: 3.0.h),
             ),
           ),
           SizedBox(
             height: 1.0.h,
           ),
-          LinearProgressIndicator(
-            minHeight: 2.5.h,
-            backgroundColor: Colors.grey[300],
-            valueColor: new AlwaysStoppedAnimation<Color>(values.color_red),
-            value: _progress,
-          ),
+          showBar(),
           SizedBox(
             height: 1.0.h,
           ),
-          Text(
-            '${(_progress * 100).round()}%',
-            style: TextStyle(
-              fontSize: 2.5.h,
-              color: values.color_red,
-            ),
-          ),
+          showPercentage(),
         ],
       ),
       padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
@@ -212,6 +195,21 @@ class _ProgressPageState extends State<ProgressPage> {
     );
   }
 
+  showPercentage() {
+    if (values.user_goal != 0 && values.tasks.length != 0) {
+      return Text(
+        '${(_progress * 100).round()}%',
+        style: TextStyle(
+          fontSize: 2.5.h,
+          color: values.color_red,
+        ),
+      );
+    }
+    return SizedBox(
+      height: 1,
+    );
+  }
+
   Widget TotalHours() {
     return Container(
         child: Column(
@@ -224,18 +222,18 @@ class _ProgressPageState extends State<ProgressPage> {
             SizedBox(
               height: 1.0.h,
             ),
-            Text(
-              "Today: " + values.user_hours_day.toStringAsFixed(1),
-              style: TextStyle(
-                color: values.color_red,
-                fontSize: 2.5.h,
-              ),
-            ),
+            // Text(
+            //   "Current: " + values.user_hours_day.toStringAsFixed(1),
+            //   style: TextStyle(
+            //     color: values.color_red,
+            //     fontSize: 2.5.h,
+            //   ),
+            // ),
             SizedBox(
               height: 1.0.h,
             ),
             Text(
-              "All time: " + values.total_hours.toStringAsFixed(1),
+              "All time: " + getHours(),
               style: TextStyle(
                 color: values.color_red,
                 fontSize: 2.5.h,
@@ -256,6 +254,7 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 
   showGraph() {
+    print(values.past_hours.toString());
     if (values.past_hours.length > 1)
       return Sparkline(
         data: values.past_hours,
@@ -270,5 +269,28 @@ class _ProgressPageState extends State<ProgressPage> {
         style: TextStyle(fontSize: 4.0.h, color: values.color_red),
       );
     }
+  }
+
+  showBar() {
+    if (values.user_goal != 0 && values.tasks.length != 0) {
+      return LinearProgressIndicator(
+        minHeight: 2.5.h,
+        backgroundColor: Colors.grey[300],
+        valueColor: new AlwaysStoppedAnimation<Color>(values.color_red),
+        value: _progress,
+      );
+    }
+    return Text(
+      "Create a task first!",
+      style: TextStyle(fontSize: 4.0.h, color: values.color_red),
+    );
+  }
+
+  String getHours() {
+    if (values.total_hours > 0 &&
+        double.tryParse(values.total_hours.toStringAsFixed(1)) < 0.1) {
+      return "0.1";
+    }
+    return values.total_hours.toStringAsFixed(1);
   }
 }

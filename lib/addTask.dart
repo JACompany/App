@@ -178,12 +178,15 @@ class _Task extends State<Task> {
                 value,
                 values.notificationID + 1,
                 this.start);
+            values.user_goal +=
+                values.tasks[values.tasks.length - 1].duration / 3600.0;
             sortList();
             values.tasks_storage.write(values.tasks);
             values.notificationID++;
             if (values.notificationID > 100000) {
               values.notificationID = 0;
             }
+
             values.values_storage.write_all_values();
             return null;
           },

@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'database.dart';
 import 'addTask.dart';
 import 'notifications.dart';
 import 'storage.dart';
@@ -22,6 +22,7 @@ final Storage tasks_storage = Storage("tasks");
 List<Task_Details> tasks = [];
 List<String> completed_tasks = [];
 final Storage completed_tasks_storage = Storage("completed_tasks");
+final Storage past_hours_storage = Storage("past_hours");
 Task_Details current_task;
 DateTime task_start_time;
 
@@ -37,7 +38,7 @@ bool is_intial_setup;
 
 //firebase (database)
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
+database firebase_commands = database();
 //notifications
 FlutterLocalNotificationsPlugin notifcation;
 Notifications notification_launcher = Notifications();

@@ -177,7 +177,9 @@ class _EditTask extends State<EditTask> {
             if (this.start.isBefore(DateTime.now())) {
               return "Start time must be after the current time";
             }
+            values.user_goal -= values.tasks[index].duration / 3600.0;
             values.tasks[index].update(value, start, end);
+            values.user_goal += values.tasks[index].duration / 3600.0;
             values.notification_launcher
                 .cancelNotification(values.tasks[index].notification_id);
             values.notification_launcher.showNotification(

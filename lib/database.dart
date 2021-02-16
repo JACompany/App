@@ -3,31 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'globalValues.dart' as values;
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(database());
-}
-
-class database extends StatelessWidget {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Database"),
-        ),
-        body: tiles(context),
-      ),
-    );
-  }
-
+class database {
   List<Widget> list = [];
-  read() async {
-    await firestore
+  void read() async {
+    await values.firestore
         .collection("leaderboard")
         .get()
         .then((value) => value.docs.forEach((element) {
@@ -38,10 +19,13 @@ class database extends StatelessWidget {
             }));
   }
 
-  ListView tiles(context) {
-    read();
-    return ListView(
-      children: list,
-    );
+  void write(double duration) async {
+    await values.firestore.runTransaction((transaction) async {
+      DocumentSnapshot docs = await transaction
+          .get(values.firestore.collection("leaderboard").doc(values.userID));
+      await transaction.update(
+          values.firestore.collection("leaderboard").doc(values.userID),
+          {'score': double.tryParse(docs['score'].toString()) + duration});
+    });
   }
 }

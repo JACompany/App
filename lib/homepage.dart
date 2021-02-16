@@ -296,6 +296,8 @@ class _HomeState extends State<Home> {
             case 1:
               values.current_task = values.tasks[index];
               values.task_start_time = DateTime.now();
+              values.notification_launcher
+                  .cancelNotification(values.tasks[index].notification_id);
               values.current_page = 'lockscreen';
               Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
@@ -316,7 +318,13 @@ class _HomeState extends State<Home> {
               setState(() {
                 values.notification_launcher
                     .cancelNotification(values.tasks[index].notification_id);
+                values.user_goal -= values.tasks[index].duration / 3600.0;
                 values.tasks.removeAt(index);
+                if (values.tasks.length == 0) {
+                  values.user_hours_day = 0;
+                  values.user_goal = 0;
+                }
+                values.values_storage.write_all_values();
                 values.tasks_storage.write(values.tasks);
               });
               break;

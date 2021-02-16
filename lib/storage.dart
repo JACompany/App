@@ -34,17 +34,21 @@ class Storage {
     str += values.total_hours.toString() + ";";
     str += values.user_goal.toString() + ";";
     str += values.user_hours_day.toString() + ";";
+    str += values.userID + ";";
+    str += values.notificationID.toString() + ";";
+    str += values.is_intial_setup.toString();
+    file.writeAsString(str);
+  }
+
+  void write_past_hours() async {
+    String str = "";
+    final file = await localFile;
     for (int i = 0; i < values.past_hours.length; i++) {
       if (i != values.past_hours.length - 1)
         str += values.past_hours[i].toString() + ",";
       else
         str += values.past_hours[i].toString();
     }
-    str += ";";
-    str += values.userID + ";";
-    str += values.notificationID.toString() + ";";
-    str += values.is_intial_setup.toString();
-    print(str);
     file.writeAsString(str);
   }
 

@@ -7,6 +7,7 @@ import 'homepage.dart';
 import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
+import 'dart:math';
 
 //https://pub.dev/packages/hardware_buttons
 class LockScreen extends StatefulWidget {
@@ -166,7 +167,9 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       } catch (exception) {
         print("Timer exception when closing");
       }
-      dispose();
+      try {
+        dispose();
+      } catch (e) {}
       values.current_page = "home";
       values.completed_tasks.insert(
           0,
@@ -177,16 +180,22 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       values.completed_tasks_storage.write(values.completed_tasks);
       values.tasks.remove(values.current_task);
       values.tasks_storage.write(values.tasks);
-      values.user_hours_day += values.current_task.end_time
+      double task_length = values.current_task.end_time
               .difference(values.current_task.start_time)
               .inMinutes
               .abs() /
           60.0;
+      values.user_hours_day += task_length;
+      values.total_hours += task_length;
+      values.past_hours.add(task_length + Random().nextDouble() / 100);
+      if (values.past_hours.length > 7) values.past_hours.removeAt(0);
+      if (values.tasks.length == 0) {
+        values.user_hours_day = 0;
+        values.user_goal = 0;
+      }
+      values.past_hours_storage.write_past_hours();
       values.values_storage.write_all_values();
-      values.firestore
-          .collection("leaderboard")
-          .doc("sujz10x7cfDIJHxD3gkk")
-          .update({"score": 40}).then((value) => null);
+      values.firebase_commands.write(task_length);
       values.notification_launcher.showNotification(
           "Improvall Productivity App",
           "Task Complete! Good work!",

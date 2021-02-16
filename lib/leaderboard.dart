@@ -37,7 +37,13 @@ class _Leaderboard extends State<Leaderboard> {
             disabledColor: Colors.black,
             iconSize: 3.0.h,
           )),
-      body: Text("Leaderboard"),
+      body: Text(values.user_hours_day.toString() +
+          ":" +
+          values.user_goal.toString() +
+          "\n" +
+          values.past_hours.toString() +
+          "\n" +
+          values.tasks.length.toString()),
       bottomNavigationBar: Container(
         height: 8.0.h,
         alignment: Alignment.bottomCenter,
