@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:intl/intl.dart';
+
 import 'calendar.dart';
 import 'completed_tasks.dart';
 import 'editTask.dart';
@@ -156,6 +158,13 @@ class _HomeState extends State<Home> {
   }
 
   String get date {
+    return DateFormat("MMMEd")
+        .format(DateTime.now())
+        .toUpperCase()
+        .replaceAll(",", "");
+  }
+
+  String get date2 {
     String current = DateTime.now().toString().substring(0, 10);
     String year = current.substring(0, 4);
     String month = current.substring(5, 7);

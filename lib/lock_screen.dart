@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'globalValues.dart' as values;
 import 'package:sizer/sizer.dart';
 import 'dart:math';
+import 'package:wakelock/wakelock.dart';
 
 //https://pub.dev/packages/hardware_buttons
 class LockScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    Wakelock.toggle(enable: true);
     duration = findDuration();
     WidgetsFlutterBinding.ensureInitialized();
     values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -162,6 +164,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
     int time_passed =
         DateTime.now().difference(values.task_start_time).inSeconds.abs();
     if (seconds - time_passed <= 0) {
+      Wakelock.toggle(enable: false);
       try {
         values.timer.cancel();
       } catch (exception) {
