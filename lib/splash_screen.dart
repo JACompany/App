@@ -44,22 +44,28 @@ class _LoadingScreen extends State<LoadingScreen> {
     tz.initializeTimeZones();
     //reading tasks
     await values.tasks_storage.read(";;;").then((readValues) {
-      for (int i = 0; i < readValues.length; i++) {
-        if (readValues.elementAt(i).length > 0) {
-          List<String> object = readValues.elementAt(i).split(";");
-          values.tasks.add(Task_Details(object[0], DateTime.parse(object[1]),
-              DateTime.parse(object[2]), int.parse(object[3])));
+      if (readValues == null)
+        values.tasks = [];
+      else
+        for (int i = 0; i < readValues.length; i++) {
+          if (readValues.elementAt(i).length > 0) {
+            List<String> object = readValues.elementAt(i).split(";");
+            values.tasks.add(Task_Details(object[0], DateTime.parse(object[1]),
+                DateTime.parse(object[2]), int.parse(object[3])));
+          }
         }
-      }
     });
     //reading completed tasks
     await values.completed_tasks_storage.read(";;;").then((readValues) {
-      for (int i = 0; i < readValues.length; i++) {
-        if (readValues.elementAt(i).length > 0) {
-          values.completed_tasks
-              .add(readValues[0] + ";" + readValues[1] + ";;;");
+      if (readValues == null)
+        values.completed_tasks = [];
+      else
+        for (int i = 0; i < readValues.length; i++) {
+          if (readValues.elementAt(i).length > 0) {
+            values.completed_tasks
+                .add(readValues[0] + ";" + readValues[1] + ";;;");
+          }
         }
-      }
     });
     //starting notifications
     var androidInit = AndroidInitializationSettings("improvall_logo");
