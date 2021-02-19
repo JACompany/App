@@ -58,12 +58,12 @@ class _Completed_Task extends State<Completed_Task> {
               onPressed: onPressed3,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
           ],
         ),
       ),
@@ -96,14 +96,14 @@ class _Completed_Task extends State<Completed_Task> {
         (route) => false);
   }
 
-  void onPressed4() {
-    values.current_page = "profile";
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Profile(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
+  // void onPressed4() {
+  //   values.current_page = "profile";
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Profile(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
 
   void onPressed5() {
     values.current_page = "home";

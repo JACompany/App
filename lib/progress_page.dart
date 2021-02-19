@@ -18,11 +18,17 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Progress"),
+          title: Text(
+            "Progress",
+            style: TextStyle(fontSize: 4.0.h),
+          ),
           backgroundColor: values.color_green,
           leading: IconButton(
             onPressed: null,
-            icon: Icon(Icons.insights),
+            icon: Icon(
+              Icons.insights,
+              size: 4.0.h,
+            ),
             disabledColor: Colors.black,
           )),
       body: ListView(
@@ -62,15 +68,15 @@ class _ProgressPageState extends State<ProgressPage> {
                   ? Colors.white
                   : Colors.black,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-              color: values.current_page == "profile"
-                  ? Colors.white
-                  : Colors.black,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            //   color: values.current_page == "profile"
+            //       ? Colors.white
+            //       : Colors.black,
+            // ))
           ],
         ),
       ),
@@ -100,15 +106,6 @@ class _ProgressPageState extends State<ProgressPage> {
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Leaderboard(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
-
-  void onPressed4() {
-    values.current_page = "profile";
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Profile(),
             transitionDuration: Duration(seconds: 0)),
         (route) => false);
   }
@@ -293,4 +290,13 @@ class _ProgressPageState extends State<ProgressPage> {
     }
     return values.total_hours.toStringAsFixed(1);
   }
+  //   void onPressed4() {
+  //   values.current_page = "profile";
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Profile(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
+
 }

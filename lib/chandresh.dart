@@ -1,21 +1,40 @@
-//https://www.youtube.com/watch?v=DqJ_KjFzL9I
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
+import 'globalValues.dart' as values;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(database());
+  runApp(leaderboard());
 }
 
-class database extends StatelessWidget {
+class leaderboard extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _leaderboard();
+}
+
+class _leaderboard extends State<leaderboard> {
+  void initState() {
+    super.initState();
+    values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        read();
+      });
+    });
+  }
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Leaderboard"),
@@ -31,22 +50,29 @@ class database extends StatelessWidget {
         .collection("leaderboard")
         .get()
         .then((value) => value.docs.forEach((element) {
-      list.add(ListTile(
-        title: Text(element.get('name')),
-        trailing: Text(element.get('score').toString()
-        ),
-      ));
-    }));
+              list.add(
+                ListTile(
+                  trailing: Text(element.get('score').toString(),
+                      style: TextStyle(
+                        fontFamily: 'Comic Sans MS',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  title: Text(element.get('username'),
+                      style: TextStyle(
+                          fontFamily: 'Comic Sans MS',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          decorationColor: Colors.green)),
+                ),
+              );
+            }));
   }
 
   ListView tiles(context) {
-    // firestore.collection("leaderboard").snapshots().listen((result) {
-    //   result.docs.forEach((element) {
-    //     list.add(element.data());
-    //   });
-    // });
     read();
     return ListView(
+      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
       children: list,
     );
   }

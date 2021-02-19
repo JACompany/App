@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'calendar.dart';
 import 'profile.dart';
 import 'package:flutter/material.dart';
@@ -37,13 +39,44 @@ class _Leaderboard extends State<Leaderboard> {
             disabledColor: Colors.black,
             iconSize: 3.0.h,
           )),
-      body: Text(values.user_hours_day.toString() +
-          ":" +
-          values.user_goal.toString() +
-          "\n" +
-          values.past_hours.toString() +
-          "\n" +
-          values.tasks.length.toString()),
+      body: StreamBuilder(
+        stream: values.firestore
+            .collection('leaderboard')
+            .orderBy('score', descending: true)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          final List<DocumentSnapshot> documents = snapshot.data.docs;
+          int count = 0;
+          return ListView(
+            children: documents.map((user) {
+              count++;
+              return ListTile(
+                tileColor: pickColor(count),
+                leading: Icon(
+                  Icons.account_circle,
+                  size: 5.0.h,
+                ),
+                title: Text(
+                  user['username'],
+                  style: TextStyle(fontSize: 2.0.h),
+                ),
+                subtitle: Text(
+                  "Rank #" + count.toString(),
+                  style: TextStyle(fontSize: 2.0.h),
+                ),
+                trailing: Text(
+                  "Hours: " + user['score'].toStringAsFixed(1),
+                  style: TextStyle(fontSize: 2.0.h),
+                ),
+              );
+            }).toList(),
+          );
+        },
+      ),
       bottomNavigationBar: Container(
         height: 8.0.h,
         alignment: Alignment.bottomCenter,
@@ -75,12 +108,12 @@ class _Leaderboard extends State<Leaderboard> {
               onPressed: onPressed3,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
           ],
         ),
       ),
@@ -114,12 +147,25 @@ class _Leaderboard extends State<Leaderboard> {
         (route) => false);
   }
 
-  void onPressed4() {
-    values.current_page = "profile";
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Profile(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
+  Color pickColor(i) {
+    if (i == 1) {
+      return Color.fromRGBO(255, 215, 0, 0.5);
+    }
+    if (i == 2) {
+      return Color.fromRGBO(168, 169, 173, 0.5);
+    }
+    if (i == 3) {
+      return Color.fromRGBO(205, 127, 50, 0.5);
+    }
+    return values.color_peach;
   }
+
+  // void onPressed4() {
+  //   values.current_page = "profile";
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Profile(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
 }

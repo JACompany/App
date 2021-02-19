@@ -182,11 +182,23 @@ class _EditTask extends State<EditTask> {
             values.user_goal += values.tasks[index].duration / 3600.0;
             values.notification_launcher
                 .cancelNotification(values.tasks[index].notification_id);
-            values.notification_launcher.showNotification(
-                "Improvall Productivity App",
-                value,
-                values.tasks[index].notification_id,
-                this.start);
+
+            if (this
+                .start
+                .subtract(Duration(minutes: 5))
+                .isAfter(DateTime.now())) {
+              values.notification_launcher.showNotification(
+                  "Improvall Productivity App",
+                  value,
+                  values.tasks[index].notification_id,
+                  this.start.subtract(Duration(minutes: 5)));
+            } else {
+              values.notification_launcher.showNotification(
+                  "Improvall Productivity App",
+                  value,
+                  values.tasks[index].notification_id,
+                  this.start);
+            }
             sortList();
             values.tasks_storage.write(values.tasks);
             values.values_storage.write_all_values();

@@ -101,12 +101,12 @@ class _Task extends State<Task> {
               onPressed: onPressed3,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
           ],
         ),
       ),
@@ -140,15 +140,6 @@ class _Task extends State<Task> {
         (route) => false);
   }
 
-  void onPressed4() {
-    values.current_page = "profile";
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Profile(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
-
   Widget addTask() {
     return Form(
       key: _formKey,
@@ -173,11 +164,22 @@ class _Task extends State<Task> {
             }
             values.tasks.add(Task_Details(
                 value, this.start, this.end, values.notificationID + 1));
-            values.notification_launcher.showNotification(
-                "Improvall Productivity App",
-                value,
-                values.notificationID + 1,
-                this.start);
+            if (this
+                .start
+                .subtract(Duration(minutes: 5))
+                .isAfter(DateTime.now())) {
+              values.notification_launcher.showNotification(
+                  "Improvall Productivity App",
+                  value,
+                  values.notificationID + 1,
+                  this.start.subtract(Duration(minutes: 5)));
+            } else {
+              values.notification_launcher.showNotification(
+                  "Improvall Productivity App",
+                  value,
+                  values.notificationID + 1,
+                  this.start);
+            }
             values.user_goal +=
                 values.tasks[values.tasks.length - 1].duration / 3600.0;
             sortList();
@@ -308,4 +310,12 @@ class Task_Details {
         notification_id.toString() +
         ";;;";
   }
+  //   void onPressed4() {
+  //   values.current_page = "profile";
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Profile(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
 }

@@ -78,12 +78,12 @@ class _HomeState extends State<Home> {
               onPressed: onPressed3,
               iconSize: 6.0.h,
             )),
-            Expanded(
-                child: IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: onPressed4,
-              iconSize: 6.0.h,
-            ))
+            // Expanded(
+            //     child: IconButton(
+            //   icon: Icon(Icons.account_circle),
+            //   onPressed: onPressed4,
+            //   iconSize: 6.0.h,
+            // ))
           ],
         ),
       ),
@@ -164,25 +164,25 @@ class _HomeState extends State<Home> {
         .replaceAll(",", "");
   }
 
-  String get date2 {
-    String current = DateTime.now().toString().substring(0, 10);
-    String year = current.substring(0, 4);
-    String month = current.substring(5, 7);
-    String day = current.substring(8, 10);
-    int k = int.parse(day);
-    int m = getMonth(month);
-    int c = 20;
-    int y = int.parse(year);
-    int w = (k +
-            (2.6 * m - 0.2).floor() -
-            2 * c +
-            y +
-            (y / 4).floor() +
-            (c / 4).floor())
-        .modInverse(7);
-    m = int.parse(month);
-    return getDateAsString(w) + " " + getMonthAsString(m) + " " + k.toString();
-  }
+  // String get date2 {
+  //   String current = DateTime.now().toString().substring(0, 10);
+  //   String year = current.substring(0, 4);
+  //   String month = current.substring(5, 7);
+  //   String day = current.substring(8, 10);
+  //   int k = int.parse(day);
+  //   int m = getMonth(month);
+  //   int c = 20;
+  //   int y = int.parse(year);
+  //   int w = (k +
+  //           (2.6 * m - 0.2).floor() -
+  //           2 * c +
+  //           y +
+  //           (y / 4).floor() +
+  //           (c / 4).floor())
+  //       .modInverse(7);
+  //   m = int.parse(month);
+  //   return getDateAsString(w) + " " + getMonthAsString(m) + " " + k.toString();
+  // }
 
   void onPressed5() {
     Navigator.of(context).pushAndRemoveUntil(
@@ -222,15 +222,6 @@ class _HomeState extends State<Home> {
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Leaderboard(),
-            transitionDuration: Duration(seconds: 0)),
-        (route) => false);
-  }
-
-  void onPressed4() {
-    values.current_page = "profile";
-    Navigator.of(context).pushAndRemoveUntil(
-        PageRouteBuilder(
-            pageBuilder: (context, animation, animation2) => Profile(),
             transitionDuration: Duration(seconds: 0)),
         (route) => false);
   }
@@ -377,4 +368,12 @@ class _HomeState extends State<Home> {
                   )),
             ]);
   }
+  // void onPressed4() {
+  //   values.current_page = "profile";
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //       PageRouteBuilder(
+  //           pageBuilder: (context, animation, animation2) => Profile(),
+  //           transitionDuration: Duration(seconds: 0)),
+  //       (route) => false);
+  // }
 }

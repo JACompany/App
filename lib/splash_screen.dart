@@ -1,7 +1,9 @@
+import 'SetupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'main.dart';
 import 'homepage.dart';
+import 'globalValues.dart' as values;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -13,7 +15,7 @@ class _LoadingScreen extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 1,
-      navigateAfterSeconds: Home(),
+      navigateAfterSeconds: values.is_intial_setup ? Home() : SetupPage(),
       image: Image(
         image: AssetImage("lib/assets/logo.gif"),
       ),
