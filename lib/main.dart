@@ -39,11 +39,11 @@ class App extends StatelessWidget {
     );
   }
 
-  void setup() {
+  void setup() async {
     values.is_setup = true;
     tz.initializeTimeZones();
     //reading tasks
-    values.tasks_storage.read(";;;").then((readValues) {
+    await values.tasks_storage.read(";;;").then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {
           List<String> object = readValues.elementAt(i).split(";");
@@ -53,7 +53,7 @@ class App extends StatelessWidget {
       }
     });
     //reading completed tasks
-    values.completed_tasks_storage.read(";;;").then((readValues) {
+    await values.completed_tasks_storage.read(";;;").then((readValues) {
       for (int i = 0; i < readValues.length; i++) {
         if (readValues.elementAt(i).length > 0) {
           values.completed_tasks
@@ -69,7 +69,7 @@ class App extends StatelessWidget {
     values.notifcation = FlutterLocalNotificationsPlugin();
     values.notifcation.initialize(initSettings, onSelectNotification: null);
     //reading all other values
-    values.values_storage.read(";").then((readValues) {
+    await values.values_storage.read(";").then((readValues) {
       if (readValues == null) {
         values.total_hours = 0;
         values.user_goal = 0;
@@ -90,9 +90,8 @@ class App extends StatelessWidget {
         values.is_intial_setup = readValues[5] == 'true';
       }
     });
-    values.past_hours_storage.read(",").then((readValues) {
+    await values.past_hours_storage.read(",").then((readValues) {
       if (readValues != null) {
-        print("----------is not empty---------------");
         for (int i = 0; i < readValues.length; i++) {
           values.past_hours.add(double.tryParse(readValues.elementAt(i)));
         }

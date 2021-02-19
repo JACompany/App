@@ -191,7 +191,11 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       values.user_hours_day += task_length;
       values.total_hours += task_length;
       values.past_hours.add(task_length + Random().nextDouble() / 100);
-      if (values.past_hours.length > 7) values.past_hours.removeAt(0);
+      if (values.past_hours.length > 7) {
+        values.past_hours.removeAt(0);
+        print("removed hour from length of " +
+            values.past_hours.length.toString());
+      }
       if (values.tasks.length == 0) {
         values.user_hours_day = 0;
         values.user_goal = 0;
