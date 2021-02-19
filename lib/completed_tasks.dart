@@ -151,7 +151,6 @@ class _Completed_Task extends State<Completed_Task> {
             onPressed: () => setState(() {
               values.completed_tasks.removeAt(index);
               values.completed_tasks_storage.write(values.completed_tasks);
-              values.values_storage.write_all_values();
             }),
           ),
         ),

@@ -298,7 +298,7 @@ class _HomeState extends State<Home> {
               values.task_start_time = DateTime.now();
               values.notification_launcher
                   .cancelNotification(values.tasks[index].notification_id);
-              values.current_page = 'lockscreen';
+              values.current_page = "lockscreen";
               Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
                       pageBuilder: (context, animation, animation2) =>

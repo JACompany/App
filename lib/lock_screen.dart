@@ -149,6 +149,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
 
   void onPressed2() {
     values.task_start_time = null;
+    values.current_page = "home";
     Navigator.of(context).pushAndRemoveUntil(
         PageRouteBuilder(
             pageBuilder: (context, animation, animation2) => Home(),
@@ -167,13 +168,10 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       Wakelock.toggle(enable: false);
       try {
         values.timer.cancel();
-      } catch (exception) {
-        print("Timer exception when closing");
-      }
+      } catch (exception) {}
       try {
         dispose();
       } catch (e) {}
-      values.current_page = "home";
       values.completed_tasks.insert(
           0,
           values.current_task.description +
@@ -193,8 +191,6 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       values.past_hours.add(task_length + Random().nextDouble() / 100);
       if (values.past_hours.length > 7) {
         values.past_hours.removeAt(0);
-        print("removed hour from length of " +
-            values.past_hours.length.toString());
       }
       if (values.tasks.length == 0) {
         values.user_hours_day = 0;
@@ -208,6 +204,7 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
           "Task Complete! Good work!",
           values.notificationID,
           TZDateTime.now(local).add(Duration(seconds: 5)));
+      values.current_page = "home";
       Navigator.of(context).pushAndRemoveUntil(
           PageRouteBuilder(
               pageBuilder: (context, animation, animation2) => Home(),

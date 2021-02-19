@@ -62,8 +62,7 @@ class _LoadingScreen extends State<LoadingScreen> {
       else
         for (int i = 0; i < readValues.length; i++) {
           if (readValues.elementAt(i).length > 0) {
-            values.completed_tasks
-                .add(readValues[0] + ";" + readValues[1] + ";;;");
+            values.completed_tasks.add(readValues.elementAt(i) + ";;;");
           }
         }
     });

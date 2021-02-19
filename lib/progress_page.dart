@@ -251,7 +251,6 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 
   showGraph() {
-    print(values.past_hours.toString());
     if (values.past_hours.length > 1)
       return Sparkline(
         data: values.past_hours,
