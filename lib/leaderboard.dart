@@ -60,10 +60,7 @@ class _Leaderboard extends State<Leaderboard> {
                   Icons.account_circle,
                   size: 5.0.h,
                 ),
-                title: Text(
-                  user['username'],
-                  style: TextStyle(fontSize: 2.0.h),
-                ),
+                title: pickText(user),
                 subtitle: Text(
                   "Rank #" + count.toString(),
                   style: TextStyle(fontSize: 2.0.h),
@@ -147,7 +144,7 @@ class _Leaderboard extends State<Leaderboard> {
         (route) => false);
   }
 
-  Color pickColor(i) {
+  Color pickColor(int i) {
     if (i == 1) {
       return Color.fromRGBO(255, 215, 0, 0.5);
     }
@@ -158,6 +155,24 @@ class _Leaderboard extends State<Leaderboard> {
       return Color.fromRGBO(205, 127, 50, 0.5);
     }
     return values.color_peach;
+  }
+
+  pickText(DocumentSnapshot user) {
+    if (user.id == values.userID) {
+      return Text(
+        user['username'] + " (You)",
+        style: TextStyle(
+            fontSize: 3.0.h,
+            fontWeight: FontWeight.bold,
+            color: values.color_red),
+      );
+    }
+    return Text(
+      user['username'],
+      style: TextStyle(
+        fontSize: 2.5.h,
+      ),
+    );
   }
 
   // void onPressed4() {
