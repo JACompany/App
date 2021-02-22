@@ -30,7 +30,7 @@ class _LoadingScreen extends State<LoadingScreen> {
     return SplashScreen(
       navigateAfterFuture: initializeAllValues(),
       image: Image(
-        image: AssetImage("lib/assets/logo.gif"),
+        image: AssetImage("lib/assets/logo.png"),
       ),
       backgroundColor: Colors.white,
       useLoader: true,
