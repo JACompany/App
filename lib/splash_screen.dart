@@ -30,7 +30,7 @@ class _LoadingScreen extends State<LoadingScreen> {
     return SplashScreen(
       navigateAfterFuture: initializeAllValues(),
       image: Image(
-        image: AssetImage("lib/assets/logo.png"),
+        image: AssetImage("lib/assets/improvall_logo.png"),
       ),
       backgroundColor: Colors.white,
       useLoader: true,
