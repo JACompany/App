@@ -47,12 +47,20 @@ class _SetupPage extends State<SetupPage> {
           children: [
             Text(
               "Username",
-              style: TextStyle(fontSize: 4.0.h, color: values.color_red),
+              style: TextStyle(fontSize: 4.0.h, color: Colors.black),
             ),
             SizedBox(height: 0.5.h),
             form(),
             SizedBox(height: 0.5.h),
-            submit_button()
+            submit_button(),
+            SizedBox(height: 0.5.h),
+            Text(
+              'Usernames cannot be changed. Inappropriate usernames will be removed.',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 2.0.h,
+                  fontStyle: FontStyle.italic),
+            ),
           ],
         ),
       ),
@@ -108,7 +116,7 @@ class _SetupPage extends State<SetupPage> {
       },
       child: Text(
         'Set Username',
-        style: TextStyle(color: values.color_red, fontSize: 3.0.h),
+        style: TextStyle(color: Colors.black, fontSize: 3.0.h),
       ),
     );
   }
