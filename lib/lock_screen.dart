@@ -55,6 +55,10 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
             SizedBox(
               height: 2.0.h,
             ),
+            warning(),
+            SizedBox(
+              height: 2.0.h,
+            ),
             unlock(),
             SizedBox(
               height: 2.0.h,
@@ -111,6 +115,17 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
       child: Text(
         "TIME REMAINING",
         style: TextStyle(fontSize: 4.0.h),
+      ),
+    );
+  }
+
+  Widget warning() {
+    return TextButton(
+      onPressed: null,
+      onLongPress: null,
+      child: Text(
+        "Please keep this screen on during the task.",
+        style: TextStyle(fontSize: 2.0.h, fontStyle: FontStyle.italic),
       ),
     );
   }
@@ -230,6 +245,11 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
     if (state == AppLifecycleState.paused) {
       dispose();
       values.current_page = "home";
+      values.notification_launcher.showNotification(
+          "Improvall: Warning",
+          "Please return to your task!",
+          200000,
+          DateTime.now().add(Duration(seconds: 2)));
       Navigator.of(context).pushAndRemoveUntil(
           PageRouteBuilder(
               pageBuilder: (context, animation, animation2) => Home(),
