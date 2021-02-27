@@ -28,11 +28,11 @@ class DynamicallyCheckbox extends StatefulWidget {
 
 class DynamicallyCheckboxState extends State {
   Map<String, bool> List = {
-    'S': false,
-    'M': false,
-    'A': false,
-    'R': false,
-    'T': false,
+    'Specific': false,
+    'Measurable': false,
+    'Attainable': false,
+    'Relevent': false,
+    'Time-based': false,
   };
 
   var holder_1 = [];
