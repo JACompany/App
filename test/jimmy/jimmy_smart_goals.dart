@@ -69,7 +69,7 @@ class DynamicallyCheckboxState extends State {
             return new CheckboxListTile(
               title: new Text(key),
               value: List[key],
-              activeColor: Colors.deepPurple[400],
+              activeColor: Colors.blue[300],
               checkColor: Colors.white,
               onChanged: (bool value) {
                 setState(() {
