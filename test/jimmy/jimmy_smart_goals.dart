@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.deepPurple[400],
+            backgroundColor: Colors.blue[300],
             title: Text("How are your goals SMART?"),
           ),
           body: SafeArea(
