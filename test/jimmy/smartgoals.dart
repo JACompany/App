@@ -43,19 +43,39 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Text(
+            'Specific',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'What do you want to acheive?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'When do you want your goal to be finished?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'Who needs to be involved to accomplish this goal?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'Why should you achieve this goal exactly?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
@@ -66,32 +86,22 @@ class MyCustomFormState extends State<MyCustomForm> {
               //Do something with this value
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
+          Text(
+            'Measurable',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'How can you measure progress and know if you have successfully met your goal?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
           ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
@@ -102,32 +112,32 @@ class MyCustomFormState extends State<MyCustomForm> {
               //Do something with this value
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
+          Text(
+            'Achievable',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Are you capable of achieving the goal?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'Do you have the needed skills?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'If you do not have the skills, how can you build them?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
           ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
@@ -138,32 +148,27 @@ class MyCustomFormState extends State<MyCustomForm> {
               //Do something with this value
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
+          Text(
+            'Relevent',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Why should you achieve this goal?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'What is the impact?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
           ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
@@ -174,32 +179,27 @@ class MyCustomFormState extends State<MyCustomForm> {
               //Do something with this value
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
+          Text(
+            'Timely',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'What is the due date of your goal?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            'Can the goal be achieved until this date?',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
           ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
@@ -210,20 +210,11 @@ class MyCustomFormState extends State<MyCustomForm> {
               //Do something with this value
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
+          Text(
+            'Smart Goal',
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           TextFormField(
             validator: (value) {
@@ -235,7 +226,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
-                hintText: 'Display Name',
+                hintText: 'Enter text here',
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 32.0),
                     borderRadius: BorderRadius.circular(5.0)),
