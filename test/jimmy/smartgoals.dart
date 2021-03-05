@@ -61,7 +61,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             decoration: InputDecoration(
                 hintText: 'Enter text here',
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 32.0),
+                    borderSide: BorderSide(color: Colors.grey, width: 10.0),
                     borderRadius: BorderRadius.circular(5.0)),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1.0),
