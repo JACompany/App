@@ -24,7 +24,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final myController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -48,16 +47,17 @@ class _MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _formKey,
       appBar: AppBar(
-        title: Text('SMART Goals'),
+        title: Text('22131'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: <Widget>[
             TextField(
-              controller: myController,
+              onChanged: (text) {
+                print("First text field: $text");
+              },
             ),
             Text(
               'Specific',
@@ -70,80 +70,32 @@ class _MyCustomFormState extends State<MyCustomForm> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'When do you want your goal to be finished?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Who needs to be involved to accomplish this goal?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Why should you achieve this goal exactly?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Measurable',
@@ -156,20 +108,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Achievable',
@@ -182,60 +122,24 @@ class _MyCustomFormState extends State<MyCustomForm> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Do you have the needed skills?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'If you do not have the skills, how can you build them?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Relevent',
@@ -248,40 +152,16 @@ class _MyCustomFormState extends State<MyCustomForm> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'What is the impact?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Timely',
@@ -294,40 +174,16 @@ class _MyCustomFormState extends State<MyCustomForm> {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Can the goal be achieved until this date?',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
             ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
+            TextField(
+              controller: myController,
             ),
             Text(
               'Smart Goal',
@@ -335,41 +191,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.text,
-              obscureText: false,
-              decoration: InputDecoration(
-                  hintText: 'Enter text here',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 32.0),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                      borderRadius: BorderRadius.circular(5.0))),
-              onChanged: (value) {
-                //Do something with this value
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate returns true if the form is valid, or false
-                  // otherwise.
-                  if (_formKey.currentState.validate()) {
-                    // If the form is valid, display a Snackbar.
-                    Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')));
-                  }
-                },
-                child: Text('Submit'),
-              ),
+            TextField(
+              controller: myController,
             ),
           ],
         ),
@@ -377,5 +200,3 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-
-class _formKey {}

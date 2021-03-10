@@ -52,12 +52,130 @@ class _MyCustomFormState extends State<MyCustomForm> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             TextField(
               onChanged: (text) {
                 print("First text field: $text");
               },
+            ),
+            Text(
+              'Specific',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              'What do you want to acheive?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'When do you want your goal to be finished?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Who needs to be involved to accomplish this goal?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Why should you achieve this goal exactly?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Measurable',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              'How can you measure progress and know if you have successfully met your goal?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Achievable',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              'Are you capable of achieving the goal?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Do you have the needed skills?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'If you do not have the skills, how can you build them?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Relevent',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              'Why should you achieve this goal?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'What is the impact?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
+            ),
+            Text(
+              'Timely',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              'What is the due date of your goal?',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+            ),
+            TextField(
+              controller: myController,
             ),
             Text(
               'Can the goal be achieved until this date?',
@@ -67,23 +185,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
             TextField(
               controller: myController,
             ),
-            TextField(
-              controller: myController,
-            ),
-            TextField(
-              controller: myController,
-            ),
-            TextField(
-              controller: myController,
-            ),
-            TextField(
-              controller: myController,
-            ),
-            TextField(
-              controller: myController,
-            ),
-            TextField(
-              controller: myController,
+            Text(
+              'Smart Goal',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             TextField(
               controller: myController,

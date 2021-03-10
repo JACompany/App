@@ -55,7 +55,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -75,7 +75,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -95,7 +95,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -115,7 +115,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -141,7 +141,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -167,7 +167,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -187,7 +187,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -207,7 +207,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -233,7 +233,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -253,7 +253,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -279,7 +279,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -299,7 +299,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
           ),
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
@@ -320,13 +320,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+          TextField(
             keyboardType: TextInputType.text,
             obscureText: false,
             decoration: InputDecoration(
