@@ -56,13 +56,8 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
               height: 2.0.h,
             ),
             warning(),
-            SizedBox(
-              height: 2.0.h,
-            ),
             unlock(),
-            SizedBox(
-              height: 2.0.h,
-            ),
+            complete_task(),
             title(),
             SizedBox(
               height: 2.0.h,
@@ -138,6 +133,64 @@ class _LockScreenState extends State<LockScreen> with WidgetsBindingObserver {
         style: TextStyle(fontSize: 3.0.h, color: values.color_red),
       ),
     );
+  }
+
+  Widget complete_task() {
+    return TextButton(
+      onPressed: done,
+      child: Text(
+        "I'm done early! ",
+        style: TextStyle(fontSize: 3.0.h, color: values.color_green),
+      ),
+    );
+  }
+
+  void done() {
+    Wakelock.toggle(enable: false);
+    try {
+      values.timer.cancel();
+    } catch (exception) {}
+    try {
+      dispose();
+    } catch (e) {}
+    values.completed_tasks.insert(
+        0,
+        values.current_task.description +
+            ";" +
+            DateTime.now().toString().substring(0, 16) +
+            ";;;");
+    values.completed_tasks_storage.write(values.completed_tasks);
+    values.tasks.remove(values.current_task);
+    values.tasks_storage.write(values.tasks);
+    double task_length = DateTime.now()
+            .difference(values.current_task.start_time)
+            .inMinutes
+            .abs() /
+        60.0;
+    values.user_hours_day += task_length;
+    values.total_hours += task_length;
+    values.past_hours.add(task_length + Random().nextDouble() / 100);
+    if (values.past_hours.length > 7) {
+      values.past_hours.removeAt(0);
+    }
+    if (values.tasks.length == 0) {
+      values.user_hours_day = 0;
+      values.user_goal = 0;
+    }
+    values.past_hours_storage.write_past_hours();
+    values.values_storage.write_all_values();
+    values.firebase_commands.write(task_length);
+    values.notification_launcher.showNotification(
+        "Improvall Productivity App",
+        "Task Complete! Good work!",
+        values.notificationID,
+        TZDateTime.now(local).add(Duration(seconds: 5)));
+    values.current_page = "home";
+    Navigator.of(context).pushAndRemoveUntil(
+        PageRouteBuilder(
+            pageBuilder: (context, animation, animation2) => Home(),
+            transitionDuration: Duration(seconds: 0)),
+        (route) => false);
   }
 
   void cancel() {

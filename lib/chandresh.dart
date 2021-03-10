@@ -1,79 +1,148 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
-import 'globalValues.dart' as values;
+import 'package:app/globalValues.dart';
+import 'homepage.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(leaderboard());
+void main() {
+  runApp(SliderWidget());
 }
 
-class leaderboard extends StatefulWidget {
+class SliderWidget extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _leaderboard();
+  _SliderWidgetState createState() {
+    return _SliderWidgetState();
+  }
 }
 
-class _leaderboard extends State<leaderboard> {
-  void initState() {
-    super.initState();
-    values.timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        read();
-      });
-    });
-  }
-
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+class _SliderWidgetState extends State<SliderWidget> {
+  double value = 5.0;
+  double value1 = 5.0;
+  double value2 = 5.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Leaderboard"),
-        ),
-        body: tiles(context),
-      ),
-    );
-  }
-
-  List<Widget> list = [];
-  read() async {
-    await firestore
-        .collection("leaderboard")
-        .get()
-        .then((value) => value.docs.forEach((element) {
-              list.add(
-                ListTile(
-                  trailing: Text(element.get('score').toString(),
-                      style: TextStyle(
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  title: Text(element.get('username'),
-                      style: TextStyle(
-                          fontFamily: 'Comic Sans MS',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          decorationColor: Colors.green)),
+        title: 'Slider',
+        home: Scaffold(
+          backgroundColor: Colors.grey[200],
+          body: Center(
+              child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(35, 100, 10, 1),
+                child: Text(
+                  'How did you feel BEFORE your task on a scale from 1-10?',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              );
-            }));
-  }
-
-  ListView tiles(context) {
-    read();
-    return ListView(
-      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-      children: list,
-    );
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: Slider.adaptive(
+                    min: 0,
+                    max: 10,
+                    value: value,
+                    activeColor: color_red,
+                    inactiveColor: color_peach,
+                    divisions: 10,
+                    label: "$value",
+                    onChanged: (changedValue) {
+                      setState(() {
+                        value = changedValue;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(35, 100, 10, 1),
+                child: Text(
+                  'How did you feel DURING your task on a scale from 1-10?',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: Slider.adaptive(
+                    min: 0,
+                    max: 10,
+                    value: value1,
+                    activeColor: color_red,
+                    inactiveColor: color_peach,
+                    divisions: 10,
+                    label: "$value1",
+                    onChanged: (changedValue) {
+                      setState(() {
+                        value1 = changedValue;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(35, 100, 10, 1),
+                child: Text(
+                  'How did you feel AFTER your task on a scale from 1-10?',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: Slider.adaptive(
+                    min: 0,
+                    max: 10,
+                    value: value2,
+                    activeColor: color_red,
+                    inactiveColor: color_peach,
+                    divisions: 10,
+                    label: "$value2",
+                    onChanged: (changedValue) {
+                      setState(() {
+                        value2 = changedValue;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              RaisedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      PageRouteBuilder(
+                          pageBuilder: (context, animation, animation2) =>
+                              Home(),
+                          transitionDuration: Duration(seconds: 0)),
+                      (route) => false);
+                },
+                icon: Icon(Icons.west_outlined),
+                label: Text('Skip'),
+                color: Colors.grey[500],
+                splashColor: color_peach,
+              ),
+              RaisedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      PageRouteBuilder(
+                          pageBuilder: (context, animation, animation2) =>
+                              Home(),
+                          transitionDuration: Duration(seconds: 0)),
+                      (route) => false);
+                },
+                icon: Icon(Icons.east_outlined),
+                label: Text('Submit'),
+                color: color_red,
+                splashColor: color_peach,
+              ),
+            ],
+          )),
+        ));
   }
 }
