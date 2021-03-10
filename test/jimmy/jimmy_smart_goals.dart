@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 void main() => runApp(MyApp());
 
@@ -72,6 +73,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'When do you want your goal to be finished?',
@@ -80,6 +89,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Who needs to be involved to accomplish this goal?',
@@ -88,6 +105,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Why should you achieve this goal exactly?',
@@ -96,6 +121,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Measurable',
@@ -110,6 +143,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Achievable',
@@ -124,6 +165,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Do you have the needed skills?',
@@ -132,6 +181,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'If you do not have the skills, how can you build them?',
@@ -140,6 +197,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Relevent',
@@ -154,6 +219,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'What is the impact?',
@@ -162,6 +235,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Timely',
@@ -176,6 +257,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Can the goal be achieved until this date?',
@@ -184,6 +273,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
             Text(
               'Smart Goal',
@@ -193,10 +290,42 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             TextField(
               controller: myController,
+              decoration: InputDecoration(
+                  hintText: 'Enter text here',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 10.0),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.circular(5.0))),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "123456",
+                    style: TextStyle(fontSize: 4.0.h, color: Colors.black),
+                  ),
+                  SizedBox(height: 0.5.h),
+                  form(),
+                  SizedBox(height: 0.5.h),
+                  submit_button(),
+                  SizedBox(height: 0.5.h),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+
+    final myController = TextEditingController();
+    Widget form() {
+      return TextField(
+        controller: _controller,
+      );
+    }
   }
 }
