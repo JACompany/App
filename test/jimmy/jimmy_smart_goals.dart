@@ -36,8 +36,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
   @override
   void initState() {
     super.initState();
-
-    myController.addListener(_printLatestValue);
   }
 
   @override
@@ -49,86 +47,97 @@ class _MyCustomFormState extends State<MyCustomForm> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  
-  final controller1 = TextEditingController();
-    Widget form1() {
-      return TextField(
-        controller: controller1,
-      );
-    }
-     final controller2 = TextEditingController();
-    Widget form2() {
-      return TextField(
-        controller: controller2,
-      );
-    }
 
-    final controller3 = TextEditingController();
-    Widget form3() {
-      return TextField(
-        controller: controller3,
-      );
-    }
-    final controller4 = TextEditingController();
-    Widget form4() {
-      return TextField(
-        controller: controller4,
-      );
-    }
-      final controller5 = TextEditingController();
-    Widget form5() {
-      return TextField(
-        controller: controller5,
-      );
-    }
-     final controller6 = TextEditingController();
-    Widget form6() {
-      return TextField(
-        controller: controller6,
-      );
-    }
-    final controller7 = TextEditingController();
-    Widget form7() {
-      return TextField(
-        controller: controller7,
-      );
-    }
-     final controller8 = TextEditingController();
-    Widget form8() {
-      return TextField(
-        controller: controller8,
-      );
-    }
-     final controller9 = TextEditingController();
-    Widget form9() {
-      return TextField(
-        controller: controller9,
-      );
-    }
-     final controller10 = TextEditingController();
-    Widget form10() {
-      return TextField(
-        controller: controller10,
-      );
-    }
-    final controller11 = TextEditingController();
-    Widget form11() {
-      return TextField(
-        controller: controller11,
-      );
-    }
-    final controller12 = TextEditingController();
-    Widget from12() {
-      return TextField(
-        controller: controller12,
-      );
-    }
-    final controller13 = TextEditingController();
-    Widget form13() {
-      return TextField(
-        controller: controller13,
-      );
-    }
+  final controller1 = TextEditingController();
+  Widget form1() {
+    return TextField(
+      controller: controller1,
+    );
+  }
+
+  final controller2 = TextEditingController();
+  Widget form2() {
+    return TextField(
+      controller: controller2,
+    );
+  }
+
+  final controller3 = TextEditingController();
+  Widget form3() {
+    return TextField(
+      controller: controller3,
+    );
+  }
+
+  final controller4 = TextEditingController();
+  Widget form4() {
+    return TextField(
+      controller: controller4,
+    );
+  }
+
+  final controller5 = TextEditingController();
+  Widget form5() {
+    return TextField(
+      controller: controller5,
+    );
+  }
+
+  final controller6 = TextEditingController();
+  Widget form6() {
+    return TextField(
+      controller: controller6,
+    );
+  }
+
+  final controller7 = TextEditingController();
+  Widget form7() {
+    return TextField(
+      controller: controller7,
+    );
+  }
+
+  final controller8 = TextEditingController();
+  Widget form8() {
+    return TextField(
+      controller: controller8,
+    );
+  }
+
+  final controller9 = TextEditingController();
+  Widget form9() {
+    return TextField(
+      controller: controller9,
+    );
+  }
+
+  final controller10 = TextEditingController();
+  Widget form10() {
+    return TextField(
+      controller: controller10,
+    );
+  }
+
+  final controller11 = TextEditingController();
+  Widget form11() {
+    return TextField(
+      controller: controller11,
+    );
+  }
+
+  final controller12 = TextEditingController();
+  Widget from12() {
+    return TextField(
+      controller: controller12,
+    );
+  }
+
+  final controller13 = TextEditingController();
+  Widget form13() {
+    return TextField(
+      controller: controller13,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +147,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
       child: ListView(
         children: <Widget>[
           Text(
-            
             'Specific',
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
@@ -367,7 +375,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           TextField(
-            
             controller: controller13,
             decoration: InputDecoration(
                 hintText: 'Enter text here',
@@ -388,7 +395,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontSize: 4.0.h, color: Colors.black),
                 ),
                 SizedBox(height: 0.5.h),
-                form(),
+                form1(),
                 SizedBox(height: 0.5.h),
                 submit_button(),
                 SizedBox(height: 0.5.h),
@@ -396,21 +403,29 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
         ],
-        
       ),
-    Widget submit_button() {
-    return OutlinedButton(
-      onPressed: () async {
-        await checkValue(controller1.text).then((value) {
-          if (value == null) {
-            
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Done!"),
-                duration: Duration(milliseconds: 2000),
-              )
-            );}});});
-          });
-     
+    );
+  }
+
+  Widget submit_button() {
+    return OutlinedButton(onPressed: () async {
+      await checkValue(controller1.text)(controller2.text)(controller3.text)(
+                          controller4.text)(controller5.text)(controller6.text)(
+                      controller7.text)(controller8.text)(controller9.text)(
+                  controller10.text)(controller11.text)(controller12.text)(
+              controller13.text)
+          .then((value) {
+        if (value == null) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Done!"),
+            duration: Duration(milliseconds: 2000),
+          ));
+        }
+      });
+    });
   }
 }
+
+submit_button() {}
+
+checkValue(String text) {}
