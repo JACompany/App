@@ -399,6 +399,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 SizedBox(height: 0.5.h),
                 submit_button(),
                 SizedBox(height: 0.5.h),
+                Text(
+                  'Submit',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 2.0.h,
+                      fontStyle: FontStyle.italic),
+                ),
               ],
             ),
           ),
