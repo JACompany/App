@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:917628286455:android:c07cb2b0f403dac55feaf2",
+        "android_client_info": {
+          "package_name": "ca.improvall.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917628286455-hrqu4eo1ald81rv462242cm2epid33gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgjjkXmpU5gY_4nvqx7KDVFL26B8cAzR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917628286455-hrqu4eo1ald81rv462242cm2epid33gr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "917628286455-3cc8h2qmobnb0h1ovf6j8ava7mh1g1c3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.improvall.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:917628286455:android:958f761330d3434d5feaf2",
         "android_client_info": {
           "package_name": "com.example.app"
@@ -29,6 +65,13 @@
             {
               "client_id": "917628286455-hrqu4eo1ald81rv462242cm2epid33gr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "917628286455-3cc8h2qmobnb0h1ovf6j8ava7mh1g1c3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.improvall.app"
+              }
             }
           ]
         }
