@@ -415,24 +415,30 @@ class _MyCustomFormState extends State<MyCustomForm> {
   }
 
   Widget submit_button() {
-    return OutlinedButton(onPressed: () async {
-      await checkValue(controller1.text)(controller2.text)(controller3.text)(
-                          controller4.text)(controller5.text)(controller6.text)(
-                      controller7.text)(controller8.text)(controller9.text)(
-                  controller10.text)(controller11.text)(controller12.text)(
-              controller13.text)
-          .then((value) {
-        if (value == null) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Done!"),
-            duration: Duration(milliseconds: 2000),
-          ));
-        }
-      });
-    });
+    return OutlinedButton(
+      onPressed: () async {
+        await checkValue(controller1.text)(controller2.text)(controller3.text)(
+                                controller4.text)(controller5.text)(
+                            controller6.text)(
+                        controller7.text)(controller8.text)(controller9.text)(
+                    controller10.text)(controller11.text)(controller12.text)(
+                controller13.text)
+            .then((value) {
+          if (value == null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Done!"),
+              duration: Duration(milliseconds: 2000),
+            ));
+          }
+        });
+      },
+      child: Text(
+        'Submit',
+        style: TextStyle(
+            color: Colors.black, fontSize: 2.0.h, fontStyle: FontStyle.italic),
+      ),
+    );
   }
 }
-
-submit_button() {}
 
 checkValue(String text) {}
