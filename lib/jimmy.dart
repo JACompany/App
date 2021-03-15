@@ -442,6 +442,20 @@ class _MyCustomFormState extends State<MyCustomForm> {
       ),
     );
   }
-}
 
-checkValue(String text) {}
+  checkValue(String text) {
+    String userInput = controller1.text +
+        controller2.text +
+        controller3.text +
+        controller4.text +
+        controller5.text +
+        controller6.text +
+        controller7.text +
+        controller8.text +
+        controller9.text +
+        controller10.text +
+        controller11.text +
+        controller12.text +
+        controller13.text;
+  }
+}
