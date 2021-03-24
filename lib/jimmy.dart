@@ -3,31 +3,17 @@ import 'package:sizer/sizer.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return OrientationBuilder(builder: (context, orientation) {
-          SizerUtil().init(constraints, orientation);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primaryColor: Colors.white,
-            ),
-            home: Scaffold(),
-          );
-        });
-      },
-    );
-  }
-}
+
 
 // Define a custom Form widget.
 class MyCustomForm extends StatefulWidget {
   @override
   _MyCustomFormState createState() => _MyCustomFormState();
 }
+
+
+
+
 
 // Define a corresponding State class.
 // This class holds data related to the Form.
@@ -142,12 +128,48 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 
+  // Define a custom Form widget.
+class MyCustomForm extends StatefulWidget {
+  @override
+  _MyCustomFormState createState() => _MyCustomFormState();
+}
+
+// Define a corresponding State class.
+// This class holds data related to the Form.
+class _MyCustomFormState extends State<MyCustomForm> {
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    myController.dispose();
+    super.dispose();
+  }
+
+  
+
+
+ {
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Form(
-      key: _formKey,
-      child: ListView(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          SizerUtil().init(constraints, orientation);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
+            home: ListView(
         children: <Widget>[
           Text(
             'Specific',
@@ -417,7 +439,16 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 
-  Widget submit_button() {
+          );
+        });
+  }
+    
+}
+}
+ 
+
+  @override
+   Widget submit_button() {
     return OutlinedButton(
       onPressed: () async {
         await checkValue(controller1.text)(controller2.text)(controller3.text)(
@@ -459,3 +490,4 @@ class _MyCustomFormState extends State<MyCustomForm> {
         controller13.text;
   }
 }
+
