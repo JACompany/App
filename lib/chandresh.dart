@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/globalValues.dart';
+import 'globalValues.dart';
 import 'homepage.dart';
 
 void main() {
