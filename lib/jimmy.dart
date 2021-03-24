@@ -6,7 +6,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   return LayoutBuilder(
+    return LayoutBuilder(
       builder: (context, constraints) {
         return OrientationBuilder(builder: (context, orientation) {
           SizerUtil().init(constraints, orientation);
@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Colors.white,
             ),
-            home: Scaffold(
-              body: MyCustomForm(),
-            ),
+            home: Scaffold(),
           );
         });
       },
@@ -396,7 +394,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "123456",
+                  "text",
                   style: TextStyle(fontSize: 4.0.h, color: Colors.black),
                 ),
                 SizedBox(height: 0.5.h),
@@ -444,6 +442,20 @@ class _MyCustomFormState extends State<MyCustomForm> {
       ),
     );
   }
-}
 
-checkValue(String text) {}
+  checkValue(String text) {
+    String userInput = controller1.text +
+        controller2.text +
+        controller3.text +
+        controller4.text +
+        controller5.text +
+        controller6.text +
+        controller7.text +
+        controller8.text +
+        controller9.text +
+        controller10.text +
+        controller11.text +
+        controller12.text +
+        controller13.text;
+  }
+}
