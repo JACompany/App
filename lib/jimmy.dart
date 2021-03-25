@@ -119,6 +119,7 @@ class MyApp extends StatelessWidget {
                 'What do you want to acheive?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller1,
@@ -135,6 +136,7 @@ class MyApp extends StatelessWidget {
                 'When do you want your goal to be finished?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller2,
@@ -151,6 +153,7 @@ class MyApp extends StatelessWidget {
                 'Who needs to be involved to accomplish this goal?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller3,
@@ -167,6 +170,7 @@ class MyApp extends StatelessWidget {
                 'Why should you achieve this goal exactly?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller4,
@@ -189,6 +193,7 @@ class MyApp extends StatelessWidget {
                 'How can you measure progress and know if you have successfully met your goal?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller5,
@@ -211,6 +216,7 @@ class MyApp extends StatelessWidget {
                 'Are you capable of achieving the goal?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller6,
@@ -227,6 +233,7 @@ class MyApp extends StatelessWidget {
                 'Do you have the needed skills?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller7,
@@ -243,6 +250,7 @@ class MyApp extends StatelessWidget {
                 'If you do not have the skills, how can you build them?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller8,
@@ -265,6 +273,7 @@ class MyApp extends StatelessWidget {
                 'Why should you achieve this goal?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller9,
@@ -281,6 +290,7 @@ class MyApp extends StatelessWidget {
                 'What is the impact?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller10,
@@ -303,6 +313,7 @@ class MyApp extends StatelessWidget {
                 'What is the due date of your goal?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller11,
@@ -319,6 +330,7 @@ class MyApp extends StatelessWidget {
                 'Can the goal be achieved until this date?',
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
               ),
               TextField(
                 controller: controller12,
