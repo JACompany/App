@@ -31,6 +31,7 @@ class _Questions extends State<Questions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: values.color_peach,
       appBar: AppBar(
         title: Text("SMART Goals"),
       ),
