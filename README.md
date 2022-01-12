@@ -8,4 +8,6 @@ Thank you to everyone on the JACO's Improvall team for allowing our app to be a 
 
 Unfortunately, our company term has come to end in accordance with JACO policies. Thank you to everyone who purchased our app to support us!
 
-- Daniel Wang, VP of Product, VP of Technology, Improvall
+Sincerely, 
+
+Daniel Wang, VP of Product, VP of Technology, Improvall
